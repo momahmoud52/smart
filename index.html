@@ -1,0 +1,2682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Vision | Ultra Premium Engineering & Construction Sovereign</title>
+    
+    <!-- استيراد الخطوط الفاخرة لتعزيز الطابع الهندسي والمظهر الفخم -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. المتغيرات العامة والتصميم الفاخر الموحد (Luxury CSS Variables & Resets)
+           ========================================================================== */
+        :root {
+            --pure-black: #000000;
+            --dark-bg: #0A0A0A;
+            --card-bg: rgba(15, 15, 15, 0.85);
+            --luxury-gold: #D4AF37;
+            --gold-glow: #FFD54A;
+            --white-text: #FFFFFF;
+            --gray-text: #CFCFCF;
+            --dark-gray: #333333;
+            --glass-border: rgba(212, 175, 55, 0.15);
+            --glass-border-hover: rgba(212, 175, 55, 0.4);
+            --font-headings: 'Montserrat', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--pure-black);
+            color: var(--white-text);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* تحسين مظهر شريط التمرير الجانبي ليتماشى مع الهوية الفاخرة للموقع */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--pure-black);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--luxury-gold);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-glow);
+        }
+
+        /* تنسيقات عامة للنصوص والعناصر المساعدة */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-headings);
+            letter-spacing: 1px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        /* مؤثرات الخلفية المضيئة الموزعة بذكاء لعمق سينمائي مذهل */
+        .ambient-glow-1 {
+            position: fixed;
+            top: -10%;
+            left: 5%;
+            width: 50vw;
+            height: 50vh;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ambient-glow-2 {
+            position: fixed;
+            bottom: 10%;
+            right: 5%;
+            width: 45vw;
+            height: 45vh;
+            background: radial-gradient(circle, rgba(255, 213, 74, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ==========================================================================
+           2. شاشة التحميل السينمائية التفاعلية (Cinematic Loader Animation)
+           ========================================================================== */
+        #luxury-loader {
+            position: fixed;
+            inset: 0;
+            background-color: var(--pure-black);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+        }
+
+        .loader-matrix {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .loader-ring {
+            width: 130px;
+            height: 130px;
+            border: 2px solid transparent;
+            border-top-color: var(--luxury-gold);
+            border-bottom-color: var(--gold-glow);
+            border-radius: 50%;
+            position: absolute;
+            animation: spinRing 1.5s linear infinite;
+        }
+
+        .loader-emblem {
+            width: 90px;
+            height: 90px;
+            background: var(--dark-bg);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+            z-index: 2;
+        }
+
+        .loader-emblem span {
+            color: var(--luxury-gold);
+            font-family: var(--font-headings);
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .loader-text-branding {
+            text-align: center;
+        }
+
+        .loader-title {
+            color: var(--white-text);
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 8px;
+            font-family: var(--font-headings);
+        }
+
+        .loader-subtitle {
+            color: var(--luxury-gold);
+            font-size: 11px;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.8;
+            animation: pulseText 2s ease-in-out infinite;
+        }
+
+        @keyframes spinRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ==========================================================================
+           3. شريط التنقل العلوي الفاخر والمستجيب للبيئات الرقمية (Luxury Navbar)
+           ========================================================================== */
+        .premium-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-b: 1px solid rgba(212, 175, 55, 0.08);
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+
+        .navbar-concourse {
+            height: 90px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-signature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand-icon-sphere {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--luxury-gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--pure-black);
+            transition: var(--transition-smooth);
+        }
+
+        .brand-signature:hover .brand-icon-sphere {
+            transform: rotate(180deg);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .brand-icon-sphere text {
+            color: var(--luxury-gold);
+            font-weight: 800;
+            font-size: 14px;
+            font-family: var(--font-headings);
+        }
+
+        .brand-name-string {
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--white-text);
+            transition: var(--transition-smooth);
+        }
+
+        .brand-signature:hover .brand-name-string {
+            color: var(--luxury-gold);
+        }
+
+        .desktop-navigation-deck {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link-node {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white-text);
+            position: relative;
+            padding: 8px 0;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link-node:hover, .nav-link-node.active-node {
+            color: var(--luxury-gold);
+        }
+
+        .nav-link-node::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--luxury-gold);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link-node:hover::after, .nav-link-node.active-node::after {
+            width: 100%;
+        }
+
+        /* الابتكار البديل للهامبرغر على الهواتف: شريط تحكم سفلي ذكي ومستقبلي */
+        .mobile-premium-dock {
+            display: none;
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 10px 20px;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 5000;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .dock-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray-text);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .dock-item i {
+            font-size: 18px;
+            margin-bottom: 3px;
+            color: var(--luxury-gold);
+        }
+
+        .dock-item:hover, .dock-item.active-dock {
+            color: var(--white-text);
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        @media (max-width: 1024px) {
+            .desktop-navigation-deck { display: none; }
+            .mobile-premium-dock { display: flex; }
+        }
+
+        /* ==========================================================================
+           4. واجهة العرض السينمائية الرئيسية للموقع (Cinematic Hero Section)
+           ========================================================================== */
+        .cinema-hero-theater {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding-top: 90px;
+        }
+
+        .hero-background-cinemagraph {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .hero-background-cinemagraph img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            transform: scale(1.05);
+            animation: slowZoomHero 25s ease-in-out infinite;
+        }
+
+        .hero-overlay-shading {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--dark-bg) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+        }
+
+        .hero-content-pipeline {
+            text-align: center;
+            max-width: 1000px;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .hero-badge-capsule {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--glass-border);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-pulse-dot {
+            width: 7px;
+            height: 7px;
+            background-color: var(--luxury-gold);
+            border-radius: 50%;
+            animation: pulseDot 1.6s infinite;
+        }
+
+        .badge-label-string {
+            font-size: 10px;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gray-text);
+        }
+
+        .hero-monumental-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: var(--white-text);
+        }
+
+        .hero-gradient-text {
+            background: linear-gradient(90deg, var(--luxury-gold), var(--gold-glow), var(--luxury-gold));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldShimmer textShimmer 4s linear infinite;
+        }
+
+        .hero-conceptual-descriptor {
+            font-size: 18px;
+            color: var(--gray-text);
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            letter-spacing: 1px;
+        }
+
+        .luxury-cta-trigger {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--gold-glow) 100%);
+            color: var(--pure-black);
+            font-family: var(--font-headings);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 18px 45px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+        }
+
+        .luxury-cta-trigger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, var(--gold-glow) 0%, var(--luxury-gold) 100%);
+        }
+
+        @keyframes slowZoomHero {
+            0%, 100% { transform: scale(1.02); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-monumental-title { font-size: 2.5rem; }
+            .hero-conceptual-descriptor { font-size: 14px; }
+        }
+
+        /* ==========================================================================
+           5. قسم الرؤية والرسالة المتناسق (Mission, Vision & Core Values Matrix)
+           ========================================================================== */
+        .section-padding-node {
+            padding: 140px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-headline-block {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-pre-title {
+            color: var(--luxury-gold);
+            font-size: 11px;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-main-title {
+            font-size: 36px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .headline-gold-separator {
+            width: 60px;
+            height: 2px;
+            background-color: var(--luxury-gold);
+            margin: 20px auto 0 auto;
+        }
+
+        .blueprint-triple-grid {
+            display: grid;
+            grid-cols-1: 1fr;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .blueprint-triple-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+
+        .blueprint-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 50px 40px;
+            border-radius: 8px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blueprint-card:hover {
+            border-color: var(--glass-border-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(212, 175, 55, 0.05);
+        }
+
+        .blueprint-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--luxury-gold);
+            transition: var(--transition-smooth);
+        }
+
+        .blueprint-card:hover::before {
+            height: 100%;
+        }
+
+        .blueprint-card-numeric {
+            font-family: var(--font-headings);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--luxury-gold);
+            margin-bottom: 25px;
+            display: block;
+            opacity: 0.6;
+        }
+
+        .blueprint-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .blueprint-card-paragraph {
+            font-size: 13px;
+            color: var(--gray-text);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* ==========================================================================
+           6. خدمات الهندسة المتقدمة - نظام الأكورديون (Premium Services Accordion)
+           ========================================================================== */
+        .accordion-concourse-pipeline {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .accordion-segment-node {
+            background: var(--dark-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .accordion-segment-node:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .accordion-trigger-bar {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 25px 30px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .accordion-trigger-title {
+            color: var(--white-text);
+            font-family: var(--font-headings);
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition-smooth);
+        }
+
+        .accordion-segment-node.open-node .accordion-trigger-title {
+            color: var(--luxury-gold);
+        }
+
+        .accordion-indicator-icon {
+            color: var(--luxury-gold);
+            font-size: 12px;
+            transition: var(--transition-smooth);
+        }
+
+        .accordion-segment-node.open-node .accordion-indicator-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .accordion-inner-body {
+            padding: 30px;
+            font-size: 13px;
+            color: var(--gray-text);
+            font-weight: 300;
+            line-height: 1.8;
+            border-t: 1px solid rgba(212, 175, 55, 0.05);
+        }
+
+        /* ==========================================================================
+           7. شريط الشركاء اللانهائي الفاخر (Continuous Partner Marquee Section)
+           ========================================================================== */
+        .marquee-container-flow {
+            width: 100%;
+            background: var(--pure-black);
+            border-y: 1px solid var(--glass-border);
+            padding: 40px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-infinite-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 30s linear infinite;
+            gap: 60px;
+        }
+
+        .marquee-infinite-track:hover {
+            animation-play-state: paused;
+        }
+
+        .partner-emblem-card {
+            background: var(--dark-bg);
+            border: 1px solid var(--glass-border);
+            padding: 20px 45px;
+            border-radius: 4px;
+            font-family: var(--font-headings);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gray-text);
+            white-space: nowrap;
+            transition: var(--transition-smooth);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        .partner-emblem-card:hover {
+            border-color: var(--luxury-gold);
+            color: var(--white-text);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+            transform: scale(1.03);
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ==========================================================================
+           8. معرض المشاريع والملفات الهندسية (Premium Multi-Image Projects Ledger)
+           ========================================================================== */
+        .portfolio-interface-deck {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .filter-pill-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-pill {
+            background: var(--pure-black);
+            border: 1px solid var(--glass-border);
+            color: var(--gray-text);
+            font-family: var(--font-headings);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-pill:hover, .filter-pill.active-pill {
+            border-color: var(--luxury-gold);
+            color: var(--white-text);
+            background: var(--dark-bg);
+        }
+
+        .filter-pill.active-pill {
+            background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--gold-glow) 100%);
+            color: var(--pure-black);
+            font-weight: 700;
+        }
+
+        .project-matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+        }
+
+        @media (max-width: 1024px) {
+            .project-matrix-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .project-matrix-grid { grid-template-columns: 1fr; }
+        }
+
+        .project-ledger-card {
+            background: var(--pure-black);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .project-ledger-card:hover {
+            border-color: var(--glass-border-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+        }
+
+        .project-thumbnail-wrapper {
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+            background: var(--dark-bg);
+        }
+
+        .project-thumbnail-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .project-ledger-card:hover .project-thumbnail-wrapper img {
+            transform: scale(1.08);
+            opacity: 0.8;
+        }
+
+        .project-tag-overlay {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--glass-border);
+            color: var(--luxury-gold);
+            font-family: var(--font-body);
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 4px 12px;
+            border-radius: 2px;
+        }
+
+        .project-card-details {
+            padding: 30px;
+        }
+
+        .project-card-headline {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            transition: var(--transition-smooth);
+        }
+
+        .project-ledger-card:hover .project-card-headline {
+            color: var(--luxury-gold);
+        }
+
+        .project-card-excerpt {
+            font-size: 13px;
+            color: var(--gray-text);
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-action-link {
+            font-family: var(--font-headings);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--luxury-gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* نافذة المعرض التفاعلية العميقة للمشاريع */
+        .project-gallery-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+        }
+
+        .gallery-modal-stage {
+            background: var(--dark-bg);
+            border: 2px solid var(--glass-border);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+        }
+
+        .modal-stage-header {
+            padding: 20px 30px;
+            background: var(--pure-black);
+            border-b: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-stage-close {
+            background: none;
+            border: 1px solid var(--glass-border);
+            color: var(--white-text);
+            font-family: var(--font-headings);
+            font-size: 10px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: var(--transition-smooth);
+        }
+
+        .modal-stage-close:hover {
+            border-color: var(--luxury-gold);
+            color: var(--luxury-gold);
+        }
+
+        .modal-main-viewport {
+            height: 450px;
+            background: #000;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .modal-main-viewport { height: 280px; }
+        }
+
+        .modal-main-viewport img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-thumbnail-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 25px;
+            background: var(--pure-black);
+        }
+
+        .strip-thumb-btn {
+            height: 80px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 4px;
+            opacity: 0.5;
+            transition: var(--transition-smooth);
+            padding: 0;
+        }
+
+        .strip-thumb-btn:hover, .strip-thumb-btn.active-thumb {
+            opacity: 1;
+        }
+
+        .strip-thumb-btn.active-thumb {
+            border-color: var(--luxury-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .strip-thumb-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-description-box {
+            padding: 30px;
+            background: var(--dark-bg);
+            border-t: 1px solid var(--glass-border);
+        }
+
+        /* ==========================================================================
+           9. الهيكل الإداري والمصفوفة التنفيذية (High-Fidelity Executive Org Chart)
+           ========================================================================== */
+        .org-chart-concourse {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+        }
+
+        .org-chart-node-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 25px;
+            border-radius: 6px;
+            width: 280px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .org-chart-node-card:hover {
+            border-color: var(--luxury-gold);
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+        }
+
+        .node-avatar-placeholder {
+            width: 60px;
+            height: 60px;
+            background: var(--pure-black);
+            border: 1px solid var(--luxury-gold);
+            border-radius: 50%;
+            margin: 0 auto 15px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-headings);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--luxury-gold);
+        }
+
+        .node-name {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .node-position {
+            font-family: var(--font-body);
+            font-size: 10px;
+            color: var(--luxury-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .node-department-tag {
+            font-size: 9px;
+            color: var(--gray-text);
+            margin-top: 8px;
+            display: block;
+            opacity: 0.7;
+        }
+
+        /* مصفوفة الربط والشجرة الهيكلية */
+        .org-chart-tier-twin {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            width: 100%;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .org-chart-tier-twin { flex-direction: column; align-items: center; gap: 30px; }
+        }
+
+        .org-chart-tier-quad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        @media (max-width: 1024px) {
+            .org-chart-tier-quad { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .org-chart-tier-quad { grid-template-columns: 1fr; justify-items: center; }
+        }
+
+        .org-chart-tier-quint {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 1300px;
+        }
+
+        @media (max-width: 1024px) {
+            .org-chart-tier-quint { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .org-chart-tier-quint { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .org-chart-tier-quint { grid-template-columns: 1fr; justify-items: center; }
+        }
+
+        .chart-divider-line {
+            width: 80%;
+            max-width: 1000px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--luxury-gold), transparent);
+            opacity: 0.3;
+            margin: 20px 0;
+        }
+
+        /* نافذة السيرة الذاتية المنبثقة لأعضاء الفريق */
+        .team-bio-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 11000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .bio-modal-envelope {
+            background: var(--dark-bg);
+            border: 2px solid var(--luxury-gold);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 480px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            position: relative;
+        }
+
+        .bio-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--gray-text);
+            cursor: pointer;
+            font-size: 16px;
+            transition: var(--transition-smooth);
+        }
+
+        .bio-modal-close:hover { color: var(--luxury-gold); }
+
+        .bio-profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .bio-avatar {
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--luxury-gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-headings);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--luxury-gold);
+            background: var(--pure-black);
+        }
+
+        .bio-meta-text h3 {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .bio-meta-text p {
+            font-size: 11px;
+            color: var(--luxury-gold);
+            font-mono: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bio-matrix-ledger {
+            border-t: 1px solid rgba(212, 175, 55, 0.15);
+            padding-top: 20px;
+            font-size: 12px;
+            font-weight: 300;
+            space-y: 15px;
+        }
+
+        .bio-ledger-item {
+            margin-bottom: 12px;
+        }
+
+        .bio-ledger-label {
+            font-family: var(--font-headings);
+            font-size: 9px;
+            text-transform: uppercase;
+            color: var(--luxury-gold);
+            display: block;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        .bio-paragraph {
+            color: var(--gray-text);
+            line-height: 1.7;
+            margin-top: 15px;
+            border-t: 1px solid rgba(255,255,255,0.05);
+            padding-top: 15px;
+        }
+
+        /* ==========================================================================
+           10. بوابة التوظيف التلقائية الاحترافية (Luxury Careers & Automated Intake)
+           ========================================================================== */
+        .form-container-envelope {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+
+        @media (max-width: 768px) {
+            .form-container-envelope { padding: 30px 20px; }
+        }
+
+        .form-grid-dual {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 640px) {
+            .form-grid-dual { grid-template-columns: 1fr; gap: 25px; }
+        }
+
+        .form-group-node {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-input-label {
+            font-family: var(--font-headings);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray-text);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .premium-input-field {
+            background: var(--pure-black);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            padding: 14px 18px;
+            color: var(--white-text);
+            font-family: var(--font-body);
+            font-size: 13px;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .premium-input-field:focus {
+            border-color: var(--luxury-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        textarea.premium-input-field {
+            resize: none;
+            height: 140px;
+        }
+
+        .cv-upload-dummy-zone {
+            border: 1px dashed rgba(212, 175, 55, 0.3);
+            background: rgba(0,0,0,0.4);
+            padding: 25px;
+            text-align: center;
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+
+        .cv-upload-title {
+            font-family: var(--font-headings);
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--white-text);
+            margin-bottom: 5px;
+        }
+
+        .cv-upload-subtitle {
+            font-size: 10px;
+            color: var(--luxury-gold);
+            opacity: 0.8;
+        }
+
+        /* ==========================================================================
+           11. مجلة الأخبار الفاخرة المفلترة (Premium Corporate News Conduit)
+           ========================================================================== */
+        .news-utility-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .news-search-input {
+            width: 280px;
+        }
+
+        .news-matrix-deck {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .news-matrix-deck { grid-template-columns: 1fr; }
+        }
+
+        .news-wire-card {
+            background: var(--dark-bg);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 6px;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .news-wire-card:hover {
+            border-color: var(--glass-border-hover);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .news-meta-cluster {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .news-category-badge {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--luxury-gold);
+            font-size: 9px;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 3px 10px;
+            border-radius: 2px;
+        }
+
+        .news-date-string {
+            font-size: 11px;
+            color: var(--dark-gray);
+            font-family: var(--font-body);
+        }
+
+        .news-title-string {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            transition: var(--transition-smooth);
+        }
+
+        .news-wire-card:hover .news-title-string {
+            color: var(--luxury-gold);
+        }
+
+        .news-excerpt-string {
+            font-size: 13px;
+            color: var(--gray-text);
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .news-read-more-node {
+            font-family: var(--font-headings);
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--luxury-gold);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           12. مركز الاتصال والخريطة المضيئة المستقبيلية (Contact Matrix & Glow Map)
+           ========================================================================== */
+        .contact-composite-matrix {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+        }
+
+        @media (max-width: 1024px) {
+            .contact-composite-matrix { grid-template-columns: 1fr; }
+        }
+
+        .contact-intel-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .intel-brick-card {
+            background: var(--dark-bg);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 6px;
+        }
+
+        .intel-label {
+            font-family: var(--font-headings);
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--luxury-gold);
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .intel-data {
+            font-size: 13px;
+            color: var(--gray-text);
+            font-weight: 300;
+        }
+
+        .intel-data-highlight {
+            font-size: 15px;
+            color: var(--white-text);
+            font-weight: 600;
+        }
+
+        /* لوحة الخريطة المضيئة والمحاكاة الرقمية الإحداثية */
+        .simulated-glow-map-canvas {
+            height: 220px;
+            background: var(--pure-black);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map-dot-pulse-radar {
+            text-align: center;
+            z-index: 10;
+        }
+
+        .radar-beacon {
+            width: 12px;
+            height: 12px;
+            background-color: var(--luxury-gold);
+            border-radius: 50%;
+            margin: 0 auto 10px auto;
+            animation: pulseDot 2s infinite;
+        }
+
+        .radar-coordinates {
+            font-family: var(--font-body);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white-text);
+            display: block;
+        }
+
+        .radar-sub-label {
+            font-size: 9px;
+            color: var(--luxury-gold);
+            font-mono: var(--font-body);
+        }
+
+        .map-grid-overlay-lines {
+            position: absolute;
+            inset: 0;
+            opacity: 0.2;
+            background-image: radial-gradient(var(--luxury-gold) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* ==========================================================================
+           13. لوحة تحكم ومراقبة الناشر الديناميكية (Live Dynamic Publisher Console)
+           ========================================================================== */
+        .floating-publisher-trigger-key {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 999;
+            background: rgba(10,10,10,0.9);
+            border: 1px solid var(--luxury-gold);
+            color: var(--luxury-gold);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: var(--font-headings);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.2);
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .floating-publisher-trigger-key:hover {
+            background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--gold-glow) 100%);
+            color: var(--pure-black);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .publisher-console-overlay-panel {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 9000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .publisher-console-wrapper {
+            background: var(--dark-bg);
+            border: 2px dashed var(--luxury-gold);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 1100px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 50px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.9);
+        }
+
+        .console-master-title-block {
+            border-b: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 25px;
+            margin-bottom: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .console-grid-split {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .console-grid-split { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .console-sub-form {
+            background: var(--pure-black);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 6px;
+        }
+
+        .console-section-heading {
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-l: 2px solid var(--luxury-gold);
+            padding-left: 10px;
+        }
+
+        /* ==========================================================================
+           14. التذييل المؤسسي والروابط السيادية (Ultra Luxury Corporate Footer)
+           ========================================================================== */
+        .sovereign-footer-anchor {
+            background: var(--pure-black);
+            border-t: 2px solid var(--luxury-gold);
+            padding: 90px 0 40px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-concourse-matrix {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-concourse-matrix { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .footer-brand-profile p {
+            font-size: 13px;
+            color: var(--gray-text);
+            font-weight: 300;
+            max-width: 400px;
+            margin-top: 20px;
+            line-height: 1.7;
+        }
+
+        .footer-column-heading {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--luxury-gold);
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .footer-link-list {
+            list-style: none;
+        }
+
+        .footer-link-item {
+            margin-bottom: 12px;
+        }
+
+        .footer-link-anchor {
+            font-size: 12px;
+            color: var(--gray-text);
+            font-weight: 300;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-link-anchor:hover {
+            color: var(--white-text);
+            padding-left: 5px;
+        }
+
+        .footer-quote-box h5 {
+            font-family: var(--font-headings);
+            font-size: 13px;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--gray-text);
+            line-height: 1.6;
+        }
+
+        .footer-terminal-bar {
+            border-t: 1px solid rgba(255,255,255,0.05);
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-body);
+            font-size: 10px;
+            color: #555555;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- مؤثرات الإضاءة المحيطة الموزعة ديناميكياً في الخلفية -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- ==========================================================================
+       شاشة التحميل السينمائية التفاعلية (Cinematic Loader Animation)
+       ========================================================================== -->
+    <div id="luxury-loader">
+        <div class="loader-matrix">
+            <div class="loader-ring"></div>
+            <div class="loader-emblem"><span>SV</span></div>
+        </div>
+        <div class="loader-text-branding">
+            <h2 class="loader-title">Smart Vision</h2>
+            <p class="loader-subtitle">Engineering Excellence Excellence</p>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       شريط التنقل العلوي الفاخر (Luxury Navbar)
+       ========================================================================== -->
+    <header class="premium-header">
+        <div class="container">
+            <div class="navbar-concourse">
+                <a href="#home-theater" class="brand-signature">
+                    <div class="brand-icon-sphere">
+                        <span style="color:#D4AF37; font-weight:900; font-size:14px;">SV</span>
+                    </div>
+                    <span class="brand-name-string">Smart Vision</span>
+                </a>
+                <nav class="desktop-navigation-deck">
+                    <a href="#home-theater" class="nav-link-node active-node">Home</a>
+                    <a href="#mission-vision-matrix" class="nav-link-node">Mission & Vision</a>
+                    <a href="#capabilities-accordion" class="nav-link-node">Services</a>
+                    <a href="#portfolio-ledger" class="nav-link-node">Projects</a>
+                    <a href="#executive-framework" class="nav-link-node">Our Team</a>
+                    <a href="#career-intake" class="nav-link-node">Careers</a>
+                    <a href="#news-conduit" class="nav-link-node">News</a>
+                    <a href="#contact-hub" class="nav-link-node">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- البديل الفاخر للهامبرغر على الهواتف: شريط تحكم سفلي ذكي ومستقبلي -->
+    <div class="mobile-premium-dock">
+        <div class="dock-item active-dock" onclick="location.href='#home-theater'">
+            <i>✦</i><span>Home</span>
+        </div>
+        <div class="dock-item" onclick="location.href='#capabilities-accordion'">
+            <i>⚙</i><span>Services</span>
+        </div>
+        <div class="dock-item" onclick="location.href='#portfolio-ledger'">
+            <i>⚏</i><span>Projects</span>
+        </div>
+        <div class="dock-item" onclick="location.href='#executive-framework'">
+            <i>❖</i><span>Team</span>
+        </div>
+        <div class="dock-item" onclick="location.href='#contact-hub'">
+            <i>✉</i><span>Contact</span>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       واجهة العرض السينمائية الرئيسية للموقع (Cinematic Hero Section)
+       ========================================================================== -->
+    <section id="home-theater" class="cinema-hero-theater">
+        <div class="hero-background-cinemagraph">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=90" alt="Corporate Engineering Superstructure Layout">
+        </div>
+        <div class="hero-overlay-shading"></div>
+        <div class="hero-content-pipeline">
+            <div class="hero-badge-capsule">
+                <div class="badge-pulse-dot"></div>
+                <span class="badge-label-string">Pioneering Structural Sovereignty</span>
+            </div>
+            <h1 class="hero-monumental-title">Building the Future<br><span class="hero-gradient-text">With Precision</span></h1>
+            <p class="hero-conceptual-descriptor">Leading engineering & construction company delivering innovative and sustainable solutions across global landscapes.</p>
+            <button class="luxury-cta-trigger" onclick="location.href='#portfolio-ledger'">Explore Portfolio Ledger</button>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       قسم الرؤية والرسالة المتناسق (Mission, Vision & Core Values Matrix)
+       ========================================================================== -->
+    <section id="mission-vision-matrix" class="section-padding-node" style="background-color: #050505;">
+        <div class="container">
+            <div class="section-headline-block">
+                <span class="section-pre-title">Corporate Blueprint</span>
+                <h2 class="section-main-title">Pillars of Intent</h2>
+                <div class="headline-gold-separator"></div>
+            </div>
+            <div class="blueprint-triple-grid">
+                <div class="blueprint-card">
+                    <span class="blueprint-card-numeric">01 / STRATEGY</span>
+                    <h3 class="blueprint-card-title">Our Mission</h3>
+                    <p class="blueprint-card-paragraph">To actualize client structural aspirations with zero compromise on engineering safety, deploying bleeding-edge automation tech to synthesize generational infrastructure assets.</p>
+                </div>
+                <div class="blueprint-card">
+                    <span class="blueprint-card-numeric">02 / DESTINATION</span>
+                    <h3 class="blueprint-card-title">Our Vision</h3>
+                    <p class="blueprint-card-paragraph">To position Smart Vision at the absolute peak of global luxury infrastructure development, recognized globally as the baseline template for engineering precision and luxury integration.</p>
+                </div>
+                <div class="blueprint-card">
+                    <span class="blueprint-card-numeric">03 / MANIFESTO</span>
+                    <h3 class="blueprint-card-title">Core Values</h3>
+                    <p class="blueprint-card-paragraph">Absolute mathematical transparency, micro-precision down to structural tolerances, unyielding corporate discretion, and pioneering architectural paradigm leadership.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       خدمات الهندسة المتقدمة - نظام الأكورديون (Premium Services Accordion)
+       ========================================================================== -->
+    <section id="capabilities-accordion" class="section-padding-node">
+        <div class="container">
+            <div class="section-headline-block">
+                <span class="section-pre-title">Capabilities Directory</span>
+                <h2 class="section-main-title">Our Specialized Vectors</h2>
+                <div class="headline-gold-separator"></div>
+            </div>
+            <div class="accordion-concourse-pipeline">
+                <div class="accordion-segment-node open-node">
+                    <button class="accordion-trigger-bar" onclick="toggleAccordion(this)">
+                        <span class="accordion-trigger-title">Civil & Structural Engineering</span>
+                        <span class="accordion-indicator-icon">▼</span>
+                    </button>
+                    <div class="accordion-content-panel" style="max-height: 200px;">
+                        <div class="accordion-inner-body">
+                            Comprehensive finite element analysis, topological matrix optimization, dynamic seismic load engineering, and core skeletal high-rise deployment frameworks tailored for extreme durability profiles.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-segment-node">
+                    <button class="accordion-trigger-bar" onclick="toggleAccordion(this)">
+                        <span class="accordion-trigger-title">Architectural Engineering</span>
+                        <span class="accordion-indicator-icon">▼</span>
+                    </button>
+                    <div class="accordion-content-panel">
+                        <div class="accordion-inner-body">
+                            Blending bespoke aesthetic luxury contours with computational spatial realities. We blueprint iconic facades utilizing high-end premium sustainable spatial components.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-segment-node">
+                    <button class="accordion-trigger-bar" onclick="toggleAccordion(this)">
+                        <span class="accordion-trigger-title">MEP Framework Logistics</span>
+                        <span class="accordion-indicator-icon">▼</span>
+                    </button>
+                    <div class="accordion-content-panel">
+                        <div class="accordion-inner-body">
+                            Intelligent thermal lifecycle automation grids, complex data routing backbones, hydronic power arrays, and continuous smart monitoring sub-elements.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-segment-node">
+                    <button class="accordion-trigger-bar" onclick="toggleAccordion(this)">
+                        <span class="accordion-trigger-title">Repair & Strengthening Structures</span>
+                        <span class="accordion-indicator-icon">▼</span>
+                    </button>
+                    <div class="accordion-content-panel">
+                        <div class="accordion-inner-body">
+                            Advanced concrete micro-reinforcements, deep structural carbon wrap optimizations, carbon polymer matrix updates, and vintage architectural remediation schemas.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-segment-node">
+                    <button class="accordion-trigger-bar" onclick="toggleAccordion(this)">
+                        <span class="accordion-trigger-title">Site Supervision & Operational Oversight</span>
+                        <span class="accordion-indicator-icon">▼</span>
+                    </button>
+                    <div class="accordion-content-panel">
+                        <div class="accordion-inner-body">
+                            Real-time laser geometric verification tracking, raw aggregate materials chemical stress validation, and complete compliance orchestration across complex multi-contractor zones.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       شريط الشركاء اللانهائي الفاخر (Continuous Partner Marquee Section)
+       ========================================================================== -->
+    <div class="marquee-container-flow">
+        <div class="marquee-infinite-track" id="partner-marquee-track">
+            <!-- سيتم توليد الشركاء ديناميكياً لتأمين استمرارية التدفق -->
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       معرض المشاريع والملفات الهندسية (Premium Multi-Image Projects Ledger)
+       ========================================================================== -->
+    <section id="portfolio-ledger" class="section-padding-node" style="background-color: #050505;">
+        <div class="container">
+            <div class="portfolio-interface-deck">
+                <div>
+                    <span class="section-pre-title">Global Implementations</span>
+                    <h2 class="section-main-title">Monuments of Innovation</h2>
+                </div>
+                <div class="filter-pill-row">
+                    <button class="filter-pill active-pill" onclick="filterProjects('All', this)">All Projects</button>
+                    <button class="filter-pill" onclick="filterProjects('Structural', this)">Structural</button>
+                    <button class="filter-pill" onclick="filterProjects('Architectural', this)">Architectural</button>
+                    <button class="filter-pill" onclick="filterProjects('MEP', this)">MEP</button>
+                </div>
+            </div>
+            <div class="project-matrix-grid" id="projects-target-grid">
+                <!-- سيتم حقن كروت المشاريع هنا ديناميكياً عبر المحرك البرمجي -->
+            </div>
+        </div>
+    </section>
+
+    <!-- نافذة المعرض التفاعلية العميقة للمشاريع -->
+    <div class="project-gallery-modal" id="project-lightbox-modal">
+        <div class="gallery-modal-stage">
+            <div class="modal-stage-header">
+                <div>
+                    <h3 id="modal-project-title" style="text-transform: uppercase; font-size:16px;">Project Title</h3>
+                </div>
+                <button class="modal-stage-close" onclick="closeProjectModal()">✕ Close Record</button>
+            </div>
+            <div class="modal-main-viewport">
+                <img id="modal-main-image" src="" alt="Focused Structural Feature Detail">
+            </div>
+            <div class="modal-thumbnail-strip" id="modal-thumb-strip">
+                <!-- الصور المصغرة تحقن هنا -->
+            </div>
+            <div class="modal-description-box">
+                <p id="modal-project-desc" style="font-size:13px; color:var(--gray-text); font-weight:300; line-height:1.6;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       الهيكل الإداري والمصفوفة التنفيذية التفاعلية (Interactive Team Org Chart)
+       ========================================================================== -->
+    <section id="executive-framework" class="section-padding-node">
+        <div class="container">
+            <div class="section-headline-block">
+                <span class="section-pre-title">Governance Framework</span>
+                <h2 class="section-main-title">Organizational Structure</h2>
+                <div class="headline-gold-separator"></div>
+            </div>
+            <div class="org-chart-concourse">
+                
+                <!-- المستوى السيادي: رئيس مجلس الإدارة (Chairman) -->
+                <div class="org-chart-node-card" onclick="openTeamBio('Dr. Error', 'Chairman of the Board', 'Supreme Council', '32 Years', 'board.chair@smartvision.ae', 'Architectural sovereign and visionary developer overseeing macro capital expenditures and strategic cross-continental mega infrastructure frameworks.')">
+                    <div class="absolute-tag" style="position:absolute; top:8px; right:8px; font-size:8px; background:rgba(212,175,55,0.2); color:var(--luxury-gold); padding:2px 5px; font-family:var(--font-headings); border-radius:2px;">BOARD TOP</div>
+                    <div class="node-avatar-placeholder">HE</div>
+                    <h3 class="node-name">Dr. Error</h3>
+                    <p class="node-position">Chairman of the Board</p>
+                    <span class="node-department-tag">Supreme Administration Matrix</span>
+                </div>
+
+                <div class="chart-divider-line"></div>
+
+                <!-- المستوى التنفيذي الأول: الرئيس التنفيذي والمستشار (CEO & Executive Advisor) -->
+                <div class="org-chart-tier-twin">
+                    <div class="org-chart-node-card" onclick="openTeamBio('Mister Bisu', 'Chief Executive Officer (CEO)', 'Executive Office', '24 Years', 'ceo.office@smartvision.com', 'Commanding strategic engineering lifecycles. Spearheaded 40+ structural megaprojects with strict timeline deployment records.')">
+                        <div class="node-avatar-placeholder">CEO</div>
+                        <h3 class="node-name">Mister Bisu</h3>
+                        <p class="node-position">Chief Executive Officer</p>
+                        <span class="node-department-tag">Executive Office Vector</span>
+                    </div>
+                    <div class="org-chart-node-card" onclick="openTeamBio('Prof. Marcus Vance', 'Chief Executive Legal Advisor', 'Risk Management', '28 Years', 'm.vance@smartvision.com', 'Principal cross-border topological regulatory specialist advising on structural feasibility portfolios across international freezones.')">
+                        <div class="node-avatar-placeholder">⚖</div>
+                        <h3 class="node-name">Prof. Marcus Vance</h3>
+                        <p class="node-position">Chief Strategic Advisor</p>
+                        <span class="node-department-tag">Risk & Regulation Desk</span>
+                    </div>
+                </div>
+
+                <div class="chart-divider-line"></div>
+
+                <!-- المستوى الإداري الثاني: 4 مدراء قطاعات رئيسية (Core Managers) -->
+                <div class="org-chart-tier-quad">
+                    <div class="org-chart-node-card" style="width:100%;" onclick="openTeamBio('Dr. Amara Thorne', 'Chief Engineering Director', 'MEP & Structural Matrix', '18 Years', 'a.thorne@smartvision.com', 'Ph.D. in Computational Structural Dynamics. Leads all structural matrix stress analysis fields.')">
+                        <div class="node-avatar-placeholder">M01</div>
+                        <h3 class="node-name">Dr. Amara Thorne</h3>
+                        <p class="node-position">Engineering Manager</p>
+                        <span class="node-department-tag">Structural Matrix Dept</span>
+                    </div>
+                    <div class="org-chart-node-card" style="width:100%;" onclick="openTeamBio('Arch. Karim Sterling', 'Principal Architectural Director', 'Aesthetic Concourse Design', '16 Years', 'k.sterling@smartvision.com', 'Award-winning elite spatial planner specialized in luxury glassmorphic organic tower exterior profiles.')">
+                        <div class="node-avatar-placeholder">M02</div>
+                        <h3 class="node-name">Arch. Karim Sterling</h3>
+                        <p class="node-position">Architecture Manager</p>
+                        <span class="node-department-tag">Aesthetic Concourse Design</span>
+                    </div>
+                    <div class="org-chart-node-card" style="width:100%;" onclick="openTeamBio('Eng. Tariq Zayed', 'Director of General Operations', 'Field Procurement Ledger', '19 Years', 't.zayed@smartvision.com', 'Coordinates large-scale supply matrix flows, equipment allocation, and localized structural site integration rules.')">
+                        <div class="node-avatar-placeholder">M03</div>
+                        <h3 class="node-name">Eng. Tariq Zayed</h3>
+                        <p class="node-position">Operations Manager</p>
+                        <span class="node-department-tag">Field Procurement Ledger</span>
+                    </div>
+                    <div class="org-chart-node-card" style="width:100%;" onclick="openTeamBio('Elena Rostova', 'Director of Global Talent Acquisition', 'Human Resources Matrix', '15 Years', 'e.rostova@smartvision.com', 'Orchestrates workforce allocation and senior talent screening mechanisms for specialized engineers.')">
+                        <div class="node-avatar-placeholder">M04</div>
+                        <h3 class="node-name">Elena Rostova</h3>
+                        <p class="node-position">HR Manager</p>
+                        <span class="node-department-tag">Human Resources Matrix</span>
+                    </div>
+                </div>
+
+                <div class="chart-divider-line"></div>
+
+                <!-- المستوى الميداني: المهندسين والمشرفين (Engineers & Supervisors Matrix) -->
+                <div class="org-chart-tier-quint">
+                    <div class="org-chart-node-card" style="width:100%; padding:15px;" onclick="openTeamBio('Eng. Ryan Choi', 'Lead Structural Assessor', 'Core Operations Technical Desk', '9 Years', 'technical.desk@smartvision.com', 'Active tier-1 engineer executing specialized operational parameters directly under regional project manager oversight vectors.')">
+                        <h4 class="node-name" style="font-size:11px;">Eng. Ryan Choi</h4>
+                        <p class="node-position" style="font-size:8px;">Structural Assessor</p>
+                    </div>
+                    <div class="org-chart-node-card" style="width:100%; padding:15px;" onclick="openTeamBio('Eng. Sarah Lin', 'Senior MEP Automation Dev', 'Core Operations Technical Desk', '10 Years', 'technical.desk@smartvision.com', 'Active tier-1 engineer executing specialized operational parameters directly under regional project manager oversight vectors.')">
+                        <h4 class="node-name" style="font-size:11px;">Eng. Sarah Lin</h4>
+                        <p class="node-position" style="font-size:8px;">MEP Automation Dev</p>
+                    </div>
+                    <div class="org-chart-node-card" style="width:100%; padding:15px;" onclick="openTeamBio('Arch. Omar Farooq', 'Senior Facade Visualizer', 'Core Operations Technical Desk', '8 Years', 'technical.desk@smartvision.com', 'Active tier-1 engineer executing specialized operational parameters directly under regional project manager oversight vectors.')">
+                        <h4 class="node-name" style="font-size:11px;">Arch. Omar Farooq</h4>
+                        <p class="node-position" style="font-size:8px;">Facade Visualizer</p>
+                    </div>
+                    <div class="org-chart-node-card" style="width:100%; padding:15px;" onclick="openTeamBio('Eng. Chloe Dupont', 'Senior Geotechnical Tech', 'Core Operations Technical Desk', '11 Years', 'technical.desk@smartvision.com', 'Active tier-1 engineer executing specialized operational parameters directly under regional project manager oversight vectors.')">
+                        <h4 class="node-name" style="font-size:11px;">Eng. Chloe Dupont</h4>
+                        <p class="node-position" style="font-size:8px;">Geotechnical Tech</p>
+                    </div>
+                    <div class="org-chart-node-card" style="width:100%; padding:15px;" onclick="openTeamBio('Inspector Ross G.', 'Chief Quality Supervisor', 'Core Operations Technical Desk', '12 Years', 'technical.desk@smartvision.com', 'Active tier-1 engineer executing specialized operational parameters directly under regional project manager oversight vectors.')">
+                        <h4 class="node-name" style="font-size:11px;">Inspector Ross G.</h4>
+                        <p class="node-position" style="font-size:8px;">Quality Supervisor</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- نافذة السيرة الذاتية المنبثقة لأعضاء الفريق -->
+    <div class="team-bio-modal" id="team-bio-lightbox">
+        <div class="bio-modal-envelope">
+            <button class="bio-modal-close" onclick="closeTeamBio()">✕</button>
+            <div class="bio-profile-header">
+                <div class="bio-avatar" id="bio-modal-avatar">E</div>
+                <div class="bio-meta-text">
+                    <h3 id="bio-modal-name">Name</h3>
+                    <p id="bio-modal-position">Position</p>
+                </div>
+            </div>
+            <div class="bio-matrix-ledger">
+                <div class="bio-ledger-item">
+                    <span class="bio-ledger-label">Corporate Department</span>
+                    <span id="bio-modal-dept" style="color:var(--white-text);">Dept</span>
+                </div>
+                <div class="bio-ledger-item">
+                    <span class="bio-ledger-label">Verified Tenure Seniority</span>
+                    <span id="bio-modal-exp" style="color:var(--white-text);">Exp</span>
+                </div>
+                <div class="bio-ledger-item">
+                    <span class="bio-ledger-label">Direct Communication Ledger</span>
+                    <span id="bio-modal-mail" style="color:var(--white-text); text-decoration: underline;">Mail</span>
+                </div>
+                <p class="bio-paragraph" id="bio-modal-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       بوابة التوظيف التلقائية الاحترافية (Luxury Careers & Automated Intake)
+       ========================================================================== -->
+    <section id="career-intake" class="section-padding-node" style="background-color: #050505;">
+        <div class="container">
+            <div class="section-headline-block">
+                <span class="section-pre-title">Human Capital Intake</span>
+                <h2 class="section-main-title">Join Our Team</h2>
+                <div class="headline-gold-separator"></div>
+            </div>
+            <div class="form-container-envelope">
+                <form id="career-submission-form" onsubmit="dispatchCareerEmail(event)">
+                    <div class="form-grid-dual">
+                        <div class="form-group-node">
+                            <label class="form-input-label">Full Candidate Name *</label>
+                            <input type="text" id="career-name" required class="premium-input-field" placeholder="e.g., Eng. John Doe">
+                        </div>
+                        <div class="form-group-node">
+                            <label class="form-input-label">Secure Contact Number *</label>
+                            <input type="tel" id="career-phone" required class="premium-input-field" placeholder="+971 50 000 0000">
+                        </div>
+                    </div>
+                    <div class="form-grid-dual">
+                        <div class="form-group-node">
+                            <label class="form-input-label">Verified Email Address *</label>
+                            <input type="email" id="career-email" required class="premium-input-field" placeholder="candidate@network.com">
+                        </div>
+                        <div class="form-group-node">
+                            <label class="form-input-label">Target Engineering Discipline</label>
+                            <select id="career-position" class="premium-input-field" style="background-color:#000;">
+                                <option value="Senior Civil Engineer">Senior Civil & Structural Engineer</option>
+                                <option value="Lead Architect">Lead Architectural System Designer</option>
+                                <option value="MEP Framework Controller">MEP Framework Systems Controller</option>
+                                <option value="Site Operations Supervisor">Site Operations General Supervisor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group-node" style="margin-bottom:25px;">
+                        <label class="form-input-label">Accumulated Years of Experience *</label>
+                        <input type="number" id="career-exp" required class="premium-input-field" placeholder="e.g., 8">
+                    </div>
+                    <div class="form-group-node" style="margin-bottom:25px;">
+                        <label class="form-input-label">Executive Summary / Cover Letter *</label>
+                        <textarea id="career-letter" required class="premium-input-field" placeholder="Outline your key technical proficiencies and notable achievements..."></textarea>
+                    </div>
+                    <div class="cv-upload-dummy-zone">
+                        <h4 class="cv-upload-title">PDF / DOCX Engineering Dossier</h4>
+                        <p class="cv-upload-subtitle">Your digital CV file will be prepared for submission via email attachment seamlessly.</p>
+                    </div>
+                    <button type="submit" class="luxury-cta-trigger" style="width:100%; border-radius:4px;">Submit Application & Open Mail Dispatcher</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       مجلة الأخبار الفاخرة المفلترة (Premium Corporate News Conduit)
+       ========================================================================== -->
+    <section id="news-conduit" class="section-padding-node">
+        <div class="container">
+            <div class="news-utility-bar">
+                <div>
+                    <span class="section-pre-title">Press Wire Records</span>
+                    <h2 class="section-main-title">Intelligence & Insights</h2>
+                </div>
+                <div style="display:flex; gap:15px; align-items:center; flex-wrap:wrap;">
+                    <input type="text" id="news-search-field" class="premium-input-field news-search-input" placeholder="Search headlines..." oninput="filterNews()">
+                    <button class="filter-pill active-pill" onclick="filterNewsCategory('All', this)">All Wire</button>
+                    <button class="filter-pill" onclick="filterNewsCategory('Innovation', this)">Innovation</button>
+                    <button class="filter-pill" onclick="filterNewsCategory('Corporate', this)">Corporate</button>
+                </div>
+            </div>
+            <div class="news-matrix-deck" id="news-target-deck">
+                <!-- سيتم حقن كروت الأخبار هنا ديناميكياً عبر المحرك البرمجي -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       مركز الاتصال والخريطة المضيئة المستقبيلية (Contact Matrix & Glow Map)
+       ========================================================================== -->
+    <section id="contact-hub" class="section-padding-node" style="background-color: #050505;">
+        <div class="container">
+            <div class="section-headline-block">
+                <span class="section-pre-title">Global Concourse Links</span>
+                <h2 class="section-main-title">Initiate Communication</h2>
+                <div class="headline-gold-separator"></div>
+            </div>
+            <div class="contact-composite-matrix">
+                <div class="contact-intel-column">
+                    <div class="intel-brick-card">
+                        <span class="intel-label">Corporate Headquarters</span>
+                        <p class="intel-data">Smart Vision Sovereign Heights, Level 84<br>Al-Maktoum Corporate Zone, Downtown Abu Dhabi, UAE</p>
+                    </div>
+                    <div class="intel-brick-card">
+                        <span class="intel-label">Direct Telephony Ledger</span>
+                        <p class="intel-data-highlight">+971 (0) 4 900 8800</p>
+                        <p class="intel-data" style="font-size:10px; margin-top:5px; opacity:0.6;">Discreet corporate channels active 24/7</p>
+                    </div>
+                    <div class="intel-brick-card">
+                        <span class="intel-label">Digital Correspondence</span>
+                        <p class="intel-data-highlight" style="font-size:14px; color:var(--luxury-gold);">intelligence@smartvision.ae</p>
+                    </div>
+                    <div class="simulated-glow-map-canvas">
+                        <div class="map-grid-overlay-lines"></div>
+                        <div class="map-dot-pulse-radar">
+                            <div class="radar-beacon"></div>
+                            <span class="radar-coordinates">24.4539° N, 54.3773° E</span>
+                            <span class="radar-sub-label">Satellite Secure Lock</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-container-envelope" style="width:100%; margin:0;">
+                    <form onsubmit="event.preventDefault(); alert('Inquiry encrypted and successfully synchronized into general communication queue.'); this.reset();">
+                        <h3 class="console-section-heading" style="margin-bottom:30px;">Encrypted Inquiry Request</h3>
+                        <div class="form-grid-dual">
+                            <div class="form-group-node">
+                                <label class="form-input-label">Your Full Name</label>
+                                <input type="text" required class="premium-input-field" placeholder="e.g., Director Al-Mansoor">
+                            </div>
+                            <div class="form-group-node">
+                                <label class="form-input-label">Your Email Matrix</label>
+                                <input type="email" required class="premium-input-field" placeholder="corporate@domain.com">
+                            </div>
+                        </div>
+                        <div class="form-group-node" style="margin-bottom:20px;">
+                            <label class="form-input-label">Subject Matter Specification</label>
+                            <input type="text" required class="premium-input-field" placeholder="e.g., Tower Exoskeleton Project Tender Proposal">
+                        </div>
+                        <div class="form-group-node" style="margin-bottom:30px;">
+                            <label class="form-input-label">Elaborate Communication Payload</label>
+                            <textarea required class="premium-input-field" placeholder="Outline full parameters of the engineering alignment scope here..."></textarea>
+                        </div>
+                        <button type="submit" class="luxury-cta-trigger" style="width:100%; background:none; border:2px solid var(--luxury-gold); color:var(--luxury-gold);">Transmit Encrypted Message Payload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       لوحة تحكم ومراقبة الناشر الديناميكية (Live Dynamic Publisher Console)
+       ========================================================================== -->
+    <button class="floating-publisher-trigger-key" onclick="togglePublisherConsole()">
+        <span style="width:8px; height:8px; background:var(--luxury-gold); border-radius:50%; display:inline-block; animation: pulseDot 1s infinite;"></span>
+        <span>Activate Publisher Mode</span>
+    </button>
+
+    <div class="publisher-console-overlay-panel" id="publisher-master-panel">
+        <div class="publisher-console-wrapper">
+            <div class="console-master-title-block">
+                <div>
+                    <h2 style="color:var(--luxury-gold); font-size:22px; text-transform:uppercase;">Live CMS Console</h2>
+                    <p style="font-size:11px; color:var(--gray-text); font-family:var(--font-body); margin-top:4px;">Simulated real-time synchronization onto client layout matrices</p>
+                </div>
+                <button class="modal-stage-close" onclick="togglePublisherConsole()">Close Panel</button>
+            </div>
+            <div class="console-grid-split">
+                
+                <!-- نموذج نشر مشروع جديد -->
+                <div class="console-sub-form">
+                    <h3 class="console-section-heading">Deploy New Project Profile</h3>
+                    <form id="pub-project-form" onsubmit="publishProjectDynamic(event)">
+                        <div class="form-group-node" style="margin-bottom:15px;">
+                            <label class="form-input-label">Project Title *</label>
+                            <input type="text" id="pub-proj-title" required class="premium-input-field" placeholder="e.g., Titanium Tech Park">
+                        </div>
+                        <div class="form-grid-dual" style="margin-bottom:15px;">
+                            <div class="form-group-node">
+                                <label class="form-input-label">Structural Classification</label>
+                                <select id="pub-proj-cat" class="premium-input-field" style="background:#000;">
+                                    <option value="Structural">Structural & Civil</option>
+                                    <option value="Architectural">Architectural</option>
+                                    <option value="MEP">MEP Frameworks</option>
+                                </select>
+                            </div>
+                            <div class="form-group-node">
+                                <label class="form-input-label">Primary Image URL *</label>
+                                <input type="text" id="pub-proj-img1" required class="premium-input-field" placeholder="Image URL 1">
+                            </div>
+                        </div>
+                        <div class="form-grid-dual" style="margin-bottom:15px;">
+                            <div class="form-group-node">
+                                <label class="form-input-label">Gallery Image URL 2 *</label>
+                                <input type="text" id="pub-proj-img2" required class="premium-input-field" placeholder="Image URL 2">
+                            </div>
+                            <div class="form-group-node">
+                                <label class="form-input-label">Gallery Image URL 3 *</label>
+                                <input type="text" id="pub-proj-img3" required class="premium-input-field" placeholder="Image URL 3">
+                            </div>
+                        </div>
+                        <div class="form-group-node" style="margin-bottom:20px;">
+                            <label class="form-input-label">Project Synopsis / Executive Summary *</label>
+                            <textarea id="pub-proj-desc" required class="premium-input-field" style="height:80px;" placeholder="Provide engineered specs summary..."></textarea>
+                        </div>
+                        <button type="submit" class="luxury-cta-trigger" style="width:100%; py:12px;">Inject Project Securely Into Grid</button>
+                    </form>
+                </div>
+
+                <!-- نموذج نشر خبر جديد -->
+                <div class="console-sub-form">
+                    <h3 class="console-section-heading">Broadcast Global News Report</h3>
+                    <form id="pub-news-form" onsubmit="publishNewsDynamic(event)">
+                        <div class="form-group-node" style="margin-bottom:15px;">
+                            <label class="form-input-label">News Headline *</label>
+                            <input type="text" id="pub-news-title" required class="premium-input-field" placeholder="e.g., Strategic Integration or Landmark Project Signings">
+                        </div>
+                        <div class="form-group-node" style="margin-bottom:15px;">
+                            <label class="form-input-label">Classification Category</label>
+                            <select id="pub-news-cat" class="premium-input-field" style="background:#000;">
+                                <option value="Innovation">Innovation & Engineering</option>
+                                <option value="Corporate">Corporate Announcements</option>
+                            </select>
+                        </div>
+                        <div class="form-group-node" style="margin-bottom:20px;">
+                            <label class="form-input-label">Article Body / Press Text *</label>
+                            <textarea id="pub-news-desc" required class="premium-input-field" style="height:120px;" placeholder="Describe the corporate breakthrough or insight..."></textarea>
+                        </div>
+                        <button type="submit" class="luxury-cta-trigger" style="width:100%; background:none; border:2px solid var(--luxury-gold); color:var(--luxury-gold);">Broadcast Press Wire Live</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       التذييل المؤسسي والروابط السيادية (Ultra Luxury Corporate Footer)
+       ========================================================================== -->
+    <footer class="sovereign-footer-anchor">
+        <div class="container">
+            <div class="footer-concourse-matrix">
+                <div class="footer-brand-profile">
+                    <a href="#home-theater" class="brand-signature">
+                        <div class="brand-icon-sphere">
+                            <span style="color:#D4AF37; font-weight:900; font-size:14px;">SV</span>
+                        </div>
+                        <span class="brand-name-string">Smart Vision</span>
+                    </a>
+                    <p>Architecting topological and structural masterpieces with flawless mathematical execution parameters across international borders.</p>
+                </div>
+                <div>
+                    <h4 class="footer-column-heading">Corporate Shortcuts</h4>
+                    <ul class="footer-link-list">
+                        <li class="footer-link-item"><a href="#home-theater" class="footer-link-anchor">Top Overview</a></li>
+                        <li class="footer-link-item"><a href="#mission-vision-matrix" class="footer-link-anchor">Pillars Profile</a></li>
+                        <li class="footer-link-item"><a href="#capabilities-accordion" class="footer-link-anchor">Core Vectors</a></li>
+                        <li class="footer-link-item"><a href="#portfolio-ledger" class="footer-link-anchor">Active Grid Ledger</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-column-heading">Philosophical Statement</h4>
+                    <div class="footer-quote-box">
+                        <h5>“Engineering Excellence Beyond Expectations. Form follows function, function commands reality.”</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-terminal-bar">
+                <p>© 2026 Smart Vision Engineering & Construction Corp. All Sovereignty Reserved.</p>
+                <div style="display:flex; gap:20px;">
+                    <span>Security Protocols</span>
+                    <span>Tender Provisions</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+       15. المحرك البرمجي الذكي للمنصة الهندسية (Vanilla Javascript Engine)
+       ========================================================================== -->
+    <script>
+        // ==========================================================================
+        // أ. مستودع البيانات الأولي (Initial Databases Matrix)
+        // ==========================================================================
+        let projectsDatabase = [
+            {
+                id: 1,
+                title: "Aura Grand Tower",
+                category: "Structural",
+                desc: "A 92-story skyscraper featuring an exoskeleton engineering matrix and premium luxury residences. Developed under strict topological optimization protocols.",
+                images: [
+                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+                ]
+            },
+            {
+                id: 2,
+                title: "The Al-Noor Pavilion",
+                category: "Architectural",
+                desc: "A futuristic cultural center showcasing sustainable biophilic designs and organic structural fluidities, integrating high-end thermodynamic glass elements.",
+                images: [
+                    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80"
+                ]
+            },
+            {
+                id: 3,
+                title: "Helix Infrastructure Hub",
+                category: "MEP",
+                desc: "A state-of-the-art sub-surface automated MEP framework powering a smart-city microdistrict with real-time digital twin monitoring synchronization.",
+                images: [
+                    "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80"
+                ]
+            }
+        ];
+
+        let newsDatabase = [
+            {
+                id: 1,
+                category: "Innovation",
+                date: "May 24, 2026",
+                title: "Integrating AI into Quantum Structural Modeling",
+                desc: "Smart Vision launches a breakthrough computational pipeline reducing structural carbon footprints by 42% across massive scale projects."
+            },
+            {
+                id: 2,
+                category: "Corporate",
+                date: "April 18, 2026",
+                title: "Global Excellence Award for Smart Vision Infrastructure",
+                desc: "Honored with the prestigious Golden Plinth Award for advanced topological engineering marvels in high-density urban environments."
+            }
+        ];
+
+        const partnerNames = ["Apex Holdings", "Vanguard Steel", "Emaar Group", "Aramco Spec", "Titanium Inc", "Zaha Vectors"];
+
+        // ==========================================================================
+        // ب. دورة حياة التحميل والتهيئة (Lifecycle Initialization)
+        // ==========================================================================
+        window.addEventListener('DOMContentLoaded', () => {
+            // محاكاة انتهاء التحميل السينمائي للموقع
+            setTimeout(() => {
+                const loader = document.getElementById('luxury-loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 800);
+            }, 2200);
+
+            // بناء المكونات الديناميكية الأولية للواجهة
+            buildPartnerMarquee();
+            renderProjectsGrid('All');
+            renderNewsDeck();
+            setupNavbarScrollSpy();
+        });
+
+        // ==========================================================================
+        // ج. معالجة شريط التمرير والتنقل العلوي الذكي (Navbar & Scroll Management)
+        // ==========================================================================
+        function setupNavbarScrollSpy() {
+            const sections = document.querySelectorAll('section');
+            const navNodes = document.querySelectorAll('.nav-link-node');
+
+            window.addEventListener('scroll', () => {
+                let currentSectionId = "";
+                sections.forEach(sec => {
+                    const secTop = sec.offsetTop - 120;
+                    if (pageYOffset >= secTop) {
+                        currentSectionId = sec.getAttribute('id');
+                    }
+                });
+
+                navNodes.forEach(node => {
+                    node.classList.remove('active-node');
+                    if (node.getAttribute('href') === `#${currentSectionId}`) {
+                        node.classList.add('active-node');
+                    }
+                });
+            });
+        }
+
+        // ==========================================================================
+        // د. معالجة نظام خدمات الأكورديون الفاخر (Accordion Controller)
+        // ==========================================================================
+        function toggleAccordion(element) {
+            const currentSegment = element.parentElement;
+            const currentPanel = currentSegment.querySelector('.accordion-content-panel');
+            const allSegments = document.querySelectorAll('.accordion-segment-node');
+
+            allSegments.forEach(seg => {
+                if (seg !== currentSegment && seg.classList.contains('open-node')) {
+                    seg.classList.remove('open-node');
+                    seg.querySelector('.accordion-content-panel').style.maxHeight = null;
+                }
+            });
+
+            if (currentSegment.classList.contains('open-node')) {
+                currentSegment.classList.remove('open-node');
+                currentPanel.style.maxHeight = null;
+            } else {
+                currentSegment.classList.add('open-node');
+                currentPanel.style.maxHeight = currentPanel.scrollHeight + "px";
+            }
+        }
+
+        // ==========================================================================
+        // هـ. توليد شريط الشركاء الديناميكي اللانهائي (Partner Marquee Generator)
+        // ==========================================================================
+        function buildPartnerMarquee() {
+            const track = document.getElementById('partner-marquee-track');
+            // مضاعفة العناصر لتأمين تدفق بصري لانهائي حقيقي دون فجوات
+            const doublePartners = [...partnerNames, ...partnerNames, ...partnerNames, ...partnerNames];
+            
+            track.innerHTML = doublePartners.map(name => `
+                <div class="partner-emblem-card">✦ ${name} Labs</div>
+            `).join('');
+        }
+
+        // ==========================================================================
+        // و. نظام فرز وعرض وتفاعل معمل المشاريع (Projects Engine & Grid Renderer)
+        // ==========================================================================
+        let currentTargetCategory = 'All';
+
+        function renderProjectsGrid(category) {
+            const grid = document.getElementById('projects-target-grid');
+            const filtered = category === 'All' ? projectsDatabase : projectsDatabase.filter(p => p.category === category);
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--luxury-gold); font-family:var(--font-body); font-size:12px; padding:40px 0;">No structural asset profiles match this classification model currently.</p>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(proj => `
+                <div class="project-ledger-card" onclick="openProjectLightbox(${proj.id})">
+                    <div class="project-thumbnail-wrapper">
+                        <img src="${proj.images[0]}" alt="${proj.title}">
+                        <div class="project-tag-overlay">${proj.category}</div>
+                    </div>
+                    <div class="project-card-details">
+                        <h3 class="project-card-headline">${proj.title}</h3>
+                        <p class="project-card-excerpt">${proj.desc}</p>
+                        <div class="project-action-link">
+                            <span>View Gallery Ledger</span>
+                            <span>${proj.images.length} Image Profiles →</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProjects(category, element) {
+            currentTargetCategory = category;
+            document.querySelectorAll('.filter-pill').forEach(pill => pill.classList.remove('active-pill'));
+            element.classList.add('active-pill');
+            renderProjectsGrid(category);
+        }
+
+        // إداراة نافذة المعرض والشرائح المتعددة للمشاريع
+        let activeProjectRef = null;
+
+        function openProjectLightbox(id) {
+            activeProjectRef = projectsDatabase.find(p => p.id === id);
+            if (!activeProjectRef) return;
+
+            document.getElementById('modal-project-title').innerText = activeProjectRef.title;
+            document.getElementById('modal-project-desc').innerText = activeProjectRef.desc;
+            
+            // تعيين الصورة الأولى كعرض افتراضي رئيسي
+            switchModalMainImage(0);
+
+            // بناء شريط الصور المصغرة التفاعلية
+            const thumbStrip = document.getElementById('modal-thumb-strip');
+            thumbStrip.innerHTML = activeProjectRef.images.map((img, idx) => `
+                <button class="strip-thumb-btn ${idx === 0 ? 'active-thumb' : ''}" onclick="switchModalMainImage(${idx}, this)">
+                    <img src="${img}" alt="Thumb specification view">
+                </button>
+            `).join('');
+
+            document.getElementById('project-lightbox-modal').style.display = 'flex';
+        }
+
+        function switchModalMainImage(index, element) {
+            document.getElementById('modal-main-image').src = activeProjectRef.images[index];
+            if (element) {
+                document.querySelectorAll('.strip-thumb-btn').forEach(btn => btn.classList.remove('active-thumb'));
+                element.classList.add('active-thumb');
+            }
+        }
+
+        function closeProjectModal() {
+            document.getElementById('project-lightbox-modal').style.display = 'none';
+        }
+
+        // ==========================================================================
+        // ز. معالجة الهيكل الإداري ونوافذ السير الذاتية (Executive Bio Framework)
+        // ==========================================================================
+        function openTeamBio(name, position, dept, exp, mail, bio) {
+            document.getElementById('bio-modal-name').innerText = name;
+            document.getElementById('bio-modal-position').innerText = position;
+            document.getElementById('bio-modal-dept').innerText = dept;
+            document.getElementById('bio-modal-exp').innerText = exp;
+            document.getElementById('bio-modal-mail').innerText = mail;
+            document.getElementById('bio-modal-desc').innerText = bio;
+            document.getElementById('bio-modal-avatar').innerText = name.charAt(0);
+
+            document.getElementById('team-bio-lightbox').style.display = 'flex';
+        }
+
+        function closeTeamBio() {
+            document.getElementById('team-bio-lightbox').style.display = 'none';
+        }
+
+        // ==========================================================================
+        // ح. بوابة التوظيف التلقائية وصياغة البيانات لـ Gmail (Automated Careers System)
+        // ==========================================================================
+        function dispatchCareerEmail(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('career-name').value;
+            const phone = document.getElementById('career-phone').value;
+            const email = document.getElementById('career-email').value;
+            const position = document.getElementById('career-position').value;
+            const experience = document.getElementById('career-exp').value;
+            const coverLetter = document.getElementById('career-letter').value;
+            const currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            const emailSubject = encodeURIComponent("New Career Application — Smart Vision");
+            
+            // صياغة نص الرسالة الاحترافية لتفتح جاهزة في تطبيق الجيميل للمرشح
+            const emailBody = encodeURIComponent(`Dear Smart Vision Recruitment Team,
+
+A new job application has been submitted through the Smart Vision Careers Portal.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+APPLICANT INFORMATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Full Name: ${name}
+Phone Number: ${phone}
+Email Address: ${email}
+Position Applied For: ${position}
+Years of Experience: ${experience} Years
+
+Cover Letter / Executive Profile Summary:
+${coverLetter}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ATTACHED DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✔ CV / Resume Reference Attached via Client Portal
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SUBMISSION DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Submission Date: ${currentDate}
+Source: Smart Vision Careers Page
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Please review the attached profile metrics and contact the applicant if shortlisted.
+
+Best Regards,
+Smart Vision Automated Recruitment System`);
+
+            // بناء مسار الإرسال المباشر وتفعيله لفتح عميل البريد الإلكتروني للمستخدم
+            window.location.href = `mailto:smartgcs_os@yahoo.com?subject=${emailSubject}&body=${emailBody}`;
+            
+            alert('Application formulated perfectly! Redirecting to your mail client framework to complete transmission protocols.');
+            document.getElementById('career-submission-form').reset();
+        }
+
+        // ==========================================================================
+        // ط. نظام مجلة الأخبار الفرز الفوري (News Feed Engine)
+        // ==========================================================================
+        let currentNewsCategory = 'All';
+
+        function renderNewsDeck() {
+            const deck = document.getElementById('news-target-deck');
+            const searchKey = document.getElementById('news-search-field').value.toLowerCase();
+            
+            let filtered = currentNewsCategory === 'All' ? newsDatabase : newsDatabase.filter(n => n.category === currentNewsCategory);
+            filtered = filtered.filter(n => n.title.toLowerCase().includes(searchKey) || n.desc.toLowerCase().includes(searchKey));
+
+            if (filtered.length === 0) {
+                deck.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--luxury-gold); font-family:var(--font-body); font-size:12px; padding:30px 0;">No validated media bulletins correspond with your search filter parameters.</p>`;
+                return;
+            }
+
+            deck.innerHTML = filtered.map(article => `
+                <div class="news-wire-card">
+                    <div>
+                        <div class="news-meta-cluster">
+                            <span class="news-category-badge">${article.category}</span>
+                            <span class="news-date-string">${article.date}</span>
+                        </div>
+                        <h3 class="news-title-string">${article.title}</h3>
+                        <p class="news-excerpt-string">${article.desc}</p>
+                    </div>
+                    <a href="#contact-hub" class="news-read-more-node">Inquire for Full Briefing Ledger →</a>
+                </div>
+            `).join('');
+        }
+
+        function filterNewsCategory(category, element) {
+            currentNewsCategory = category;
+            element.parentElement.querySelectorAll('.filter-pill').forEach(pill => pill.classList.remove('active-pill'));
+            element.classList.add('active-pill');
+            renderNewsDeck();
+        }
+
+        function filterNews() {
+            renderNewsDeck();
+        }
+
+        // ==========================================================================
+        // ي. مصفوفة لوحة تحكم الناشر الحي وحقن البيانات الحية (Live CMS Publisher Console)
+        // ==========================================================================
+        function togglePublisherConsole() {
+            const panel = document.getElementById('publisher-master-panel');
+            panel.style.display = panel.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function publishProjectDynamic(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('pub-proj-title').value;
+            const category = document.getElementById('pub-proj-cat').value;
+            const img1 = document.getElementById('pub-proj-img1').value;
+            const img2 = document.getElementById('pub-proj-img2').value;
+            const img3 = document.getElementById('pub-proj-img3').value;
+            const desc = document.getElementById('pub-proj-desc').value;
+
+            // توليد كائن البيانات وحقنه في الترتيب الأول للمصفوفة العامة
+            const dynamicProjectItem = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                desc: desc,
+                images: [img1, img2, img3]
+            };
+
+            projectsDatabase.unshift(dynamicProjectItem);
+            
+            // تحديث العرض الفوري لشبكة المشاريع دون تدمير الحالة أو تصفير الجلسة
+            renderProjectsGrid(currentTargetCategory);
+            
+            alert('Security clearance approved. Structural project asset integrated live across active network grid mirrors!');
+            document.getElementById('pub-project-form').reset();
+            togglePublisherConsole();
+        }
+
+        function publishNewsDynamic(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('pub-news-title').value;
+            const category = document.getElementById('pub-news-cat').value;
+            const desc = document.getElementById('pub-news-desc').value;
+            const formattedDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            const dynamicNewsItem = {
+                id: Date.now(),
+                category: category,
+                date: formattedDate,
+                title: title,
+                desc: desc
+            };
+
+            newsDatabase.unshift(dynamicNewsItem);
+            
+            // تحديث العرض الفوري لشريط الأخبار
+            renderNewsDeck();
+
+            alert('Media protocol initialized. Wire broadcast dispatched and integrated live into public node relays.');
+            document.getElementById('pub-news-form').reset();
+            togglePublisherConsole();
+        }
+    </script>
+</body>
+</html>
