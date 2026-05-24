@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SMART VISION | Executive Team</title>
+    
+    <!-- Premium Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE
+           ========================================================================== */
+        :root {
+            --bg-pure-black: #000000;
+            --bg-rich-dark: #0A0A0A;
+            --bg-glass: rgba(0, 0, 0, 0.75);
+            --bg-glass-card: rgba(255, 255, 255, 0.03);
+            
+            --gold-primary: #D4AF37;
+            --gold-glow: #FFD54A;
+            --gold-hover: #E6C75A;
+            --gold-border: #C9A227;
+            --gold-alpha: rgba(212, 175, 55, 0.25);
+            
+            --text-white: #FFFFFF;
+            --text-secondary: #CFCFCF;
+            --text-muted: #8F8F8F;
+            
+            --grad-gold: linear-gradient(90deg, #8B6B15, #D4AF37, #FFD54A, #D4AF37, #8B6B15);
+            
+            --shadow-gold-glow: 0 0 15px rgba(212,175,55,0.35), 0 0 30px rgba(212,175,55,0.15);
+            --glass-blur: blur(16px);
+            
+            --font-main: 'Inter', sans-serif;
+            --font-sans: 'Montserrat', sans-serif;
+            
+            --transition-main: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* ==========================================================================
+           2. GLOBAL RESET & BASE STYLES
+           ========================================================================== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%; background-color: var(--bg-pure-black); color: var(--text-white);
+            font-family: var(--font-sans); overflow-x: hidden; scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-pure-black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 3px; }
+
+        html, body, h1, h2, h3, h4, .brand-logo, .nav-links a, .dock-item, .logo-text, .member-name {
+            font-family: var(--font-main) !important;
+        }        
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .blueprint-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px; pointer-events: none; z-index: 1;
+        }
+
+        /* ==========================================================================
+           3. PRELOADER & NAVIGATION
+           ========================================================================== */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
+            background: var(--bg-pure-black); z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1s linear;
+        }
+        .loader-container { position: relative; display: flex; justify-content: center; align-items: center; width: 220px; height: 220px; }
+        .loader-ring { position: absolute; width: 100%; height: 100%; border: 2px solid transparent; border-top-color: var(--gold-primary); border-radius: 50%; animation: spin 3s linear infinite; }
+        .loader-ring-reverse { position: absolute; width: 85%; height: 85%; border: 1px dashed transparent; border-bottom-color: var(--gold-glow); border-radius: 50%; animation: spin-reverse 2s linear infinite; }
+        .loader-center { position: absolute; width: 65%; height: 65%; background: var(--bg-glass-card); border: 1px solid var(--gold-alpha); border-radius: 50%; backdrop-filter: var(--glass-blur); display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: var(--shadow-gold-glow); }
+        .loader-center i { font-size: 30px; color: var(--gold-primary); animation: pulseGlow 2s infinite alternate; }
+        .counter-number { font-size: 1.2rem; font-weight: 700; color: var(--gold-primary); margin-top: 5px; }
+
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 30px 60px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-main);
+        }
+        .header.scrolled { padding: 15px 60px; background: var(--bg-glass); backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--gold-alpha); }
+        .brand-logo { font-size: 1.6rem; font-weight: 900; letter-spacing: 3px; }
+        .brand-logo span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links a { font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); position: relative; padding: 10px 0; }
+        .nav-links a::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--grad-gold); transition: var(--transition-main); }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold-hover); text-shadow: 0 0 8px rgba(255,213,74,0.3); }
+        .nav-links a:hover::before, .nav-links a.active::before { width: 100%; }
+
+        /* Mobile Nav */
+        .mobile-control-dock {
+            display: none; position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
+            width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 40px; padding: 10px 25px;
+            justify-content: space-between; align-items: center; z-index: 10000; box-shadow: var(--shadow-gold-glow); opacity: 0; transition: transform 1s, opacity 1s;
+        }
+        .mobile-control-dock.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .dock-brand span { color: var(--gold-primary); font-weight: 700;}
+        .dock-trigger-btn { background: var(--grad-gold); border: none; padding: 10px 22px; border-radius: 30px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        
+        .immersive-overlay-NAVIGATE {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; background: rgba(0, 0, 0, 0.96); backdrop-filter: blur(30px); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: var(--transition-main);
+        }
+        .immersive-overlay-NAVIGATE.active { opacity: 1; visibility: visible; }
+        .overlay-nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 85%; max-width: 340px; text-align: center; }
+        .overlay-nav-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15); padding: 22px 15px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translateY(30px); transition: var(--transition-main); }
+        .immersive-overlay-NAVIGATE.active .overlay-nav-item { opacity: 1; transform: translateY(0); }
+        .overlay-nav-item i { font-size: 1.3rem; color: var(--gold-primary); }
+        .overlay-nav-item span { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); }
+
+        /* ==========================================================================
+           4. PAGE HERO
+           ========================================================================== */
+        .page-hero {
+            position: relative; height: 50vh; width: 100%; display: flex; align-items: flex-end;
+            padding: 80px 8%; background: var(--bg-pure-black); overflow: hidden; z-index: 2;
+            border-bottom: 1px solid var(--gold-alpha);
+        }
+        .page-hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop') center/cover no-repeat;
+            background-attachment: fixed; filter: brightness(0.2) grayscale(0.8); z-index: 1;
+        }
+        .page-hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, var(--bg-pure-black) 5%, transparent 100%); z-index: 2;
+        }
+        .page-hero-content { position: relative; z-index: 3; max-width: 900px; transform: translateY(30px); opacity: 0; animation: fadeInUp 1s forwards 1.2s; }
+        .subtitle { color: var(--gold-primary); font-size: 0.85rem; letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 10px; font-weight: 600; }
+        .page-title { font-size: clamp(2.5rem, 4vw, 4rem); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; line-height: 1.2; font-weight: 900; }
+        .page-title span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* ==========================================================================
+           5. ORG CHART (TREE STRUCTURE)
+           ========================================================================== */
+        .team-section {
+            padding: 100px 2%; background: var(--bg-pure-black); position: relative; z-index: 2;
+            display: flex; justify-content: center; overflow-x: auto;
+        }
+        
+        /* CSS Tree Logic */
+        .org-tree {
+            display: flex; justify-content: center; align-items: flex-start;
+            padding-top: 20px; margin: 0 auto;
+        }
+        .org-tree ul {
+            padding-top: 40px; position: relative; transition: all 0.5s;
+            display: flex; justify-content: center; gap: 20px;
+        }
+        /* Top line for child nodes */
+        .org-tree li {
+            float: left; text-align: center; list-style-type: none;
+            position: relative; padding: 40px 10px 0 10px; transition: all 0.5s;
+        }
+        /* Drawing the lines */
+        .org-tree li::before, .org-tree li::after {
+            content: ''; position: absolute; top: 0; right: 50%;
+            border-top: 2px solid var(--gold-primary); width: 50%; height: 40px;
+        }
+        .org-tree li::after {
+            right: auto; left: 50%; border-left: 2px solid var(--gold-primary);
+        }
+        /* Remove left/right lines for first and last child */
+        .org-tree li:only-child::after, .org-tree li:only-child::before { display: none; }
+        .org-tree li:only-child { padding-top: 0; }
+        .org-tree li:first-child::before, .org-tree li:last-child::after { border: 0 none; }
+        /* Vertical line from top */
+        .org-tree li:first-child::after { border-radius: 5px 0 0 0; }
+        .org-tree li:last-child::before {
+            border-right: 2px solid var(--gold-primary); border-radius: 0 5px 0 0;
+        }
+        /* Connecting parents to children */
+        .org-tree ul ul::before {
+            content: ''; position: absolute; top: 0; left: 50%;
+            border-left: 2px solid var(--gold-primary); width: 0; height: 40px; transform: translateX(-50%);
+        }
+
+        /* Top Level Wrapper (CEO & CFO) */
+        .executive-tier {
+            display: flex; justify-content: center; gap: 40px; position: relative;
+            background: rgba(212, 175, 55, 0.02); padding: 20px; border-radius: 20px;
+            border: 1px dashed rgba(212, 175, 55, 0.2);
+        }
+
+        /* ==========================================================================
+           6. TEAM CARDS
+           ========================================================================== */
+        .team-card {
+            background: var(--bg-glass-card); border: 1px solid var(--gold-alpha);
+            border-radius: 8px; padding: 25px 20px; width: 220px; display: inline-block;
+            cursor: pointer; transition: var(--transition-bounce); position: relative;
+            backdrop-filter: var(--glass-blur); overflow: hidden;
+        }
+        .team-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%);
+            opacity: 0; transition: var(--transition-main); pointer-events: none;
+        }
+        .team-card:hover {
+            transform: translateY(-10px); border-color: var(--gold-primary); box-shadow: var(--shadow-gold-glow);
+        }
+        .team-card:hover::before { opacity: 1; }
+        
+        .member-img {
+            width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 15px auto;
+            border: 2px solid var(--gold-primary); padding: 3px; background: var(--bg-pure-black);
+            overflow: hidden; position: relative;
+        }
+        .member-img img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+            transition: var(--transition-main); filter: grayscale(100%);
+        }
+        .team-card:hover .member-img img { filter: grayscale(0%); transform: scale(1.1); }
+        
+        .member-name { font-size: 1.1rem; font-weight: 700; color: var(--text-white); margin-bottom: 5px; }
+        .member-role { font-size: 0.75rem; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+        
+        .card-action {
+            margin-top: 15px; font-size: 0.7rem; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; justify-content: center; gap: 5px;
+            opacity: 0; transform: translateY(10px); transition: var(--transition-main);
+        }
+        .team-card:hover .card-action { opacity: 1; transform: translateY(0); color: var(--gold-hover); }
+
+        /* ==========================================================================
+           7. INTERACTIVE BIO MODAL
+           ========================================================================== */
+        .bio-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px);
+            z-index: 100000; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: var(--transition-main);
+        }
+        .bio-modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .bio-modal-content {
+            background: var(--bg-rich-dark); border: 1px solid var(--gold-primary);
+            width: 90%; max-width: 800px; border-radius: 12px; position: relative;
+            display: flex; overflow: hidden; transform: scale(0.95) translateY(20px);
+            transition: var(--transition-bounce); box-shadow: var(--shadow-gold-glow);
+        }
+        .bio-modal-overlay.active .bio-modal-content { transform: scale(1) translateY(0); }
+
+        .modal-close {
+            position: absolute; top: 20px; right: 20px; background: transparent; border: none;
+            color: var(--text-white); font-size: 1.5rem; cursor: pointer; z-index: 5;
+            transition: var(--transition-main); width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: 50%;
+        }
+        .modal-close:hover { background: rgba(212,175,55,0.2); color: var(--gold-primary); transform: rotate(90deg); }
+
+        .modal-image { flex: 0 0 40%; position: relative; }
+        .modal-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(50%); }
+        .modal-image::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, transparent, var(--bg-rich-dark));
+        }
+
+        .modal-info { flex: 1; padding: 50px 40px; }
+        .modal-info .role { color: var(--gold-primary); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 10px; font-weight: 600; }
+        .modal-info h2 { font-size: 2.2rem; margin-bottom: 25px; font-family: var(--font-main); }
+        .modal-info p { color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem; margin-bottom: 30px; }
+        
+        .modal-socials { display: flex; gap: 15px; }
+        .modal-socials a {
+            width: 35px; height: 35px; border: 1px solid var(--gold-alpha); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; color: var(--gold-primary); transition: var(--transition-main);
+        }
+        .modal-socials a:hover { background: var(--gold-primary); color: var(--bg-pure-black); box-shadow: 0 0 10px rgba(212,175,55,0.5); }
+
+        /* ==========================================================================
+           8. FOOTER (Exact match)
+           ========================================================================== */
+        .executive-footer { background: #030303; border-top: 1px solid rgba(212,175,55,0.2); padding: 80px 8% 40px 8%; position: relative; z-index: 2; }
+        .footer-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; margin-bottom: 60px; }
+        .footer-brand-column h3 { font-size: 1.5rem; margin-bottom: 20px; letter-spacing: 2px; }
+        .footer-brand-column h3 span { color: var(--gold-primary); }
+        .footer-brand-column p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; }
+        .footer-links-column h4 { color: var(--gold-primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+        .footer-links-column ul { display: flex; flex-direction: column; gap: 15px; }
+        .footer-links-column a { color: var(--text-secondary); font-size: 0.85rem; transition: var(--transition-main); }
+        .footer-links-column a:hover { color: var(--gold-glow); padding-left: 5px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-bottom p { color: var(--text-muted); font-size: 0.8rem; }
+        .footer-socials { display: flex; gap: 20px; }
+        .footer-socials a { width: 40px; height: 40px; border: 1px solid rgba(212,175,55,0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--text-secondary); transition: var(--transition-main); }
+        .footer-socials a:hover { border-color: var(--gold-primary); color: var(--bg-pure-black); background: var(--grad-gold); box-shadow: var(--shadow-gold-glow); }
+
+        /* ==========================================================================
+           9. ANIMATIONS & RESPONSIVE
+           ========================================================================== */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+        @keyframes pulseGlow { 100% { opacity: 1; filter: drop-shadow(0 0 15px #FFD54A); } }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 1200px) {
+            .org-tree ul { gap: 10px; }
+            .team-card { width: 180px; padding: 20px 10px; }
+        }
+        
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .mobile-control-dock { display: flex; }
+            
+            /* Change Tree to Flex Grid on Tablet/Mobile for readability */
+            .org-tree, .org-tree ul, .org-tree li { display: flex; flex-direction: column; align-items: center; width: 100%; padding: 0 !important; }
+            .org-tree ul { gap: 30px; margin-top: 30px; flex-wrap: wrap; flex-direction: row; justify-content: center; }
+            .org-tree li::before, .org-tree li::after, .org-tree ul ul::before { display: none; } /* Hide structural lines */
+            .executive-tier { flex-direction: column; gap: 30px; background: transparent; border: none; }
+            .team-card { width: 250px; }
+            
+            .bio-modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
+            .modal-image { height: 300px; flex: none; }
+            .modal-image::after { background: linear-gradient(to top, var(--bg-rich-dark), transparent); }
+            .modal-info { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Architectural Background Pattern -->
+    <div class="blueprint-grid"></div>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring-reverse"></div>
+            <div class="loader-center">
+                <i class="fa-solid fa-users-gear"></i>
+                <div class="counter-number" id="percentage-counter">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DESKTOP HEADER -->
+    <header class="header" id="main-header">
+        <div class="brand-logo">SMART <span>VISION</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="partnerships.html">Partnerships</a></li>
+            <li><a href="team.html" class="active">Team</a></li>
+            <li><a href="career.html">Career</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- MOBILE SMART DOCK -->
+    <nav class="mobile-control-dock" id="mobile-dock">
+        <div class="dock-brand">SMART <span>VISION</span></div>
+        <button class="dock-trigger-btn" id="dock-trigger">
+            <i class="fa-solid fa-compass-drafting"></i> NAVIGATE
+        </button>
+    </nav>
+
+    <!-- IMMERSIVE MOBILE OVERLAY -->
+    <div class="immersive-overlay-NAVIGATE" id="control-center-overlay">
+        <div class="overlay-nav-grid">
+            <a href="index.html" class="overlay-nav-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="projects.html" class="overlay-nav-item"><i class="fa-solid fa-city"></i><span>Projects</span></a>
+            <a href="team.html" class="overlay-nav-item" style="border-color: var(--gold-primary);"><i class="fa-solid fa-users-gear"></i><span style="color: var(--gold-primary);">Team</span></a>
+            <a href="contact.html" class="overlay-nav-item" style="grid-column: span 2;"><i class="fa-solid fa-envelope"></i><span>Contact Hub</span></a>
+        </div>
+    </div>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="page-hero-bg"></div>
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <span class="subtitle">The Minds Behind The Vision</span>
+            <h1 class="page-title">Executive <span>Leadership</span></h1>
+        </div>
+    </section>
+
+    <!-- ORG CHART SECTION -->
+    <section class="team-section">
+        <div class="org-tree">
+            <ul>
+                <!-- ROOT NODE (CEO & CFO) -->
+                <li>
+                    <div class="executive-tier">
+                        <!-- CEO -->
+                        <div class="team-card" onclick="openBioModal('ceo')">
+                            <div class="member-img">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop" alt="CEO">
+                            </div>
+                            <div class="member-name">Alexander Sterling</div>
+                            <div class="member-role">Chief Executive Officer</div>
+                            <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                        </div>
+                        
+                        <!-- CFO -->
+                        <div class="team-card" onclick="openBioModal('cfo')">
+                            <div class="member-img">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" alt="CFO">
+                            </div>
+                            <div class="member-name">Victoria Vance</div>
+                            <div class="member-role">Chief Financial Officer</div>
+                            <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                        </div>
+                    </div>
+                    
+                    <!-- CHILD NODES (The 5 Directors) -->
+                    <ul>
+                        <li>
+                            <div class="team-card" onclick="openBioModal('mem1')">
+                                <div class="member-img">
+                                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop" alt="VP Engineering">
+                                </div>
+                                <div class="member-name">Marcus Kane</div>
+                                <div class="member-role">VP of Engineering</div>
+                                <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="team-card" onclick="openBioModal('mem2')">
+                                <div class="member-img">
+                                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800&auto=format&fit=crop" alt="Lead Architect">
+                                </div>
+                                <div class="member-name">Elena Rostova</div>
+                                <div class="member-role">Lead Architect</div>
+                                <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="team-card" onclick="openBioModal('mem3')">
+                                <div class="member-img">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" alt="Director of Operations">
+                                </div>
+                                <div class="member-name">Julian Thorne</div>
+                                <div class="member-role">Director of Ops</div>
+                                <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="team-card" onclick="openBioModal('mem4')">
+                                <div class="member-img">
+                                    <img src="https://images.unsplash.com/photo-1598550874175-4d0ef436c909?q=80&w=800&auto=format&fit=crop" alt="Head of Sustainability">
+                                </div>
+                                <div class="member-name">Sophia Lin</div>
+                                <div class="member-role">Sustainability</div>
+                                <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="team-card" onclick="openBioModal('mem5')">
+                                <div class="member-img">
+                                    <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=800&auto=format&fit=crop" alt="Chief Technology Officer">
+                                </div>
+                                <div class="member-name">David Al-Fayed</div>
+                                <div class="member-role">Chief Tech Officer</div>
+                                <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE BIO MODAL -->
+    <div class="bio-modal-overlay" id="bioModal">
+        <div class="bio-modal-content">
+            <button class="modal-close" onclick="closeBioModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-image">
+                <img id="modalImg" src="" alt="Profile Picture">
+            </div>
+            <div class="modal-info">
+                <span class="role" id="modalRole">Role</span>
+                <h2 id="modalName">Name</h2>
+                <p id="modalDesc">Biography goes here.</p>
+                <div class="modal-socials">
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXECUTIVE FOOTER -->
+    <footer class="executive-footer">
+        <div class="footer-matrix">
+            <div class="footer-brand-column">
+                <h3>SMART <span>VISION</span></h3>
+                <p>Engineering the future through visionary architecture, structural integrity, and uncompromising luxury.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SMART VISION. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // 1. Team Database (JSON Object containing bios)
+        const teamDatabase = {
+            ceo: {
+                name: "Alexander Sterling",
+                role: "Chief Executive Officer",
+                img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop",
+                desc: "With over 25 years in mega-scale construction, Alexander leads SMART VISION with unparalleled strategic foresight. His vision transforms theoretical blueprints into iconic skylines globally. He holds a Ph.D. in Structural Engineering."
+            },
+            cfo: {
+                name: "Victoria Vance",
+                role: "Chief Financial Officer",
+                img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop",
+                desc: "Victoria engineers the financial architecture of our multi-billion dollar projects. Her rigorous risk management and capital allocation strategies ensure that SMART VISION remains a highly profitable global powerhouse."
+            },
+            mem1: {
+                name: "Marcus Kane",
+                role: "VP of Engineering",
+                img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop",
+                desc: "Marcus oversees all structural implementations. Known for his uncompromising standards, he leads a team of 400+ engineers, ensuring every project exceeds international safety and durability metrics."
+            },
+            mem2: {
+                name: "Elena Rostova",
+                role: "Lead Architect",
+                img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800&auto=format&fit=crop",
+                desc: "Elena is the creative force behind our parametric designs. Merging avant-garde aesthetics with mathematical precision, her concepts have won multiple international awards for architectural innovation."
+            },
+            mem3: {
+                name: "Julian Thorne",
+                role: "Director of Operations",
+                img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
+                desc: "Julian commands the logistics and on-ground execution of all projects. From supply chain to heavy machinery deployment, his operations run with military-grade precision and efficiency."
+            },
+            mem4: {
+                name: "Sophia Lin",
+                role: "Head of Sustainability",
+                img: "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?q=80&w=800&auto=format&fit=crop",
+                desc: "Sophia ensures our legacy protects the future. She integrates carbon-negative materials and eco-systems into our structures, making SMART VISION a leader in green mega-construction."
+            },
+            mem5: {
+                name: "David Al-Fayed",
+                role: "Chief Technology Officer",
+                img: "https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=800&auto=format&fit=crop",
+                desc: "David turns static buildings into smart ecosystems. By integrating AI and IoT at the foundational level, he builds structures that adapt, learn, and optimize themselves in real-time."
+            }
+        };
+
+        // 2. Modal Logic
+        const modal = document.getElementById('bioModal');
+        const mImg = document.getElementById('modalImg');
+        const mName = document.getElementById('modalName');
+        const mRole = document.getElementById('modalRole');
+        const mDesc = document.getElementById('modalDesc');
+
+        function openBioModal(memberId) {
+            const data = teamDatabase[memberId];
+            mImg.src = data.img;
+            mName.innerText = data.name;
+            mRole.innerText = data.role;
+            mDesc.innerText = data.desc;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeBioModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on clicking outside content
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) closeBioModal();
+        });
+
+        // 3. Preloader Logic
+        document.addEventListener("DOMContentLoaded", () => {
+            let count = 0;
+            const counterElement = document.getElementById("percentage-counter");
+            const preloader = document.getElementById("preloader");
+            
+            const interval = setInterval(() => {
+                count += Math.floor(Math.random() * 5) + 1; 
+                if (count > 100) count = 100;
+                counterElement.innerText = count + "%";
+                
+                if (count === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.style.opacity = "0";
+                        preloader.style.transform = "translateY(-100%)";
+                        setTimeout(() => preloader.remove(), 1000);
+                        setTimeout(() => document.getElementById('mobile-dock').classList.add('visible'), 500);
+                    }, 400);
+                }
+            }, 30);
+        });
+
+        // 4. Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // 5. Mobile NAVIGATE Logic
+        const dockTrigger = document.getElementById('dock-trigger');
+        const overlayNAVIGATE = document.getElementById('control-center-overlay');
+        dockTrigger.addEventListener('click', () => {
+            overlayNAVIGATE.classList.toggle('active');
+            dockTrigger.innerHTML = overlayNAVIGATE.classList.contains('active') ? '<i class="fa-solid fa-xmark"></i> CLOSE' : '<i class="fa-solid fa-compass-drafting"></i> NAVIGATE';
+        });
+    </script>
+</body>
+</html>

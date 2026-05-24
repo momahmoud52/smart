@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SMART VISION | Strategic Partnerships</title>
+    
+    <!-- Premium Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE (Exact match with Projects)
+           ========================================================================== */
+        :root {
+            --bg-pure-black: #000000;
+            --bg-rich-dark: #0A0A0A;
+            --bg-glass: rgba(0, 0, 0, 0.75);
+            --bg-glass-card: rgba(255, 255, 255, 0.03);
+            
+            --gold-primary: #D4AF37;
+            --gold-glow: #FFD54A;
+            --gold-hover: #E6C75A;
+            --gold-border: #C9A227;
+            --gold-alpha: rgba(212, 175, 55, 0.25);
+            
+            --text-white: #FFFFFF;
+            --text-secondary: #CFCFCF;
+            --text-muted: #8F8F8F;
+            
+            --grad-gold: linear-gradient(90deg, #8B6B15, #D4AF37, #FFD54A, #D4AF37, #8B6B15);
+            
+            --shadow-gold-glow: 0 0 15px rgba(212,175,55,0.35), 0 0 30px rgba(212,175,55,0.15);
+            --glass-blur: blur(16px);
+            
+            --font-main: 'Inter', sans-serif;
+            --font-sans: 'Montserrat', sans-serif;
+            
+            --transition-main: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* ==========================================================================
+           2. GLOBAL RESET & BASE STYLES
+           ========================================================================== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%; background-color: var(--bg-pure-black); color: var(--text-white);
+            font-family: var(--font-sans); overflow-x: hidden; scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-pure-black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 3px; }
+
+        html, body, h1, h2, h3, h4, .brand-logo, .nav-links a, .dock-item, .stat-value, .logo-text {
+            font-family: var(--font-main) !important;
+        }        
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .blueprint-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px; pointer-events: none; z-index: 1;
+        }
+
+        /* ==========================================================================
+           3. PRELOADER & NAVIGATION
+           ========================================================================== */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
+            background: var(--bg-pure-black); z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1s linear;
+        }
+        .loader-container { position: relative; display: flex; justify-content: center; align-items: center; width: 220px; height: 220px; }
+        .loader-ring { position: absolute; width: 100%; height: 100%; border: 2px solid transparent; border-top-color: var(--gold-primary); border-radius: 50%; animation: spin 3s linear infinite; }
+        .loader-ring-reverse { position: absolute; width: 85%; height: 85%; border: 1px dashed transparent; border-bottom-color: var(--gold-glow); border-radius: 50%; animation: spin-reverse 2s linear infinite; }
+        .loader-center { position: absolute; width: 65%; height: 65%; background: var(--bg-glass-card); border: 1px solid var(--gold-alpha); border-radius: 50%; backdrop-filter: var(--glass-blur); display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: var(--shadow-gold-glow); }
+        .loader-center i { font-size: 30px; color: var(--gold-primary); animation: pulseGlow 2s infinite alternate; }
+        .counter-number { font-size: 1.2rem; font-weight: 700; color: var(--gold-primary); margin-top: 5px; }
+
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 30px 60px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-main);
+        }
+        .header.scrolled { padding: 15px 60px; background: var(--bg-glass); backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--gold-alpha); }
+        .brand-logo { font-size: 1.6rem; font-weight: 900; letter-spacing: 3px; }
+        .brand-logo span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links a { font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); position: relative; padding: 10px 0; }
+        .nav-links a::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--grad-gold); transition: var(--transition-main); }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold-hover); text-shadow: 0 0 8px rgba(255,213,74,0.3); }
+        .nav-links a:hover::before, .nav-links a.active::before { width: 100%; }
+
+        /* Mobile Nav */
+        .mobile-control-dock {
+            display: none; position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
+            width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 40px; padding: 10px 25px;
+            justify-content: space-between; align-items: center; z-index: 10000; box-shadow: var(--shadow-gold-glow); opacity: 0; transition: transform 1s, opacity 1s;
+        }
+        .mobile-control-dock.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .dock-brand span { color: var(--gold-primary); font-weight: 700;}
+        .dock-trigger-btn { background: var(--grad-gold); border: none; padding: 10px 22px; border-radius: 30px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        
+        .immersive-overlay-NAVIGATE {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; background: rgba(0, 0, 0, 0.96); backdrop-filter: blur(30px); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: var(--transition-main);
+        }
+        .immersive-overlay-NAVIGATE.active { opacity: 1; visibility: visible; }
+        .overlay-nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 85%; max-width: 340px; text-align: center; }
+        .overlay-nav-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15); padding: 22px 15px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translateY(30px); transition: var(--transition-main); }
+        .immersive-overlay-NAVIGATE.active .overlay-nav-item { opacity: 1; transform: translateY(0); }
+        .overlay-nav-item i { font-size: 1.3rem; color: var(--gold-primary); }
+        .overlay-nav-item span { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); }
+
+        /* ==========================================================================
+           4. PARTNERSHIPS HERO SECTION
+           ========================================================================== */
+        .page-hero {
+            position: relative; height: 60vh; width: 100%; display: flex; align-items: flex-end;
+            padding: 80px 8%; background: var(--bg-pure-black); overflow: hidden; z-index: 2;
+            border-bottom: 1px solid var(--gold-alpha);
+        }
+        .page-hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* Corporate architecture/handshake abstract bg */
+            background: url('https://images.unsplash.com/photo-1554469384-e58fac16e23a?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            background-attachment: fixed; filter: brightness(0.25) grayscale(0.6); z-index: 1;
+        }
+        .page-hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, var(--bg-pure-black) 5%, transparent 100%); z-index: 2;
+        }
+        .page-hero-content { position: relative; z-index: 3; max-width: 900px; transform: translateY(30px); opacity: 0; animation: fadeInUp 1s forwards 1.2s; }
+        .subtitle { color: var(--gold-primary); font-size: 0.85rem; letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 10px; font-weight: 600; }
+        .page-title { font-size: clamp(2.5rem, 4vw, 4rem); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; line-height: 1.2; font-weight: 900; }
+        .page-title span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* ==========================================================================
+           5. INFINITE LOGO MARQUEE (The Premium Touch)
+           ========================================================================== */
+        .marquee-section {
+            position: relative; z-index: 2; background: var(--bg-rich-dark);
+            padding: 60px 0; border-bottom: 1px solid var(--gold-alpha);
+            overflow: hidden; display: flex; align-items: center;
+        }
+        /* Fade Edges for smooth entry/exit */
+        .marquee-section::before, .marquee-section::after {
+            content: ''; position: absolute; top: 0; width: 15vw; height: 100%; z-index: 3; pointer-events: none;
+        }
+        .marquee-section::before { left: 0; background: linear-gradient(to right, var(--bg-rich-dark), transparent); }
+        .marquee-section::after { right: 0; background: linear-gradient(to left, var(--bg-rich-dark), transparent); }
+
+        .marquee-track {
+            display: flex; gap: 80px; width: max-content;
+            animation: scrollMarquee 35s linear infinite;
+        }
+        .marquee-track:hover { animation-play-state: paused; }
+
+        .brand-item {
+            display: flex; align-items: center; gap: 15px; padding: 10px 20px;
+            color: var(--text-muted); filter: grayscale(100%) opacity(0.4);
+            transition: var(--transition-bounce); cursor: pointer;
+        }
+        .brand-item i { font-size: 2.5rem; }
+        .brand-item .logo-text { font-size: 1.5rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
+        
+        .brand-item:hover {
+            filter: grayscale(0%) opacity(1);
+            color: var(--gold-primary);
+            transform: scale(1.1) translateY(-5px);
+            text-shadow: 0 0 20px rgba(212,175,55,0.4);
+        }
+
+        /* ==========================================================================
+           6. STRATEGIC PILLARS GRID (Similar to Portfolio)
+           ========================================================================== */
+        .partners-section {
+            padding: 100px 8%; background: var(--bg-pure-black); position: relative; z-index: 2;
+            min-height: 80vh;
+        }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-header h2 { font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; letter-spacing: 2px; }
+        .section-header h2 span { font-weight: 700; color: var(--gold-primary); }
+
+        .partners-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 30px;
+        }
+
+        .partner-card {
+            background: var(--bg-glass-card); border: 1px solid rgba(212,175,55,0.1);
+            padding: 50px 40px; border-radius: 4px; position: relative; overflow: hidden;
+            transition: var(--transition-main); cursor: pointer;
+        }
+        /* Top Animated Border */
+        .partner-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 2px;
+            background: var(--grad-gold); transition: all 0.7s ease;
+        }
+        
+        .partner-card:hover {
+            border-color: var(--gold-alpha); transform: translateY(-10px);
+            background: rgba(255,255,255,0.05); box-shadow: var(--shadow-gold-glow);
+        }
+        .partner-card:hover::before { left: 100%; }
+
+        .partner-icon {
+            width: 70px; height: 70px; border: 1px solid var(--gold-alpha); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; margin-bottom: 30px;
+            font-size: 1.8rem; color: var(--gold-primary); background: var(--bg-pure-black);
+            transition: var(--transition-bounce);
+        }
+        .partner-card:hover .partner-icon {
+            transform: scale(1.1) rotate(5deg); box-shadow: 0 0 20px rgba(212,175,55,0.3);
+            background: var(--gold-primary); color: var(--bg-pure-black);
+        }
+
+        .partner-card h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 15px; letter-spacing: 1px; color: var(--text-white); }
+        .partner-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 30px; }
+        
+        .partner-link {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
+            color: var(--gold-primary); display: flex; align-items: center; gap: 10px;
+            font-weight: 600; opacity: 0.7; transition: var(--transition-main);
+        }
+        .partner-card:hover .partner-link { opacity: 1; gap: 15px; }
+
+        /* ==========================================================================
+           7. FEATURED ALLIANCE (Matching "Featured Masterpiece")
+           ========================================================================== */
+        .featured-alliance {
+            padding: 0; position: relative; z-index: 2; border-top: 1px solid var(--gold-alpha);
+            display: flex; flex-wrap: wrap; background: var(--bg-pure-black);
+        }
+        .alliance-img {
+            flex: 1 1 50%; min-height: 60vh; 
+            background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop') center/cover no-repeat;
+            position: relative; filter: grayscale(0.3);
+        }
+        .alliance-content {
+            flex: 1 1 50%; padding: 100px 8%; display: flex; flex-direction: column; justify-content: center;
+            border-left: 1px solid var(--gold-alpha); background: var(--bg-rich-dark);
+        }
+        .alliance-content h2 { font-size: clamp(2rem, 3vw, 3rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; }
+        .alliance-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 40px; }
+        
+        .featured-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
+        .metric-box { border-left: 2px solid var(--gold-primary); padding-left: 15px; }
+        .metric-box h4 { font-size: 1.8rem; color: var(--text-white); margin-bottom: 5px; font-weight: 700; }
+        .metric-box span { font-size: 0.75rem; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ==========================================================================
+           8. FOOTER (Exact match)
+           ========================================================================== */
+        .executive-footer { background: #030303; border-top: 1px solid rgba(212,175,55,0.2); padding: 80px 8% 40px 8%; position: relative; z-index: 2; }
+        .footer-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; margin-bottom: 60px; }
+        .footer-brand-column h3 { font-size: 1.5rem; margin-bottom: 20px; letter-spacing: 2px; }
+        .footer-brand-column h3 span { color: var(--gold-primary); }
+        .footer-brand-column p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; }
+        .footer-links-column h4 { color: var(--gold-primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+        .footer-links-column ul { display: flex; flex-direction: column; gap: 15px; }
+        .footer-links-column a { color: var(--text-secondary); font-size: 0.85rem; transition: var(--transition-main); }
+        .footer-links-column a:hover { color: var(--gold-glow); padding-left: 5px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-bottom p { color: var(--text-muted); font-size: 0.8rem; }
+        .footer-socials { display: flex; gap: 20px; }
+        .footer-socials a { width: 40px; height: 40px; border: 1px solid rgba(212,175,55,0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--text-secondary); transition: var(--transition-main); }
+        .footer-socials a:hover { border-color: var(--gold-primary); color: var(--bg-pure-black); background: var(--grad-gold); box-shadow: var(--shadow-gold-glow); }
+
+        /* ==========================================================================
+           9. ANIMATIONS & RESPONSIVE
+           ========================================================================== */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+        @keyframes pulseGlow { 100% { opacity: 1; filter: drop-shadow(0 0 15px #FFD54A); } }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .mobile-control-dock { display: flex; }
+            .featured-alliance { flex-direction: column; }
+            .alliance-img { min-height: 40vh; }
+            .alliance-content { border-left: none; border-top: 1px solid var(--gold-alpha); padding: 60px 5%; }
+        }
+        @media (max-width: 768px) {
+            .partners-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+            .marquee-track { gap: 40px; }
+            .brand-item .logo-text { font-size: 1.2rem; }
+            .brand-item i { font-size: 2rem; }
+        }
+        @media (max-width: 480px) {
+            .page-hero { padding: 60px 5%; height: 50vh; align-items: center; text-align: center; justify-content: center; }
+            .partners-section { padding: 60px 5%; }
+            .featured-metrics { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Architectural Background Pattern -->
+    <div class="blueprint-grid"></div>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring-reverse"></div>
+            <div class="loader-center">
+                <i class="fa-solid fa-handshake-angle"></i>
+                <div class="counter-number" id="percentage-counter">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DESKTOP HEADER -->
+    <header class="header" id="main-header">
+        <div class="brand-logo">SMART <span>VISION</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="partnerships.html" class="active">Partnerships</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="career.html">Career</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- MOBILE SMART DOCK -->
+    <nav class="mobile-control-dock" id="mobile-dock">
+        <div class="dock-brand">SMART <span>VISION</span></div>
+        <button class="dock-trigger-btn" id="dock-trigger">
+            <i class="fa-solid fa-compass-drafting"></i> NAVIGATE
+        </button>
+    </nav>
+
+    <!-- IMMERSIVE MOBILE OVERLAY -->
+    <div class="immersive-overlay-NAVIGATE" id="control-center-overlay">
+        <div class="overlay-nav-grid">
+            <a href="index.html" class="overlay-nav-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="about.html" class="overlay-nav-item"><i class="fa-solid fa-building-user"></i><span>About</span></a>
+            <a href="services.html" class="overlay-nav-item"><i class="fa-solid fa-trowel-bricks"></i><span>Services</span></a>
+            <a href="projects.html" class="overlay-nav-item"><i class="fa-solid fa-city"></i><span>Projects</span></a>
+            <a href="partnerships.html" class="overlay-nav-item" style="border-color: var(--gold-primary);"><i class="fa-solid fa-handshake-angle"></i><span style="color: var(--gold-primary);">Partnerships</span></a>
+            <a href="team.html" class="overlay-nav-item"><i class="fa-solid fa-users-gear"></i><span>Team</span></a>
+            <a href="career.html" class="overlay-nav-item"><i class="fa-solid fa-briefcase"></i><span>Career</span></a>
+            <a href="news.html" class="overlay-nav-item"><i class="fa-solid fa-newspaper"></i><span>News</span></a>
+            <a href="contact.html" class="overlay-nav-item" style="grid-column: span 2;"><i class="fa-solid fa-envelope"></i><span>Contact Hub</span></a>
+        </div>
+    </div>
+
+    <!-- PARTNERSHIPS HERO SECTION -->
+    <section class="page-hero">
+        <div class="page-hero-bg"></div>
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <span class="subtitle">Global Network</span>
+            <h1 class="page-title">Strategic <span>Alliances</span></h1>
+        </div>
+    </section>
+
+    <!-- INFINITE LOGO MARQUEE -->
+    <section class="marquee-section">
+        <div class="marquee-track">
+            <!-- Group 1 -->
+            <div class="brand-item"><i class="fa-brands fa-aws"></i><span class="logo-text">AWS Infra</span></div>
+            <div class="brand-item"><i class="fa-solid fa-microchip"></i><span class="logo-text">NovaTech</span></div>
+            <div class="brand-item"><i class="fa-solid fa-shield-halved"></i><span class="logo-text">Vanguard</span></div>
+            <div class="brand-item"><i class="fa-solid fa-bolt"></i><span class="logo-text">Volt Energy</span></div>
+            <div class="brand-item"><i class="fa-solid fa-cube"></i><span class="logo-text">Nexus Build</span></div>
+            <div class="brand-item"><i class="fa-solid fa-leaf"></i><span class="logo-text">EcoMatrix</span></div>
+            
+            <!-- Group 2 (Duplicate for seamless loop) -->
+            <div class="brand-item"><i class="fa-brands fa-aws"></i><span class="logo-text">AWS Infra</span></div>
+            <div class="brand-item"><i class="fa-solid fa-microchip"></i><span class="logo-text">NovaTech</span></div>
+            <div class="brand-item"><i class="fa-solid fa-shield-halved"></i><span class="logo-text">Vanguard</span></div>
+            <div class="brand-item"><i class="fa-solid fa-bolt"></i><span class="logo-text">Volt Energy</span></div>
+            <div class="brand-item"><i class="fa-solid fa-cube"></i><span class="logo-text">Nexus Build</span></div>
+            <div class="brand-item"><i class="fa-solid fa-leaf"></i><span class="logo-text">EcoMatrix</span></div>
+        </div>
+    </section>
+
+    <!-- STRATEGIC PILLARS GRID -->
+    <section class="partners-section">
+        <div class="section-header">
+            <h2>Our Core <span>Partners</span></h2>
+        </div>
+        <div class="partners-grid">
+            
+            <!-- Partner 1 -->
+            <div class="partner-card">
+                <div class="partner-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <h3>Apex Financial Group</h3>
+                <p>Providing the robust financial infrastructure necessary to fund and sustain our mega-scale architectural endeavors worldwide.</p>
+                <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
+            </div>
+
+            <!-- Partner 2 -->
+            <div class="partner-card">
+                <div class="partner-icon"><i class="fa-solid fa-microchip"></i></div>
+                <h3>Syntax AI Systems</h3>
+                <p>Integrating next-generation artificial intelligence to transform traditional structures into sentient, self-regulating smart buildings.</p>
+                <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
+            </div>
+
+            <!-- Partner 3 -->
+            <div class="partner-card">
+                <div class="partner-icon"><i class="fa-solid fa-leaf"></i></div>
+                <h3>Aero Eco-Materials</h3>
+                <p>Supplying cutting-edge, carbon-negative materials to ensure our designs protect and harmonize with the natural environment.</p>
+                <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
+            </div>
+
+            <!-- Partner 4 -->
+            <div class="partner-card">
+                <div class="partner-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                <h3>Global Logistics Hub</h3>
+                <p>Ensuring streamlined supply chain management for rapid deployment of construction resources across continents.</p>
+                <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
+            </div>
+
+            <!-- Partner 5 -->
+            <div class="partner-card">
+                <div class="partner-icon"><i class="fa-solid fa-drafting-compass"></i></div>
+                <h3>Zenith Architecture</h3>
+                <p>Collaborating on conceptual parametric designs to push the boundaries of modern skyline aesthetics.</p>
+                <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
+            </div>
+
+            <!-- Partner 6 -->
+            <div class="partner-card">
+                <div class="partner-icon"><i class="fa-solid fa-shield-virus"></i></div>
+                <h3>Titan Security</h3>
+                <p>Implementing military-grade cybersecurity and physical protection protocols for our high-profile corporate clients.</p>
+                <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FEATURED ALLIANCE -->
+    <section class="featured-alliance">
+        <div class="alliance-img"></div>
+        <div class="alliance-content">
+            <span class="subtitle">Featured Joint Venture</span>
+            <h2>The NovaTech <span>Alliance</span></h2>
+            <p>Our exclusive partnership with NovaTech represents a paradigm shift in urban development. By merging SMART VISION's structural engineering prowess with NovaTech's quantum-computing building management systems, we are creating cities that literally think for themselves.</p>
+            
+            <div class="featured-metrics">
+                <div class="metric-box">
+                    <h4 class="stat-value">12+</h4>
+                    <span>Smart Cities Powered</span>
+                </div>
+                <div class="metric-box">
+                    <h4 class="stat-value">$5.4B</h4>
+                    <span>Combined Portfolio</span>
+                </div>
+                <div class="metric-box">
+                    <h4 class="stat-value">40%</h4>
+                    <span>Energy Reduction</span>
+                </div>
+                <div class="metric-box">
+                    <h4 class="stat-value">24/7</h4>
+                    <span>AI Monitoring</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXECUTIVE FOOTER -->
+    <footer class="executive-footer">
+        <div class="footer-matrix">
+            <div class="footer-brand-column">
+                <h3>SMART <span>VISION</span></h3>
+                <p>Engineering the future through visionary architecture, structural integrity, and uncompromising luxury.</p>
+            </div>
+            <div class="footer-links-column">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home / Hub</a></li>
+                    <li><a href="projects.html">Corporate Portfolio</a></li>
+                    <li><a href="services.html">Core Services</a></li>
+                    <li><a href="partnerships.html">Global Alliances</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-column">
+                <h4>Corporate</h4>
+                <ul>
+                    <li><a href="about.html">Our Legacy</a></li>
+                    <li><a href="team.html">Leadership</a></li>
+                    <li><a href="career.html">Careers</a></li>
+                    <li><a href="news.html">Press & Media</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-column">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Hub</a></li>
+                    <li><a href="#">Client Portal</a></li>
+                    <li><a href="#">Investor Relations</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SMART VISION Engineering & Construction. All Rights Reserved.</p>
+            <div class="footer-socials">
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS (Preloader & Navigation) -->
+    <script>
+        // 1. Preloader Logic
+        document.addEventListener("DOMContentLoaded", () => {
+            let count = 0;
+            const counterElement = document.getElementById("percentage-counter");
+            const preloader = document.getElementById("preloader");
+            
+            const interval = setInterval(() => {
+                count += Math.floor(Math.random() * 5) + 1; 
+                if (count > 100) count = 100;
+                counterElement.innerText = count + "%";
+                
+                if (count === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.style.opacity = "0";
+                        preloader.style.transform = "translateY(-100%)";
+                        setTimeout(() => preloader.remove(), 1000);
+                        
+                        // Show mobile dock after load
+                        setTimeout(() => {
+                            document.getElementById('mobile-dock').classList.add('visible');
+                        }, 500);
+                    }, 400);
+                }
+            }, 30);
+        });
+
+        // 2. Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 3. Mobile Immersive NAVIGATE Toggles
+        const dockTrigger = document.getElementById('dock-trigger');
+        const overlayNAVIGATE = document.getElementById('control-center-overlay');
+        
+        dockTrigger.addEventListener('click', () => {
+            overlayNAVIGATE.classList.toggle('active');
+            if(overlayNAVIGATE.classList.contains('active')) {
+                dockTrigger.innerHTML = '<i class="fa-solid fa-xmark"></i> CLOSE';
+            } else {
+                dockTrigger.innerHTML = '<i class="fa-solid fa-compass-drafting"></i> NAVIGATE';
+            }
+        });
+
+        // Close NAVIGATE when clicking outside items
+        overlayNAVIGATE.addEventListener('click', (e) => {
+            if(e.target === overlayNAVIGATE) {
+                overlayNAVIGATE.classList.remove('active');
+                dockTrigger.innerHTML = '<i class="fa-solid fa-compass-drafting"></i> NAVIGATE';
+            }
+        });
+    </script>
+</body>
+</html>
