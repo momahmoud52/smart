@@ -3,1358 +3,820 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Vision | Ultra Premium Luxury Engineering</title>
-    <!-- Premium Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>SMART VISION | Engineering & Architecture</title>
+    
+    <!-- Google Fonts for Cinematic & Luxury Look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         /* ==========================================================================
-           1. DESIGN SYSTEM & CORE VARIABLES
+           1. CSS VARIABLES (SMART VISION COLOR PALETTE)
            ========================================================================== */
         :root {
-            --pure-black: #000000;
-            --dark-bg: #0A0A0A;
-            --luxury-gold: #D4AF37;
-            --soft-gold-glow: #FFD54A;
-            --white-text: #FFFFFF;
-            --gray-text: #CFCFCF;
-            --dark-gray: #1A1A1A;
-            --glass-bg: rgba(10, 10, 10, 0.75);
-            --glass-border: rgba(212, 175, 55, 0.25);
-            --gold-gradient: linear-gradient(135deg, #B38728 0%, #FBF5B7 25%, #DAA520 50%, #FBF5B7 75%, #AA771C 100%);
-            --transition-epic: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* Primary Background Colors */
+            --bg-primary: #000000;
+            --bg-section: #0A0A0A;
+            --bg-glass: rgba(0, 0, 0, 0.65);
+            
+            /* Gold Colors */
+            --gold-primary: #D4AF37;
+            --gold-glow: #FFD54A;
+            --gold-hover: #E6C75A;
+            --gold-border: #C9A227;
+            
+            /* Text Colors */
+            --text-white: #FFFFFF;
+            --text-secondary: #CFCFCF;
+            --text-muted: #8F8F8F;
+            
+            /* Gradients */
+            --grad-main-gold: linear-gradient(90deg, #8B6B15, #D4AF37, #FFD54A, #D4AF37, #8B6B15);
+            --grad-hero: linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.75) 50%, rgba(212,175,55,0.20) 100%);
+            --grad-dark: linear-gradient(180deg, #000000 0%, #0A0A0A 50%, #000000 100%);
+            
+            /* Shadows & Glows */
+            --glow-gold: 0 0 10px rgba(212,175,55,0.4), 0 0 20px rgba(212,175,55,0.3), 0 0 40px rgba(212,175,55,0.2);
+            --glow-btn: 0 0 15px #D4AF37, 0 0 35px rgba(212,175,55,0.6);
+            
+            /* Glassmorphism & Borders */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-blur: blur(12px);
+            --glass-border: 1px solid rgba(212, 175, 55, 0.25);
+            --premium-border: 1px solid rgba(212, 175, 55, 0.5);
+            
+            /* Transitions */
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Typography */
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
         }
 
-        /* Reset & Base Rules */
+        /* ==========================================================================
+           2. RESET & BASE STYLES
+           ========================================================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            outline: none;
-            -webkit-tap-highlight-color: transparent;
         }
 
         html {
             scroll-behavior: smooth;
-            overflow-x: hidden;
-            background-color: var(--pure-black);
         }
 
         body {
-            background-color: var(--pure-black);
-            color: var(--white-text);
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
             overflow-x: hidden;
-            position: relative;
+            line-height: 1.6;
         }
 
-        /* Custom Premium Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--pure-black);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, var(--luxury-gold), var(--pure-black));
-            border-radius: 4px;
-        }
-
-        /* Typography Scannability */
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-family: var(--font-heading);
+            color: var(--text-white);
+            font-weight: 600;
         }
-        p {
-            font-family: 'Inter', sans-serif;
-            color: var(--gray-text);
-            line-height: 1.8;
-            font-weight: 300;
-        }
-        a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
-        ul { list-style: none; }
-        img { max-width: 100%; height: auto; object-fit: cover; }
 
-        /* Luxury Custom Interactive Cursor */
-        #customCursor {
-            width: 8px; height: 8px;
-            background: var(--soft-gold-glow);
-            border-radius: 50%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 999999;
-            box-shadow: 0 0 15px var(--soft-gold-glow), 0 0 30px var(--luxury-gold);
-            transition: width 0.2s, height 0.2s;
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-smooth);
         }
-        #customCursorFollower {
-            width: 40px; height: 40px;
-            border: 1px solid var(--luxury-gold);
-            border-radius: 50%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 999998;
-            transition: transform 0.08s linear, width 0.3s, height 0.3s;
-            background: rgba(212, 175, 55, 0.03);
+
+        ul {
+            list-style: none;
         }
 
         /* ==========================================================================
-           2. CINEMATIC PRELOADER
+           3. PRELOADER (CINEMATIC LOADER)
            ========================================================================== */
         #preloader {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100vh;
-            background: var(--pure-black);
-            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-primary);
+            z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), visibility 1s;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
         }
-        .loader-wrapper {
+
+        .loader-logo-container {
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .loader-ring {
-            width: 140px; height: 140px;
-            border: 2px solid transparent;
-            border-top: 2px solid var(--luxury-gold);
-            border-right: 2px solid var(--soft-gold-glow);
-            border-radius: 50%;
-            animation: spinEnterprise 2s linear infinite;
-        }
-        .loader-ring-inner {
-            position: absolute;
-            width: 110px; height: 110px;
-            border: 1px solid transparent;
-            border-bottom: 2px solid var(--luxury-gold);
-            border-left: 2px solid var(--white-text);
-            border-radius: 50%;
-            animation: spinEnterpriseReverse 1.5s linear infinite;
-        }
-        .loader-logo {
-            position: absolute;
-            font-family: 'Montserrat';
-            font-weight: 800;
-            font-size: 1.8rem;
-            color: var(--white-text);
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-        }
-        .loader-logo span { color: var(--luxury-gold); }
-        .loader-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
-            letter-spacing: 6px;
-            color: var(--luxury-gold);
-            text-transform: uppercase;
-            text-align: center;
-            font-weight: 500;
+            margin-bottom: 40px;
             animation: pulseGlow 2s infinite alternate;
         }
 
-        @keyframes spinEnterprise { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes spinEnterpriseReverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
-        @keyframes pulseGlow { 0% { opacity: 0.4; text-shadow: 0 0 5px rgba(212, 175, 55, 0.2); } 100% { opacity: 1; text-shadow: 0 0 20px var(--soft-gold-glow); } }
+        /* Placeholder for User's Logo Image */
+        .loader-logo-img {
+            width: 150px;
+            height: auto;
+            /* If no image is provided yet, this creates a gold box placeholder */
+            min-height: 50px; 
+            border: var(--premium-border);
+            box-shadow: var(--glow-gold);
+            border-radius: 4px;
+        }
+
+        .loader-text {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--gold-primary);
+            letter-spacing: 5px;
+            margin-top: 15px;
+            text-transform: uppercase;
+            text-shadow: var(--glow-gold);
+        }
+
+        .loader-bar-container {
+            width: 300px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .loader-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--grad-main-gold);
+            animation: loadingBar 2.5s ease-in-out forwards;
+        }
+
+        @keyframes pulseGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(212,175,55,0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 25px rgba(212,175,55,0.6)); transform: scale(1.02); }
+        }
+
+        @keyframes loadingBar {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        .hide-loader {
+            opacity: 0;
+            visibility: hidden;
+        }
 
         /* ==========================================================================
-           3. ULTRA STICKY NAVBAR
+           4. HEADER & NAVIGATION (GLASSMORPHISM)
            ========================================================================== */
         header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            padding: 30px 6%;
-            display: flex; justify-content: space-between; align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 1000;
-            transition: var(--transition-epic);
-            background: transparent;
+            transition: var(--transition-smooth);
+            border-bottom: 1px solid transparent;
         }
+
         header.scrolled {
-            background: var(--glass-bg);
+            background: var(--bg-glass);
+            backdrop-filter: var(--glass-blur);
+            padding: 15px 5%;
+            border-bottom: var(--glass-border);
+        }
+
+        .logo a {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--text-white);
+            letter-spacing: 2px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--gold-primary);
+        }
+
+        .desktop-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .desktop-nav li a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            position: relative;
+            padding-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .desktop-nav li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background: var(--gold-primary);
+            transition: var(--transition-smooth);
+            box-shadow: var(--glow-gold);
+        }
+
+        .desktop-nav li a:hover {
+            color: var(--text-white);
+        }
+
+        .desktop-nav li a:hover::after,
+        .desktop-nav li a.active::after {
+            width: 100%;
+        }
+
+        .desktop-nav li a.active {
+            color: var(--gold-primary);
+        }
+
+        /* ==========================================================================
+           5. CUSTOM MOBILE TOGGLE (Alternative to Hamburger)
+           ========================================================================== */
+        .mobile-toggle {
+            display: none;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        /* Geometric Engineering Style Toggle: 4 dots forming a square */
+        .toggle-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--gold-primary);
+            transition: var(--transition-smooth);
+            box-shadow: 0 0 5px rgba(212,175,55,0.5);
+        }
+
+        .toggle-dot:nth-child(1) { top: 10px; left: 10px; }
+        .toggle-dot:nth-child(2) { top: 10px; right: 10px; }
+        .toggle-dot:nth-child(3) { bottom: 10px; left: 10px; }
+        .toggle-dot:nth-child(4) { bottom: 10px; right: 10px; }
+
+        /* Animation to 'X' on click */
+        .mobile-toggle.active .toggle-dot:nth-child(1) { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); width: 25px; height: 2px; }
+        .mobile-toggle.active .toggle-dot:nth-child(2) { opacity: 0; }
+        .mobile-toggle.active .toggle-dot:nth-child(3) { opacity: 0; }
+        .mobile-toggle.active .toggle-dot:nth-child(4) { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); width: 25px; height: 2px; }
+
+        /* ==========================================================================
+           6. MOBILE FULLSCREEN MENU (GLASSMORPHISM)
+           ========================================================================== */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            padding: 18px 6%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-        .logo-area {
-            display: flex; align-items: center; gap: 15px; cursor: pointer;
-        }
-        .logo-box {
-            width: 45px; height: 45px;
-            border-radius: 6px;
-            border: 1px solid var(--luxury-gold);
-            display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            background: var(--dark-bg);
-            position: relative; overflow: hidden;
-        }
-        .logo-box::after {
-            content: ''; position: absolute; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            top: 0; left: -100%; animation: shine 3s infinite;
-        }
-        @keyframes shine { 100% { left: 100%; } }
-        
-        .brand-name {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800; font-size: 1.4rem; letter-spacing: 3px;
-        }
-        .brand-name span { color: var(--luxury-gold); font-weight: 400; }
-
-        .nav-menu { display: flex; gap: 35px; align-items: center; }
-        .nav-item { position: relative; }
-        .nav-link {
-            font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px;
-            color: var(--gray-text); padding: 5px 0;
-        }
-        .nav-link::after {
-            content: ''; position: absolute; bottom: 0; left: 0;
-            width: 0%; height: 1px; background: var(--luxury-gold);
-            transition: var(--transition-smooth);
-            box-shadow: 0 0 8px var(--soft-gold-glow);
-        }
-        .nav-link:hover { color: var(--white-text); }
-        .nav-link:hover::after { width: 100%; }
-        .nav-item.active .nav-link { color: var(--luxury-gold); }
-        .nav-item.active .nav-link::after { width: 100%; background: var(--luxury-gold); }
-
-        /* Advanced Alternative Mobile Trigger (Premium Minimalist Text-Icon) */
-        .premium-mobile-trigger {
-            display: none; color: var(--luxury-gold); font-family: 'Montserrat';
-            font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
-            cursor: pointer; align-items: center; gap: 10px; border: 1px solid var(--glass-border);
-            padding: 8px 16px; border-radius: 4px; background: rgba(0,0,0,0.5);
+            z-index: 1001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
             transition: var(--transition-smooth);
         }
-        .premium-mobile-trigger:hover { border-color: var(--luxury-gold); box-shadow: 0 0 15px rgba(212,175,55,0.2); }
-        .trigger-bars { display: flex; flex-direction: column; gap: 4px; }
-        .trigger-bars span { width: 18px; height: 1px; background: var(--luxury-gold); transition: var(--transition-smooth); }
-        
-        /* Fullscreen Glass Mobile Menu */
-        .fullscreen-mobile-menu {
-            position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-            background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px); z-index: 999;
-            transition: var(--transition-epic);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
-        .fullscreen-mobile-menu.active { right: 0; }
-        .fullscreen-mobile-menu ul { text-align: center; display: flex; flex-direction: column; gap: 25px; }
-        .fullscreen-mobile-menu a {
-            font-size: 1.8rem; font-family: 'Montserrat'; font-weight: 600;
-            letter-spacing: 3px; text-transform: uppercase; color: var(--gray-text);
+
+        .mobile-nav {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
-        .fullscreen-mobile-menu a:hover, .fullscreen-mobile-menu .active a { color: var(--luxury-gold); text-shadow: 0 0 15px var(--soft-gold-glow); }
-        
-        @media (max-width: 1100px) {
-            .nav-menu { display: none; }
-            .premium-mobile-trigger { display: flex; }
+
+        .mobile-nav li {
+            transform: translateY(30px);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .mobile-menu-overlay.active .mobile-nav li {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Staggered animation delays for mobile links */
+        .mobile-menu-overlay.active .mobile-nav li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu-overlay.active .mobile-nav li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-menu-overlay.active .mobile-nav li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-menu-overlay.active .mobile-nav li:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-menu-overlay.active .mobile-nav li:nth-child(5) { transition-delay: 0.5s; }
+        .mobile-menu-overlay.active .mobile-nav li:nth-child(6) { transition-delay: 0.6s; }
+        .mobile-menu-overlay.active .mobile-nav li:nth-child(7) { transition-delay: 0.7s; }
+        .mobile-menu-overlay.active .mobile-nav li:nth-child(8) { transition-delay: 0.8s; }
+        .mobile-menu-overlay.active .mobile-nav li:nth-child(9) { transition-delay: 0.9s; }
+
+        .mobile-nav li a {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .mobile-nav li a:hover {
+            color: var(--gold-hover);
+            text-shadow: var(--glow-gold);
         }
 
         /* ==========================================================================
-           4. CINEMATIC HERO SECTION
+           7. HERO SECTION (CINEMATIC CORPORATE STYLE)
            ========================================================================== */
-        .hero-viewport {
-            height: 100vh; width: 100%; position: relative;
-            display: flex; justify-content: center; align-items: center;
-            text-align: center; overflow: hidden;
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            overflow: hidden;
+            background: var(--bg-primary);
         }
-        .hero-parallax-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-            transform: scale(1.05); transition: transform 0.1s linear;
-        }
-        .hero-darkener {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(10,10,10,0.6) 50%, rgba(0,0,0,1) 100%);
+
+        /* Engineering Background Image Placeholder */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Using a high-quality architecture image from Unsplash */
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
             z-index: 1;
+            transform: scale(1.05);
+            animation: slowZoom 20s infinite alternate;
         }
-        .hero-inner { position: relative; z-index: 2; max-width: 1100px; padding: 0 30px; }
-        .hero-badge {
-            font-family: 'Montserrat'; font-size: 0.85rem; color: var(--luxury-gold);
-            letter-spacing: 5px; text-transform: uppercase; margin-bottom: 25px; display: inline-block;
-            border: 1px solid var(--glass-border); padding: 6px 20px; border-radius: 30px;
-            background: rgba(212,175,55,0.05); backdrop-filter: blur(5px);
+
+        @keyframes slowZoom {
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1.15); }
         }
-        .hero-main-title {
-            font-size: 5rem; font-weight: 800; line-height: 1.15; margin-bottom: 30px;
-            text-transform: uppercase; letter-spacing: -1px;
-            background: linear-gradient(180deg, #FFFFFF 0%, #A9A9A9 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--grad-hero);
+            z-index: 2;
         }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--gold-primary);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: inline-block;
+            border-left: 2px solid var(--gold-primary);
+            padding-left: 15px;
+            box-shadow: -5px 0 15px rgba(212,175,55,0.2);
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .hero-title span {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--gold-primary);
+            background: var(--grad-main-gold);
+            -webkit-background-clip: text;
+            /* Subtle text glow */
+            filter: drop-shadow(0 0 15px rgba(212,175,55,0.3));
+        }
+
         .hero-desc {
-            font-size: 1.25rem; color: var(--gray-text); max-width: 750px; margin: 0 auto 45px;
-            font-weight: 300;
-        }
-        
-        /* Core Premium Button Style */
-        .luxury-button {
-            display: inline-block; padding: 18px 45px;
-            background: transparent; border: 1px solid var(--luxury-gold);
-            color: var(--luxury-gold); font-family: 'Montserrat'; font-weight: 600;
-            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px;
-            border-radius: 2px; cursor: pointer; position: relative; overflow: hidden;
-            transition: var(--transition-smooth); z-index: 1;
-        }
-        .luxury-button::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: var(--luxury-gold); transition: var(--transition-epic); z-index: -1;
-        }
-        .luxury-button:hover { color: var(--pure-black); box-shadow: 0 0 30px rgba(212,175,55,0.4); transform: translateY(-3px); }
-        .luxury-button:hover::before { left: 0; }
-
-        @media(max-width: 768px) {
-            .hero-main-title { font-size: 3rem; }
-            .hero-desc { font-size: 1rem; }
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
         }
 
-        /* ==========================================================================
-           5. PHILOSOPHY (VISION / MISSION) SECTION
-           ========================================================================== */
-        .premium-section { padding: 140px 6%; position: relative; }
-        .section-header { text-align: center; max-width: 700px; margin: 0 auto 80px; }
-        .section-tag { font-size: 0.8rem; color: var(--luxury-gold); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; display: block; }
-        .section-title { font-size: 3rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        .section-title span { color: var(--luxury-gold); font-weight: 300; }
-        
-        .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-        .phil-card {
-            background: linear-gradient(145deg, #0d0d0d 0%, #050505 100%);
-            border: 1px solid var(--glass-border); padding: 50px 40px; border-radius: 4px;
-            transition: var(--transition-epic); position: relative; overflow: hidden;
+        .btn-group {
+            display: flex;
+            gap: 20px;
         }
-        .phil-card::after {
-            content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 60px;
-            background: rgba(212,175,55,0.02); border-radius: 50%; transform: translate(20px, 20px);
-            transition: var(--transition-epic);
+
+        .btn {
+            padding: 15px 35px;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: var(--transition-smooth);
+            display: inline-block;
+            text-align: center;
         }
-        .phil-card:hover { transform: translateY(-10px); border-color: var(--luxury-gold); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        .phil-card:hover::after { width: 150px; height: 150px; background: rgba(212,175,55,0.05); }
-        .phil-icon-box {
-            width: 70px; height: 70px; border-radius: 2px; border: 1px solid var(--luxury-gold);
-            display: flex; justify-content: center; align-items: center; margin-bottom: 30px;
-            background: rgba(212,175,55,0.03); color: var(--luxury-gold); font-size: 1.8rem;
+
+        .btn-primary {
+            background: var(--gold-primary);
+            color: var(--bg-primary);
+            border: 1px solid var(--gold-primary);
+            box-shadow: var(--glow-gold);
         }
-        .phil-card h3 { font-size: 1.4rem; margin-bottom: 20px; text-transform: uppercase; font-weight: 600; }
+
+        .btn-primary:hover {
+            background: var(--gold-hover);
+            box-shadow: var(--glow-btn);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            color: var(--text-white);
+            border: var(--premium-border);
+        }
+
+        .btn-outline:hover {
+            background: var(--gold-primary);
+            color: var(--bg-primary);
+            box-shadow: var(--glow-btn);
+            transform: translateY(-3px);
+        }
 
         /* ==========================================================================
-           6. SERVICES SECTION (LUXURY ACCORDION)
+           8. INTRODUCTION SECTION (LUXURY DARK GRADIENT)
            ========================================================================== */
-        .services-wrapper { background: var(--dark-bg); }
-        .modern-accordion { max-width: 900px; margin: 0 auto; }
-        .premium-acc-item {
-            background: var(--pure-black); border: 1px solid var(--glass-border);
-            margin-bottom: 20px; border-radius: 2px; transition: var(--transition-smooth);
+        .section-intro {
+            padding: 100px 5%;
+            background: var(--grad-dark);
+            position: relative;
         }
-        .premium-acc-item:hover { border-color: rgba(212,175,55,0.5); }
-        .acc-trigger {
-            padding: 25px 40px; display: flex; justify-content: space-between; align-items: center;
-            cursor: pointer; transition: var(--transition-smooth);
-        }
-        .acc-trigger h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: 1px; color: var(--white-text); transition: 0.3s; }
-        .acc-trigger:hover h3 { color: var(--luxury-gold); }
-        .acc-arrow {
-            width: 30px; height: 30px; border: 1px solid var(--glass-border); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; color: var(--luxury-gold);
-            font-size: 0.8rem; transition: var(--transition-smooth);
-        }
-        .premium-acc-item.open .acc-trigger { background: rgba(212,175,55,0.03); }
-        .premium-acc-item.open .acc-arrow { transform: rotate(180deg); background: var(--luxury-gold); color: var(--pure-black); }
-        .premium-acc-item.open h3 { color: var(--luxury-gold); }
-        .acc-panel {
-            padding: 0 40px; max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .acc-panel-inner { padding-bottom: 30px; color: var(--gray-text); font-size: 0.95rem; }
 
-        /* ==========================================================================
-           7. CONTINUOUS LOGO MARQUEE
-           ========================================================================== */
-        .marquee-container {
-            background: var(--pure-black); padding: 60px 0; border-top: 1px solid var(--dark-gray); border-bottom: 1px solid var(--dark-gray);
-            overflow: hidden; position: relative;
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
         }
-        .marquee-track { display: flex; width: max-content; animation: enterpriseMarquee 25s linear infinite; }
-        .marquee-item {
-            width: 220px; height: 80px; display: flex; justify-content: center; align-items: center;
-            margin: 0 40px; background: rgba(15,15,15,0.6); border: 1px solid var(--dark-gray);
-            border-radius: 4px; transition: var(--transition-smooth);
-        }
-        .marquee-item:hover { border-color: var(--luxury-gold); background: var(--dark-bg); transform: scale(1.05); }
-        .marquee-item span { font-family: 'Montserrat'; font-weight: 700; color: #444; letter-spacing: 3px; font-size: 1.1rem; transition: 0.3s; }
-        .marquee-item:hover span { color: var(--luxury-gold); text-shadow: 0 0 10px rgba(212,175,55,0.3); }
-        @keyframes enterpriseMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* ==========================================================================
-           8. CINEMATIC PROJECTS GALLERY (MULTIPLE IMAGES SIMULATED PER CARD)
-           ========================================================================== */
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
-        @media(max-width:480px){ .gallery-grid { grid-template-columns: 1fr; } }
-        .showcase-card {
-            position: relative; border-radius: 4px; overflow: hidden;
-            border: 1px solid var(--glass-border); height: 450px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .card-slider-engine { width: 100%; height: 100%; position: relative; }
-        .engine-slide {
-            width: 100%; height: 100%; object-fit: cover; position: absolute;
-            top: 0; left: 0; opacity: 0; transition: opacity 0.8s ease-in-out;
-        }
-        .engine-slide.active { opacity: 1; z-index: 1; }
-        .showcase-meta {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
-            z-index: 3; transition: var(--transition-epic); transform: translateY(10px);
-        }
-        .showcase-card:hover .showcase-meta { transform: translateY(0); }
-        .showcase-title { font-size: 1.6rem; color: var(--white-text); margin-bottom: 8px; font-weight: 600; }
-        .showcase-category { font-size: 0.85rem; color: var(--luxury-gold); text-transform: uppercase; letter-spacing: 2px; }
-        
-        /* Inline Slider Buttons */
-        .engine-nav {
-            position: absolute; top: 50%; width: 100%; display: flex;
-            justify-content: space-between; padding: 0 20px; transform: translateY(-50%);
-            z-index: 4; opacity: 0; transition: var(--transition-smooth);
-        }
-        .showcase-card:hover .engine-nav { opacity: 1; }
-        .engine-nav-btn {
-            background: rgba(0,0,0,0.8); border: 1px solid var(--luxury-gold);
-            color: var(--luxury-gold); width: 40px; height: 40px; border-radius: 50%;
-            cursor: pointer; display: flex; justify-content: center; align-items: center;
-            font-size: 0.9rem; transition: var(--transition-smooth);
-        }
-        .engine-nav-btn:hover { background: var(--luxury-gold); color: var(--pure-black); box-shadow: 0 0 15px var(--luxury-gold); }
 
-        /* ==========================================================================
-           9. EXECUTIVE COMPACT REVOLUTIONARY ORG CHART
-           ========================================================================== */
-        .org-chart-bg { background: var(--dark-bg); overflow-x: auto; padding-bottom: 160px; }
-        
-        /* Professional CSS Tree Graph Architecture */
-        .corporate-tree-wrapper { min-width: 1000px; display: flex; justify-content: center; padding-top: 20px; }
-        .corporate-tree-wrapper ul {
-            position: relative; padding-top: 30px; display: flex; justify-content: center;
+        .section-header .gold-line {
+            width: 80px;
+            height: 2px;
+            background: var(--grad-main-gold);
+            margin: 0 auto;
+            box-shadow: var(--glow-gold);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: var(--glass-border);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover Line Effect on Cards */
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--grad-main-gold);
             transition: var(--transition-smooth);
         }
-        .corporate-tree-wrapper li {
-            text-align: center; list-style-type: none; position: relative; padding: 30px 15px 0 15px;
-            transition: var(--transition-smooth);
-        }
-        .corporate-tree-wrapper li::before, .corporate-tree-wrapper li::after {
-            content: ''; position: absolute; top: 0; right: 50%;
-            border-top: 1.5px solid var(--luxury-gold); width: 50%; height: 30px;
-        }
-        .corporate-tree-wrapper li::after { right: auto; left: 50%; border-left: 1.5px solid var(--luxury-gold); }
-        .corporate-tree-wrapper li:only-child::after, .corporate-tree-wrapper li:only-child::before { display: none; }
-        .corporate-tree-wrapper li:only-child { padding-top: 0; }
-        .corporate-tree-wrapper li:first-child::before, .corporate-tree-wrapper li:last-child::after { border: 0 none; }
-        .corporate-tree-wrapper li:last-child::before { border-right: 1.5px solid var(--luxury-gold); border-radius: 0 4px 0 0; }
-        .corporate-tree-wrapper li:first-child::after { border-radius: 4px 0 0 0; }
-        .corporate-tree-wrapper ul ul::before {
-            content: ''; position: absolute; top: 0; left: 50%;
-            border-left: 1.5px solid var(--luxury-gold); width: 0; height: 30px;
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold-border);
+            background: var(--bg-section);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
-        /* Combined Node/Card for Side-by-Side Leaders */
-        .executive-node-deck {
-            display: flex; gap: 25px; justify-content: center; background: rgba(15,15,15,0.8);
-            padding: 20px 30px; border-radius: 6px; border: 1.5px solid var(--luxury-gold);
-            box-shadow: 0 0 35px rgba(212,175,55,0.15); position: relative; z-index: 5;
+        .feature-card:hover::before {
+            width: 100%;
+            box-shadow: var(--glow-gold);
         }
 
-        .chart-node {
-            background: linear-gradient(135deg, #111 0%, #050505 100%);
-            border: 1px solid var(--glass-border); padding: 20px; border-radius: 4px;
-            width: 200px; cursor: pointer; transition: var(--transition-smooth);
-            display: inline-block; text-align: center;
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--gold-primary);
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(212,175,55,0.4));
         }
-        .chart-node:hover {
-            border-color: var(--luxury-gold); transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(212,175,55,0.25);
-        }
-        .node-avatar {
-            width: 75px; height: 75px; border-radius: 50%; border: 2px solid var(--luxury-gold);
-            margin: 0 auto 12px; object-fit: cover; display: block;
-        }
-        .node-name { font-size: 1rem; font-weight: 600; color: var(--white-text); margin-bottom: 4px; }
-        .node-role { font-size: 0.8rem; color: var(--luxury-gold); font-weight: 500; letter-spacing: 0.5px; }
 
-        /* Floating Modern Modal Box */
-        .premium-popup-layer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center;
-            z-index: 10000; opacity: 0; visibility: hidden; transition: var(--transition-smooth);
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-white);
         }
-        .premium-popup-layer.active { opacity: 1; visibility: visible; }
-        .popup-box {
-            background: #0A0A0A; border: 1px solid var(--luxury-gold);
-            border-radius: 8px; padding: 45px; max-width: 550px; width: 92%;
-            position: relative; transform: scale(0.85); transition: var(--transition-epic);
-            box-shadow: 0 0 50px rgba(212,175,55,0.3); text-align: center;
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
-        .premium-popup-layer.active .popup-box { transform: scale(1); }
-        .popup-close { position: absolute; top: 20px; right: 25px; font-size: 1.4rem; color: #666; cursor: pointer; }
-        .popup-close:hover { color: var(--luxury-gold); }
-        .popup-avatar { width: 130px; height: 130px; border-radius: 50%; border: 2px solid var(--luxury-gold); margin-bottom: 25px; object-fit: cover; }
-        .popup-title { font-size: 1.6rem; font-weight: 700; color: var(--white-text); margin-bottom: 5px; }
-        .popup-subtitle { font-size: 0.95rem; color: var(--luxury-gold); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
-        .popup-meta-row { display: flex; justify-content: space-around; border-top: 1px solid #1A1A1A; border-bottom: 1px solid #1A1A1A; padding: 15px 0; margin-bottom: 25px; }
-        .meta-item-spec h5 { font-size: 0.75rem; color: #666; text-transform: uppercase; margin-bottom: 3px; }
-        .meta-item-spec p { font-size: 0.9rem; color: var(--white-text); font-weight: 500; }
 
         /* ==========================================================================
-           10. CAREER PORTAL WITH PROFESSIONAL EMAIL GENERATOR
+           9. FOOTER (BASIC STRUCTURE FOR INDEX)
            ========================================================================== */
-        .career-portal-form {
-            max-width: 850px; margin: 0 auto; background: linear-gradient(180deg, #070707 0%, #020202 100%);
-            padding: 55px; border-radius: 4px; border: 1px solid var(--glass-border);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-        }
-        .grid-half { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        @media(max-width: 768px) { .grid-half { grid-template-columns: 1fr; } .career-portal-form { padding: 30px 20px; } }
-        .input-wrapper { margin-bottom: 30px; }
-        .input-wrapper label { display: block; margin-bottom: 10px; color: var(--luxury-gold); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
-        .premium-input {
-            width: 100%; padding: 16px 20px; background: rgba(0,0,0,0.6);
-            border: 1px solid var(--dark-gray); color: var(--white-text);
-            border-radius: 2px; font-family: 'Inter'; font-size: 0.95rem; transition: var(--transition-smooth);
-        }
-        .premium-input:focus { border-color: var(--luxury-gold); box-shadow: 0 0 15px rgba(212,175,55,0.15); }
-        textarea.premium-input { resize: vertical; min-height: 140px; }
-        
-        .luxury-file-vault {
-            position: relative; border: 1px dashed var(--glass-border);
-            text-align: center; padding: 35px; background: rgba(0,0,0,0.4); cursor: pointer; transition: 0.3s;
-        }
-        .luxury-file-vault:hover { border-color: var(--luxury-gold); background: rgba(212,175,55,0.02); }
-        .luxury-file-vault input[type="file"] { position: absolute; top: 0; left: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
-
-        /* ==========================================================================
-           11. NEWSROOM & ENTERPRISE PERSISTENT PUBLISHER SYSTEM
-           ========================================================================== */
-        .news-universe { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; }
-        .news-magazine-card {
-            background: #070707; border: 1px solid var(--dark-gray);
-            transition: var(--transition-epic); overflow: hidden; display: flex; flex-direction: column;
-        }
-        .news-magazine-card:hover { transform: translateY(-8px); border-color: var(--luxury-gold); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
-        .magazine-img-frame { width: 100%; height: 240px; overflow: hidden; position: relative; }
-        .magazine-img-frame img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-epic); }
-        .news-magazine-card:hover .magazine-img-frame img { transform: scale(1.08); }
-        .magazine-body { padding: 35px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .magazine-stamp { color: var(--luxury-gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
-        .magazine-headline { font-size: 1.3rem; line-height: 1.4; margin-bottom: 15px; font-weight: 600; color: var(--white-text); }
-        
-        /* Floating Publisher Panel Engine */
-        #publisherConsoleTrigger {
-            position: fixed; bottom: 35px; left: 35px; background: var(--luxury-gold);
-            color: var(--pure-black); width: 55px; height: 55px; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; cursor: pointer;
-            box-shadow: 0 0 25px rgba(212,175,55,0.5); z-index: 998; display: none;
-            transition: var(--transition-smooth);
-        }
-        #publisherConsoleTrigger:hover { transform: scale(1.1) rotate(90deg); }
-        .hidden-login-gate { position: absolute; bottom: 15px; left: 15px; font-size: 9px; color: #111; cursor: pointer; z-index: 10; }
-
-        /* ==========================================================================
-           12. CONTACT INFRASTRUCTURE & FOOTER
-           ========================================================================== */
-        .panel-contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
-        @media(max-width:992px) { .panel-contact-grid { grid-template-columns: 1fr; } }
-        .locative-card {
-            background: linear-gradient(135deg, #0a0a0a 0%, #030303 100%);
-            padding: 35px; border: 1px solid var(--glass-border); display: flex; align-items: center; gap: 25px;
-        }
-        .locative-icon { font-size: 2rem; color: var(--luxury-gold); }
-        .interactive-map-frame { width: 100%; height: 100%; min-height: 380px; border: 1px solid var(--glass-border); filter: grayscale(1) invert(1) contrast(1.2); }
-        
         footer {
-            background: #030303; border-top: 1px solid var(--luxury-gold); padding: 80px 6% 30px; text-align: center;
+            background: var(--bg-primary);
+            border-top: var(--premium-border);
+            padding: 40px 5%;
+            text-align: center;
         }
-        .footer-quote { font-family: 'Montserrat'; font-size: 1.6rem; color: var(--luxury-gold); font-style: italic; max-width: 800px; margin: 0 auto 40px; font-weight: 300; }
-        .footer-socials { display: flex; justify-content: center; gap: 25px; margin-bottom: 40px; }
-        .footer-socials a {
-            width: 45px; height: 45px; border: 1px solid #222; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; color: var(--gray-text);
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-white);
+            margin-bottom: 15px;
         }
-        .footer-socials a:hover { border-color: var(--luxury-gold); color: var(--luxury-gold); transform: translateY(-4px); box-shadow: 0 5px 15px rgba(212,175,55,0.2); }
-        
-        /* Reveal Mechanism */
-        .reveal-node { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .reveal-node.revealed { opacity: 1; transform: translateY(0); }
+
+        .footer-logo span {
+            color: var(--gold-primary);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================================================
+           10. MEDIA QUERIES (RESPONSIVE DESIGN)
+           ========================================================================== */
+        @media screen and (max-width: 1024px) {
+            .hero-title { font-size: 3.5rem; }
+            .desktop-nav { gap: 20px; }
+        }
+
+        @media screen and (max-width: 850px) {
+            .desktop-nav { display: none; }
+            .mobile-toggle { display: block; }
+            .hero-title { font-size: 2.8rem; }
+            .hero-desc { font-size: 1rem; }
+            .btn-group { flex-direction: column; gap: 15px; }
+            .btn { width: 100%; }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero-title { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 0.85rem; }
+            .section-intro { padding: 60px 5%; }
+            .mobile-nav li a { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Access Port for Publisher Authentication -->
-    <div class="hidden-login-gate" onclick="authenticateAdminGateway()">System Core</div>
-
-    <!-- Active Luxury Cursor Nodes -->
-    <div id="customCursor"></div>
-    <div id="customCursorFollower"></div>
-
-    <!-- Cinematic Preloader -->
+    <!-- 1. PRELOADER -->
     <div id="preloader">
-        <div class="loader-wrapper">
-            <div class="loader-ring"></div>
-            <div class="loader-ring-inner"></div>
-            <div class="loader-logo">S<span>V</span></div>
+        <div class="loader-logo-container">
+            <!-- مسار صورة اللوجو يوضع هنا، استخدمت عنصر وهمي ليحاكي الشكل المطلوب -->
+            <div class="loader-logo-img" style="background: url('https://via.placeholder.com/150x50/000000/D4AF37?text=LOGO') no-repeat center center/cover;"></div>
         </div>
-        <div class="loader-text">Smart Vision Engineering Excellence</div>
+        <div class="loader-text">SMART VISION</div>
+        <div class="loader-bar-container">
+            <div class="loader-bar"></div>
+        </div>
     </div>
 
-    <!-- Sticky Elegant Header -->
-    <header id="globalHeader">
-        <div class="logo-area" onclick="window.scrollTo(0,0)">
-            <div class="logo-box">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-            </div>
-            <div class="brand-name">SMART <span>VISION</span></div>
+    <!-- 2. HEADER -->
+    <header id="header">
+        <div class="logo">
+            <a href="index.html">SMART<span>VISION</span></a>
         </div>
-        <ul class="nav-menu">
-            <li class="nav-item active"><a href="#home" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="#philosophy" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-            <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-            <li class="nav-item"><a href="#team" class="nav-link">Team</a></li>
-            <li class="nav-item"><a href="#careers" class="nav-link">Career</a></li>
-            <li class="nav-item"><a href="#news" class="nav-link">News</a></li>
-            <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+
+        <!-- Desktop Navigation -->
+        <ul class="desktop-nav">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="#">Partnerships</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Career</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
-        <div class="premium-mobile-trigger" id="mobileTrigger">
-            <span>Menu</span>
-            <div class="trigger-bars"><span></span><span></span></div>
+
+        <!-- Mobile Custom Toggle (Alternative to Hamburger) -->
+        <div class="mobile-toggle" id="mobileToggle">
+            <div class="toggle-dot"></div>
+            <div class="toggle-dot"></div>
+            <div class="toggle-dot"></div>
+            <div class="toggle-dot"></div>
         </div>
     </header>
 
-    <!-- Overlay Mobile Navigation -->
-    <div class="fullscreen-mobile-menu" id="mobileMenu">
-        <ul>
-            <li><a href="#home" class="mob-nav-link">Home</a></li>
-            <li><a href="#philosophy" class="mob-nav-link">About</a></li>
-            <li><a href="#services" class="mob-nav-link">Services</a></li>
-            <li><a href="#projects" class="mob-nav-link">Projects</a></li>
-            <li><a href="#team" class="mob-nav-link">Team</a></li>
-            <li><a href="#careers" class="mob-nav-link">Career</a></li>
-            <li><a href="#news" class="mob-nav-link">News</a></li>
-            <li><a href="#contact" class="mob-nav-link">Contact</a></li>
+    <!-- 3. MOBILE OVERLAY MENU -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <ul class="mobile-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Partnerships</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Career</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
     </div>
 
-    <!-- Cinematic Hero Section -->
-    <section class="hero-viewport" id="home">
-        <div class="hero-parallax-bg" id="heroBg"></div>
-        <div class="hero-darkener"></div>
-        <div class="hero-inner">
-            <span class="hero-badge">Elite Engineering Framework</span>
-            <h1 class="hero-main-title">Building the Future<br>with Precision</h1>
-            <p class="hero-desc">Advancing global luxury construction through sophisticated design, high-fidelity computations, and architectural mastery.</p>
-            <a href="#projects" class="luxury-button">View Masterpieces</a>
-        </div>
-    </section>
-
-    <!-- Philosophy Section -->
-    <section class="premium-section reveal-node" id="philosophy">
-        <div class="section-header">
-            <span class="section-tag">Corporate DNA</span>
-            <h2 class="section-title">Our <span>Philosophy</span></h2>
-        </div>
-        <div class="philosophy-grid">
-            <div class="phil-card">
-                <div class="phil-icon-box">👁️</div>
-                <h3>Our Vision</h3>
-                <p>To fundamentally establish the global touchstone for luxury architectural engineering, scaling high-impact infrastructures with eternal structural integrity.</p>
-            </div>
-            <div class="phil-card">
-                <div class="phil-icon-box">🎯</div>
-                <h3>Our Mission</h3>
-                <p>Deploying radical computing workflows, ultra-premium source components, and unrivaled mastercraft mechanics to concrete the ambitions of elite clients.</p>
-            </div>
-            <div class="phil-card">
-                <div class="phil-icon-box">💎</div>
-                <h3>Core Values</h3>
-                <p>Uncompromising qualitative strictness, holistic ecological accountability, spatial opulence, and definitive precision mapping across every dimension.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Premium Services Section -->
-    <section class="premium-section services-wrapper reveal-node" id="services">
-        <div class="section-header">
-            <span class="section-tag">Capabilities</span>
-            <h2 class="section-title">Our <span>Services</span></h2>
-        </div>
-        <div class="modern-accordion">
-            <div class="premium-acc-item">
-                <div class="acc-trigger">
-                    <h3>Civil & Structural Engineering</h3>
-                    <div class="acc-arrow">▼</div>
-                </div>
-                <div class="acc-panel">
-                    <div class="acc-panel-inner">
-                        <p>Mathematical calculations, seismic resilience configurations, and advanced stress-analysis modeling for high-altitude corporate superstructures and expansive commercial complexes.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="premium-acc-item">
-                <div class="acc-trigger">
-                    <h3>Architectural Engineering</h3>
-                    <div class="acc-arrow">▼</div>
-                </div>
-                <div class="acc-panel">
-                    <div class="acc-panel-inner">
-                        <p>Merging complex spatial dynamics with prestigious high-fashion visual narratives to sculpt landmark properties that command global attention.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="premium-acc-item">
-                <div class="acc-trigger">
-                    <h3>MEP Infrastructure Systems</h3>
-                    <div class="acc-arrow">▼</div>
-                </div>
-                <div class="acc-panel">
-                    <div class="acc-panel-inner">
-                        <p>High-efficiency mechanical networks, state-of-the-art fully automated electrical plants, and ultra-sanitary fluid management pathways completely optimized for intelligent operations.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="premium-acc-item">
-                <div class="acc-trigger">
-                    <h3>Structural Restoration & Fortification</h3>
-                    <div class="acc-arrow">▼</div>
-                </div>
-                <div class="acc-panel">
-                    <div class="acc-panel-inner">
-                        <p>Micro-engineered polymer integration, high-tensile carbon wrap retrofitting, and elite core stabilization to shield multi-billion-dollar historic or distressed assets.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Continuous Marquee Wrap -->
-    <section class="marquee-container">
-        <div class="marquee-track">
-            <div class="marquee-item"><span>EMAAR PROPERTIES</span></div>
-            <div class="marquee-item"><span>SAUDI ARAMCO</span></div>
-            <div class="marquee-item"><span>SABIC CORP</span></div>
-            <div class="marquee-item"><span>AL DAR</span></div>
-            <div class="marquee-item"><span>NEOM CITIES</span></div>
-            <!-- Mirror Duplicate Track for infinite looping illusion -->
-            <div class="marquee-item"><span>EMAAR PROPERTIES</span></div>
-            <div class="marquee-item"><span>SAUDI ARAMCO</span></div>
-            <div class="marquee-item"><span>SABIC CORP</span></div>
-            <div class="marquee-item"><span>AL DAR</span></div>
-            <div class="marquee-item"><span>NEOM CITIES</span></div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="premium-section reveal-node" id="projects">
-        <div class="section-header">
-            <span class="section-tag">Portfolio</span>
-            <h2 class="section-title">Luxury <span>Showcase</span></h2>
-        </div>
-        <div class="gallery-grid" id="projectsDynamicGrid">
-            
-            <!-- Project Node 1 -->
-            <div class="showcase-card">
-                <div class="card-slider-engine" data-index="0">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="engine-slide active">
-                    <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="engine-slide">
-                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="engine-slide">
-                    <div class="engine-nav">
-                        <div class="engine-nav-btn prev-engine">❮</div>
-                        <div class="engine-nav-btn next-engine">❯</div>
-                    </div>
-                </div>
-                <div class="showcase-meta">
-                    <h3 class="showcase-title">The Royal Apex Tower</h3>
-                    <p class="showcase-category">Skyscraper Architecture / Dubai</p>
-                </div>
-            </div>
-
-            <!-- Project Node 2 -->
-            <div class="showcase-card">
-                <div class="card-slider-engine" data-index="0">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="engine-slide active">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="engine-slide">
-                    <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="engine-slide">
-                    <div class="engine-nav">
-                        <div class="engine-nav-btn prev-engine">❮</div>
-                        <div class="engine-nav-btn next-engine">❯</div>
-                    </div>
-                </div>
-                <div class="showcase-meta">
-                    <h3 class="showcase-title">Lumina Estate Estate</h3>
-                    <p class="showcase-category">Residential Masterpiece / Riyadh</p>
-                </div>
-            </div>
-
-            <!-- Project Node 3 -->
-            <div class="showcase-card">
-                <div class="card-slider-engine" data-index="0">
-                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="engine-slide active">
-                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="engine-slide">
-                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="engine-slide">
-                    <div class="engine-nav">
-                        <div class="engine-nav-btn prev-engine">❮</div>
-                        <div class="engine-nav-btn next-engine">❯</div>
-                    </div>
-                </div>
-                <div class="showcase-meta">
-                    <h3 class="showcase-title">Vortex Logistics Center</h3>
-                    <p class="showcase-category">Industrial Complex / Abu Dhabi</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Organizational Chart Section -->
-    <section class="premium-section org-chart-bg reveal-node" id="team">
-        <div class="section-header">
-            <span class="section-tag">Structure</span>
-            <h2 class="section-title">Organizational <span>Chart</span></h2>
-        </div>
+    <!-- 4. HERO SECTION -->
+    <section class="hero" id="home">
+        <!-- Background Image (Architecture/Engineering) -->
+        <div class="hero-bg"></div>
         
-        <div class="corporate-tree-wrapper">
-            <div class="tree">
-                <ul>
-                    <li>
-                        <!-- TOP LEVEL LEADERS (Side-by-Side Deck) -->
-                        <div class="executive-node-deck">
-                            <div class="chart-node" onclick="hydrateAndOpenModal('H.E. Ahmed Al Mansoori', 'Chief Executive Officer', '25+ Years', 'Executive Operations Council', 'ahmed.mansoori@smartvision.ae', 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80', 'Architecting the overarching blueprint and tactical expansion metrics for the international sectors of Smart Vision Group.')">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="node-avatar">
-                                <div class="node-name">Ahmed Al Mansoori</div>
-                                <div class="node-role">CEO</div>
-                            </div>
-                            <div class="chart-node" onclick="hydrateAndOpenModal('Sir David Sterling', 'Executive Chairman', '30 Years', 'Strategic Advisory Board', 'd.sterling@smartvision.ae', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80', 'Directing global sovereign portfolio alignment and critical structural compliance.')">
-                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="node-avatar">
-                                <div class="node-name">David Sterling</div>
-                                <div class="node-role">Chairman</div>
-                            </div>
-                        </div>
+        <!-- Hero Overlay Gradient (from User Palette) -->
+        <div class="hero-overlay"></div>
 
-                        <!-- MANAGEMENT SECOND LEVEL -->
-                        <ul>
-                            <li>
-                                <div class="chart-node" onclick="hydrateAndOpenModal('Eng. Sarah Jenkins', 'Chief Engineering Director', '16 Years', 'Structural Computation Division', 's.jenkins@smartvision.ae', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80', 'Supervising high-fidelity mathematical simulations and infrastructure calculations.')">
-                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="node-avatar">
-                                    <div class="node-name">Sarah Jenkins</div>
-                                    <div class="node-role">Engineering Mgr</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="chart-node" onclick="hydrateAndOpenModal('Arch. Omar Tariq', 'Principal Design Director', '19 Years', 'Creative Spatial Concept Design', 'o.tariq@smartvision.ae', 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80', 'Pioneering award-winning premium luxury architectural concepts globally.')">
-                                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="node-avatar">
-                                    <div class="node-name">Omar Tariq</div>
-                                    <div class="node-role">Architecture Mgr</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="chart-node" onclick="hydrateAndOpenModal('Elena Rossi', 'Global Logistics Officer', '14 Years', 'Operational Site Execution', 'e.rossi@smartvision.ae', 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80', 'Enforcing severe site qualitative controls and operational timelines.')">
-                                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="node-avatar">
-                                    <div class="node-name">Elena Rossi</div>
-                                    <div class="node-role">Operations Mgr</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="chart-node" onclick="hydrateAndOpenModal('Michael Chen', 'Talent Capital Lead', '12 Years', 'Corporate Human Relations', 'm.chen@smartvision.ae', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80', 'Acquiring and engineering world-class executive and architectural minds.')">
-                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="node-avatar">
-                                    <div class="node-name">Michael Chen</div>
-                                    <div class="node-role">HR Manager</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Interactive Card Popups Layer -->
-    <div class="premium-popup-layer" id="teamPopupLayer">
-        <div class="popup-box">
-            <span class="popup-close" onclick="closeTeamLayer()">✖</span>
-            <img src="" class="popup-avatar" id="popAvatar">
-            <h3 class="popup-title" id="popName">Name</h3>
-            <h4 class="popup-subtitle" id="popRole">Role</h4>
-            <div class="popup-meta-row">
-                <div class="meta-item-spec"><h5>Experience</h5><p id="popExp">00</p></div>
-                <div class="meta-item-spec"><h5>Department</h5><p id="popDept">Core</p></div>
-            </div>
-            <p id="popBio" style="margin-bottom:20px; font-style:italic; font-size:0.9rem;"></p>
-            <p style="font-size:0.85rem;">Secure Email Link: <span id="popMail" style="color:var(--luxury-gold)"></span></p>
-        </div>
-    </div>
-
-    <!-- Career Form Section -->
-    <section class="premium-section reveal-node" id="careers">
-        <div class="section-header">
-            <span class="section-tag">Talent Ecosystem</span>
-            <h2 class="section-title">Careers <span>Portal</span></h2>
-        </div>
-        <div class="career-portal-form">
-            <form id="recruitmentForm" onsubmit="compileAndLaunchGmail(event)">
-                <div class="grid-half">
-                    <div class="input-wrapper">
-                        <label>Full Legal Name</label>
-                        <input type="text" id="app_name" class="premium-input" required>
-                    </div>
-                    <div class="input-wrapper">
-                        <label>Secure Phone Line</label>
-                        <input type="tel" id="app_phone" class="premium-input" required>
-                    </div>
-                </div>
-                <div class="grid-half">
-                    <div class="input-wrapper">
-                        <label>Digital Mail Address</label>
-                        <input type="email" id="app_email" class="premium-input" required>
-                    </div>
-                    <div class="input-wrapper">
-                        <label>Target Framework Position</label>
-                        <input type="text" id="app_pos" class="premium-input" placeholder="e.g. Senior Structural Engineer" required>
-                    </div>
-                </div>
-                <div class="input-wrapper">
-                    <label>Cumulative Years of Experience</label>
-                    <input type="number" id="app_exp" class="premium-input" required>
-                </div>
-                <div class="input-wrapper">
-                    <label>Executive Cover Narrative</label>
-                    <textarea id="app_letter" class="premium-input" required></textarea>
-                </div>
-                <div class="input-wrapper">
-                    <label>Curriculum Vitae Repository (PDF / DOC)</label>
-                    <div class="luxury-file-vault">
-                        <input type="file" id="app_file" accept=".pdf,.doc,.docx">
-                        <p id="fileFeedback" style="font-size:0.85rem; color:var(--gray-text);">Drag file here or browse internal systems</p>
-                    </div>
-                </div>
-                <button type="submit" class="luxury-button" style="width:100%; margin-top:20px;">Transmit Application Suite</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Newsroom Section -->
-    <section class="premium-section news-wrapper reveal-node" id="news">
-        <div class="section-header">
-            <span class="section-tag">Chronicles</span>
-            <h2 class="section-title">Corporate <span>Newsroom</span></h2>
-        </div>
-        <div class="news-universe" id="newsUniverseDisplay">
+        <div class="hero-content">
+            <span class="hero-subtitle">Engineering Excellence</span>
+            <h1 class="hero-title">Shaping The <span>Future</span> of Architecture</h1>
+            <p class="hero-desc">We deliver premium engineering and architectural solutions. Combining innovative design with structural integrity to create landmarks of tomorrow.</p>
             
-            <!-- Default News Item 1 -->
-            <div class="news-magazine-card">
-                <div class="magazine-img-frame">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
-                </div>
-                <div class="magazine-body">
-                    <div>
-                        <span class="magazine-stamp">May 24, 2026 | Global Accolades</span>
-                        <h3 class="magazine-headline">Smart Vision Crowned Pinnacle of Sustainable Architecture 2026</h3>
-                        <p style="font-size:0.85rem;">Honoring our elite multi-tier parametric structural workflows that systematically eliminate carbon overheads.</p>
-                    </div>
-                    <br><a class="nav-link" style="font-size:0.75rem; color:var(--luxury-gold)">Read Whitepaper ➔</a>
-                </div>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Discover Projects</a>
+                <a href="#" class="btn btn-outline">Our Services</a>
             </div>
-
-            <!-- Default News Item 2 -->
-            <div class="news-magazine-card">
-                <div class="magazine-img-frame">
-                    <img src="https://images.unsplash.com/photo-1541888086425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
-                </div>
-                <div class="magazine-body">
-                    <div>
-                        <span class="magazine-stamp">April 18, 2026 | Mega Ventures</span>
-                        <h3 class="magazine-headline">Synergy Pact Sealed For Ultra-Luxury Mega City Framework</h3>
-                        <p style="font-size:0.85rem;">Deploying premium engineering node algorithms to oversee upcoming algorithmic city configurations.</p>
-                    </div>
-                    <br><a class="nav-link" style="font-size:0.75rem; color:var(--luxury-gold)">Read Whitepaper ➔</a>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- Publisher FAB Command Station & Panel Overlay -->
-    <div id="publisherConsoleTrigger" onclick="togglePublisherModal()">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-    </div>
-
-    <div class="premium-popup-layer" id="publisherPanelLayer">
-        <div class="popup-box" style="text-align:left;">
-            <span class="popup-close" onclick="togglePublisherModal()">✖</span>
-            <h3 style="color:var(--luxury-gold); margin-bottom:25px; text-transform:uppercase;">Publishing Control Panel</h3>
-            
-            <div class="input-wrapper">
-                <label>Stream Class Type</label>
-                <select id="pubType" class="premium-input">
-                    <option value="news">Corporate News Article</option>
-                    <option value="project">Luxury Project Card</option>
-                </select>
-            </div>
-            <div class="input-wrapper">
-                <label>Title/Headline</label>
-                <input type="text" id="pubTitle" class="premium-input" placeholder="Enter structural title">
-            </div>
-            <div class="input-wrapper">
-                <label>Visual Asset Image URL</label>
-                <input type="text" id="pubUrl" class="premium-input" placeholder="https://images.unsplash.com/...">
-            </div>
-            <div class="input-wrapper">
-                <label>Detailed Metadata Narrative</label>
-                <textarea id="pubDescription" class="premium-input" placeholder="Provide highly elite specifications..."></textarea>
-            </div>
-            <button onclick="executePlatformPublication()" class="luxury-button" style="width:100%;">Authorize Global Publication</button>
-        </div>
-    </div>
-
-    <!-- Contact & Infrastructure Mapping Section -->
-    <section class="premium-section reveal-node" id="contact">
+    <!-- 5. INTRODUCTION / QUICK SERVICES SECTION -->
+    <section class="section-intro" id="about">
         <div class="section-header">
-            <span class="section-tag">Global Coordinates</span>
-            <h2 class="section-title">Connect <span>With Us</span></h2>
+            <h2>Elite Engineering</h2>
+            <div class="gold-line"></div>
         </div>
-        <div class="panel-contact-grid">
-            <div style="display:flex; flex-direction:column; gap:25px;">
-                <div class="locative-card">
-                    <div class="locative-icon">📍</div>
-                    <div>
-                        <h4 style="color:var(--luxury-gold); margin-bottom:4px;">Main Base HQ</h4>
-                        <p style="font-size:0.9rem;">Penthouse Floor 88, Sovereign Structure, Downtown, Dubai</p>
-                    </div>
+
+        <div class="features-grid">
+            <!-- Card 1 -->
+            <div class="feature-card">
+                <!-- SVG Icon representing Architecture -->
+                <div class="feature-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 21h18"></path>
+                        <path d="M9 8h1"></path>
+                        <path d="M9 12h1"></path>
+                        <path d="M9 16h1"></path>
+                        <path d="M14 8h1"></path>
+                        <path d="M14 12h1"></path>
+                        <path d="M14 16h1"></path>
+                        <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path>
+                    </svg>
                 </div>
-                <div class="locative-card">
-                    <div class="locative-icon">📞</div>
-                    <div>
-                        <h4 style="color:var(--luxury-gold); margin-bottom:4px;">Global Line</h4>
-                        <p style="font-size:0.9rem;">+971 4 888 9999</p>
-                    </div>
-                </div>
-                <div class="locative-card">
-                    <div class="locative-icon">✉️</div>
-                    <div>
-                        <h4 style="color:var(--luxury-gold); margin-bottom:4px;">Corporate Core Mail</h4>
-                        <p style="font-size:0.9rem;">concierge@smartvision.ae</p>
-                    </div>
-                </div>
+                <h3>Architectural Design</h3>
+                <p>Crafting visionary architectural blueprints that merge aesthetic luxury with functional brilliance.</p>
             </div>
-            <div class="interactive-map-frame">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.178590442654!2d55.27218767615967!3d25.19719697771447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a6d374f%3A0x204174d6b4073852!2sBurj%20Khalifa!5e0!3m2!1sen!2sae!4v1710000000000!5m2!1sen!2sae" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+            <!-- Card 2 -->
+            <div class="feature-card">
+                <!-- SVG Icon representing Construction/Engineering -->
+                <div class="feature-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <h3>Structural Engineering</h3>
+                <p>Applying rigorous engineering principles to ensure maximum safety, durability, and resilience.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="feature-card">
+                <!-- SVG Icon representing Project Management -->
+                <div class="feature-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                </div>
+                <h3>Project Management</h3>
+                <p>Executing massive corporate projects with unmatched executive precision and timely delivery.</p>
             </div>
         </div>
     </section>
 
-    <!-- Master Footer Structure -->
+    <!-- 6. FOOTER PREVIEW -->
     <footer>
-        <p class="footer-quote">"Engineering Excellence Beyond Expectations."</p>
-        <div class="footer-socials">
-            <a href="#">LN</a><a href="#">X</a><a href="#">IG</a><a href="#">FB</a>
-        </div>
-        <div style="border-top:1px solid #111; padding-top:35px; font-size:0.85rem; color:#444;">
-            © 2026 Smart Vision Engineering Core Consortium. Architected for Absolute Permanence.
-        </div>
+        <div class="footer-logo">SMART<span>VISION</span></div>
+        <p class="footer-copy">&copy; 2026 Smart Vision Engineering. All Rights Reserved. Designed with Executive Excellence.</p>
     </footer>
 
     <!-- ==========================================================================
-       13. QUANTUM JAVASCRIPT MASTER LOGIC
-       ========================================================================== */ -->
+         JAVASCRIPT
+         ========================================================================== -->
     <script>
-        // A. Interactive Custom Mouse Follower Logic
-        const cursor = document.getElementById('customCursor');
-        const follower = document.getElementById('customCursorFollower');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            // Kinetic lag effect for follower
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* 1. Preloader Logic */
+            const preloader = document.getElementById('preloader');
+            // We simulate a loading time of 2.5 seconds to let the gold bar animation finish
             setTimeout(() => {
-                follower.style.left = e.clientX + 'px';
-                follower.style.top = e.clientY + 'px';
-            }, 50);
-        });
+                preloader.classList.add('hide-loader');
+                // Remove from DOM after transition
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 800);
+            }, 2500);
 
-        // Hover expansions
-        document.querySelectorAll('a, button, .chart-node, .acc-trigger').forEach(elem => {
-            elem.addEventListener('mouseenter', () => {
-                cursor.style.width = '20px'; cursor.style.height = '20px';
-                follower.style.width = '60px'; follower.style.height = '60px';
-            });
-            elem.addEventListener('mouseleave', () => {
-                cursor.style.width = '8px'; cursor.style.height = '8px';
-                follower.style.width = '40px'; follower.style.height = '40px';
-            });
-        });
-
-        // B. Preloader De-activation Execution
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('preloader');
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 1000);
-            }, 1200);
-            renderPersistentAssets(); // Hydrate LocalStorage data if exists
-        });
-
-        // C. Cinematic Background Parallax Track
-        window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY;
-            document.getElementById('heroBg').style.transform = `scale(1.05) translateY(${scrollPos * 0.4}px)`;
-            
-            // Header Scroll class adaptation
-            const header = document.getElementById('globalHeader');
-            if(scrollPos > 60) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
-
-            // Dynamic Active Track Links based on window layout
-            const sections = document.querySelectorAll('section');
-            const navItems = document.querySelectorAll('.nav-item');
-            
-            sections.forEach((sec, idx) => {
-                const top = sec.offsetTop - 150;
-                const height = sec.offsetHeight;
-                if(scrollPos >= top && scrollPos < top + height) {
-                    navItems.forEach(item => item.classList.remove('active'));
-                    if(navItems[idx]) navItems[idx].classList.add('active');
-                }
-            });
-
-            // Trigger Scroll View Reveal Mechanics
-            document.querySelectorAll('.reveal-node').forEach(node => {
-                if(node.getBoundingClientRect().top < window.innerHeight - 100) {
-                    node.classList.add('revealed');
-                }
-            });
-        });
-
-        // D. Alternative Mobile Dynamic Drawer Toggle
-        const trigger = document.getElementById('mobileTrigger');
-        const menuOverlay = document.getElementById('mobileMenu');
-        trigger.addEventListener('click', () => {
-            menuOverlay.classList.toggle('active');
-            trigger.querySelector('.trigger-bars').classList.toggle('active');
-        });
-        document.querySelectorAll('.mob-nav-link').forEach(l => {
-            l.addEventListener('click', () => menuOverlay.classList.remove('active'));
-        });
-
-        // E. Structural Services Accordion Mechanics
-        document.querySelectorAll('.acc-trigger').forEach(trig => {
-            trig.addEventListener('click', function() {
-                const item = this.parentElement;
-                const panel = this.nextElementSibling;
-                
-                if(item.classList.contains('open')) {
-                    panel.style.maxHeight = null;
-                    item.classList.remove('open');
+            /* 2. Header Scroll Effect (Glassmorphism Activation) */
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
                 } else {
-                    // Close all adjacent rows for extreme cleanliness
-                    document.querySelectorAll('.premium-acc-item').forEach(i => {
-                        i.classList.remove('open');
-                        i.querySelector('.acc-panel').style.maxHeight = null;
-                    });
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                    item.classList.add('open');
-                }
-            });
-        });
-
-        // F. Multi-Image Project Carousel Slider Subsystem
-        function activateSliderSubroutines(targetCard) {
-            const slider = targetCard.querySelector('.card-slider-engine');
-            if(!slider) return;
-            const slides = slider.querySelectorAll('.engine-slide');
-            const nextBtn = slider.querySelector('.next-engine');
-            const prevBtn = slider.querySelector('.prev-engine');
-            let idx = parseInt(slider.getAttribute('data-index')) || 0;
-
-            function cycle() {
-                slides.forEach(s => s.classList.remove('active'));
-                slides[idx].classList.add('active');
-                slider.setAttribute('data-index', idx);
-            }
-
-            nextBtn.addEventListener('click', (e) => { e.stopPropagation(); idx = (idx + 1) % slides.length; cycle(); });
-            prevBtn.addEventListener('click', (e) => { e.stopPropagation(); idx = (idx - 1 + slides.length) % slides.length; cycle(); });
-        }
-        document.querySelectorAll('.showcase-card').forEach(card => activateSliderSubroutines(card));
-
-        // G. Org Chart Modal Data Hydrator Engine
-        const layer = document.getElementById('teamPopupLayer');
-        function hydrateAndOpenModal(name, role, exp, dept, mail, img, bio) {
-            document.getElementById('popName').innerText = name;
-            document.getElementById('popRole').innerText = role;
-            document.getElementById('popExp').innerText = exp;
-            document.getElementById('popDept').innerText = dept;
-            document.getElementById('popMail').innerText = mail;
-            document.getElementById('popBio').innerText = bio;
-            document.getElementById('popAvatar').src = img;
-            layer.classList.add('active');
-        }
-        function closeTeamLayer() { layer.classList.remove('active'); }
-
-        // H. File Input Feedback Capture
-        const fileVault = document.getElementById('app_file');
-        fileVault.addEventListener('change', function() {
-            if(this.files.length > 0) {
-                document.getElementById('fileFeedback').innerText = `Document Ready: ${this.files[0].name}`;
-                document.getElementById('fileFeedback').style.color = 'var(--luxury-gold)';
-            }
-        });
-
-        // I. Career Direct Gmail Transmission Compilation Pipeline
-        function compileAndLaunchGmail(e) {
-            e.preventDefault();
-            const name = document.getElementById('app_name').value;
-            const phone = document.getElementById('app_phone').value;
-            const email = document.getElementById('app_email').value;
-            const position = document.getElementById('app_pos').value;
-            const experience = document.getElementById('app_exp').value;
-            const coverNarrative = document.getElementById('app_letter').value;
-            const stamp = new Date().toLocaleString();
-
-            const subjectLine = `New Career Application — Smart Vision`;
-            
-            const messageBody = `Dear Smart Vision Recruitment Team,
-
-A new job application has been submitted through the Smart Vision Careers Portal.
-
-━━━━━━━━━━━━━━━━━━
-APPLICANT INFORMATION
-━━━━━━━━━━━━━━━━━━
-Full Name: ${name}
-Phone Number: ${phone}
-Email Address: ${email}
-Position Applied For: ${position}
-Years of Experience: ${experience}
-
-Cover Letter:
-${coverNarrative}
-
-━━━━━━━━━━━━━━━━━━
-ATTACHED DOCUMENTS
-━━━━━━━━━━━━━━━━━━
-✔ CV / Resume Attached via local client file upload system
-
-━━━━━━━━━━━━━━━━━━
-SUBMISSION DETAILS
-━━━━━━━━━━━━━━━━━━
-Submission Date: ${stamp}
-Source: Smart Vision Careers Page
-
-━━━━━━━━━━━━━━━━━━
-Please review the applicant information above and contact the individual if shortlisted.
-
-Best Regards,
-Smart Vision Automated Recruitment System`;
-
-            const encodedSubject = encodeURIComponent(subjectLine);
-            const encodedBody = encodeURIComponent(messageBody);
-            
-            // Build absolute deployment mailto query string targeting designated matrix email
-            const targetMailLink = `mailto:Smartgcs_os@yahoo.com?subject=${encodedSubject}&body=${encodedBody}`;
-            
-            alert("Application Package Generated. Redirecting to your secure Mail application with pre-mapped structural parameters...");
-            window.location.href = targetMailLink;
-            document.getElementById('recruitmentForm').reset();
-        }
-
-        // J. Publisher System Verification & Persistence Engines
-        const validatedCredentials = ["admin@smartvision.ae", "publisher@smartvision.ae", "publisher@smartvision.com"];
-        let userAuthorizedToken = false;
-
-        function authenticateAdminGateway() {
-            if(userAuthorizedToken) { togglePublisherModal(); return; }
-            const capture = prompt("Enter Authorized Publisher Mail Node:");
-            if(validatedCredentials.includes(capture)) {
-                userAuthorizedToken = true;
-                alert("Cryptographic Signature Verified. Publishing Command Console Unlocked.");
-                document.getElementById('publisherConsoleTrigger').style.display = 'flex';
-            } else if (capture != null) {
-                alert("Unauthorized Signature. Console Access Denied.");
-            }
-        }
-
-        function togglePublisherModal() { document.getElementById('publisherPanelLayer').classList.toggle('active'); }
-
-        function executePlatformPublication() {
-            const selection = document.getElementById('pubType').value;
-            const title = document.getElementById('pubTitle').value;
-            const imgUrl = document.getElementById('pubUrl').value || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
-            const desc = document.getElementById('pubDescription').value;
-
-            if(!title || !desc) { alert("Data stream incomplete. Fill parameters."); return; }
-
-            const structuredPayload = { selection, title, imgUrl, desc, timestamp: new Date().toLocaleDateString() };
-            
-            // Commit payload directly into persistent Storage Vault
-            let existingVault = JSON.parse(localStorage.getItem('smartVisionVault')) || [];
-            existingVault.push(structuredPayload);
-            localStorage.setItem('smartVisionVault', JSON.stringify(existingVault));
-
-            renderPersistentAssets();
-            togglePublisherModal();
-            
-            // Clear inputs
-            document.getElementById('pubTitle').value = '';
-            document.getElementById('pubUrl').value = '';
-            document.getElementById('pubDescription').value = '';
-        }
-
-        function renderPersistentAssets() {
-            const vaultData = JSON.parse(localStorage.getItem('smartVisionVault')) || [];
-            
-            // Isolate layout targets
-            const newsTrack = document.getElementById('newsUniverseDisplay');
-            const projectTrack = document.getElementById('projectsDynamicGrid');
-
-            vaultData.forEach(payload => {
-                if(payload.selection === 'news') {
-                    const block = document.createElement('div');
-                    block.className = 'news-magazine-card';
-                    block.innerHTML = `
-                        <div class="magazine-img-frame"><img src="${payload.imgUrl}"></div>
-                        <div class="magazine-body">
-                            <div>
-                                <span class="magazine-stamp">${payload.timestamp} | Dynamic Dispatch</span>
-                                <h3 class="magazine-headline">${payload.title}</h3>
-                                <p style="font-size:0.85rem;">${payload.desc}</p>
-                            </div>
-                            <br><a class="nav-link" style="font-size:0.75rem; color:var(--luxury-gold)">Read Intel ➔</a>
-                        </div>`;
-                    newsTrack.insertBefore(block, newsTrack.firstChild);
-                } else if(payload.selection === 'project') {
-                    const block = document.createElement('div');
-                    block.className = 'showcase-card';
-                    block.innerHTML = `
-                        <div class="card-slider-engine" data-index="0">
-                            <img src="${payload.imgUrl}" class="engine-slide active">
-                            <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="engine-slide">
-                            <div class="engine-nav">
-                                <div class="engine-nav-btn prev-engine">❮</div>
-                                <div class="engine-nav-btn next-engine">❯</div>
-                            </div>
-                        </div>
-                        <div class="showcase-meta">
-                            <h3 class="showcase-title">${payload.title}</h3>
-                            <p class="showcase-category">${payload.desc}</p>
-                        </div>`;
-                    projectTrack.insertBefore(block, projectTrack.firstChild);
-                    activateSliderSubroutines(block);
+                    header.classList.remove('scrolled');
                 }
             });
 
-            // Erase duplicates from processing stack array
-            localStorage.setItem('smartVisionVault', JSON.stringify([]));
-        }
+            /* 3. Custom Mobile Toggle Logic */
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav li a');
+
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                
+                // Prevent scrolling on body when menu is open
+                if (mobileMenu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+        });
     </script>
 </body>
 </html>
