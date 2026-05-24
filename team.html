@@ -321,7 +321,8 @@
             
             .bio-modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
             .modal-image { height: 300px; flex: none; }
-            .modal-image::after { background: linear-gradient(to top, var(--bg-rich-dark), transparent); }
+            .modal-image::after { 
+             background: linear-gradient(to top, var(--bg-rich-dark) 0%, transparent 40%); }
             .modal-info { padding: 30px 20px; }
         }
     </style>
@@ -455,20 +456,20 @@
                         <li>
                             <div class="team-card" onclick="openBioModal('mem4')">
                                 <div class="member-img">
-                                    <img src="https://images.unsplash.com/photo-1598550874175-4d0ef436c909?q=80&w=800&auto=format&fit=crop" alt="Head of Sustainability">
+                                    <img src="female-profile.jpg" alt="Head of Sustainability">
                                 </div>
-                                <div class="member-name">Sophia Lin</div>
-                                <div class="member-role">Sustainability</div>
+                                <div class="member-name">Malak ibrahim</div>
+                                <div class="member-role">project Coordinator</div>
                                 <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
                             </div>
                         </li>
                         <li>
                             <div class="team-card" onclick="openBioModal('mem5')">
                                 <div class="member-img">
-                                    <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=800&auto=format&fit=crop" alt="Chief Technology Officer">
+                                    <img src="unknow.jpg" alt="Chief Technology Officer">
                                 </div>
-                                <div class="member-name">David Al-Fayed</div>
-                                <div class="member-role">Chief Tech Officer</div>
+                                <div class="member-name">Mohamed Nabil</div>
+                                <div class="member-role">Site Supervision Engineer</div>
                                 <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
                             </div>
                         </li>
@@ -490,8 +491,6 @@
                 <h2 id="modalName">Name</h2>
                 <p id="modalDesc">Biography goes here.</p>
                 <div class="modal-socials">
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
         </div>
@@ -545,16 +544,16 @@
                 desc: "Guiding SMART VISION’s structural team to deliver innovation, code – compliant, and high-impact designs with precision and collaboration."
             },
             mem4: {
-                name: "Sophia Lin",
-                role: "Head of Sustainability",
-                img: "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?q=80&w=800&auto=format&fit=crop",
-                desc: "Sophia ensures our legacy protects the future. She integrates carbon-negative materials and eco-systems into our structures, making SMART VISION a leader in green mega-construction."
+                name: "Malak ibrahim",
+                role: "project Coordinator",
+                img: "female-profile.jpg",
+                desc: "Coordinate all projects’ trades between all teams members for SMART VISION’s Projects."
             },
             mem5: {
-                name: "David Al-Fayed",
-                role: "Chief Technology Officer",
-                img: "https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=800&auto=format&fit=crop",
-                desc: "David turns static buildings into smart ecosystems. By integrating AI and IoT at the foundational level, he builds structures that adapt, learn, and optimize themselves in real-time."
+                name: "Mohamed Nabil",
+                role: "Site Supervision Engineer",
+                img: "unknow.jpg",
+                desc: "Site Supervision Engineer."
             }
         };
 
