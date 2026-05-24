@@ -2,821 +2,795 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMART VISION | Engineering & Architecture</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SMART VISION | Premium Engineering & Architecture</title>
     
-    <!-- Google Fonts for Cinematic & Luxury Look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Premium Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Montserrat:wght@200;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* ==========================================================================
-           1. CSS VARIABLES (SMART VISION COLOR PALETTE)
+           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE
            ========================================================================== */
         :root {
-            /* Primary Background Colors */
-            --bg-primary: #000000;
-            --bg-section: #0A0A0A;
-            --bg-glass: rgba(0, 0, 0, 0.65);
+            /* Background Colors */
+            --bg-pure-black: #000000;
+            --bg-rich-dark: #0A0A0A;
+            --bg-glass: rgba(0, 0, 0, 0.75);
+            --bg-glass-card: rgba(255, 255, 255, 0.02);
             
-            /* Gold Colors */
+            /* Luxury Gold System */
             --gold-primary: #D4AF37;
             --gold-glow: #FFD54A;
             --gold-hover: #E6C75A;
             --gold-border: #C9A227;
+            --gold-alpha: rgba(212, 175, 55, 0.25);
             
-            /* Text Colors */
+            /* Typography Colors */
             --text-white: #FFFFFF;
             --text-secondary: #CFCFCF;
             --text-muted: #8F8F8F;
             
-            /* Gradients */
-            --grad-main-gold: linear-gradient(90deg, #8B6B15, #D4AF37, #FFD54A, #D4AF37, #8B6B15);
-            --grad-hero: linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.75) 50%, rgba(212,175,55,0.20) 100%);
-            --grad-dark: linear-gradient(180deg, #000000 0%, #0A0A0A 50%, #000000 100%);
+            /* Cinematic Gradients */
+            --grad-gold: linear-gradient(90deg, #8B6B15, #D4AF37, #FFD54A, #D4AF37, #8B6B15);
+            --grad-hero-overlay: linear-gradient(to right, rgba(0,0,0,0.95) 20%, rgba(0,0,0,0.75) 50%, rgba(212,175,55,0.15) 100%);
+            --grad-luxury-dark: linear-gradient(180deg, #000000, #0A0A0A, #000000);
+            --grad-card-hover: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, transparent 100%);
             
-            /* Shadows & Glows */
-            --glow-gold: 0 0 10px rgba(212,175,55,0.4), 0 0 20px rgba(212,175,55,0.3), 0 0 40px rgba(212,175,55,0.2);
-            --glow-btn: 0 0 15px #D4AF37, 0 0 35px rgba(212,175,55,0.6);
+            /* Premium Shadows & Blurs */
+            --shadow-gold-glow: 0 0 15px rgba(212,175,55,0.35), 0 0 30px rgba(212,175,55,0.15);
+            --shadow-btn-hover: 0 0 20px #D4AF37, 0 0 40px rgba(212,175,55,0.5);
+            --glass-blur: blur(16px);
             
-            /* Glassmorphism & Borders */
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-blur: blur(12px);
-            --glass-border: 1px solid rgba(212, 175, 55, 0.25);
-            --premium-border: 1px solid rgba(212, 175, 55, 0.5);
+            /* Fonts */
+            --font-display: 'Cinzel', serif;
+            --font-sans: 'Montserrat', sans-serif;
             
-            /* Transitions */
-            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            
-            /* Typography */
-            --font-heading: 'Cinzel', serif;
-            --font-body: 'Montserrat', sans-serif;
+            /* Engine Settings */
+            --transition-main: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* ==========================================================================
-           2. RESET & BASE STYLES
+           2. GLOBAL RESET & CINEMATIC BASE STYLES
            ========================================================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+            outline: none; -webkit-tap-highlight-color: transparent;
         }
 
-        html {
+        html, body {
+            width: 100%; min-height: 100%;
+            background-color: var(--bg-pure-black);
+            color: var(--text-white);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        body {
-            font-family: var(--font-body);
-            background-color: var(--bg-primary);
-            color: var(--text-secondary);
-            overflow-x: hidden;
-            line-height: 1.6;
+        /* Custom Premium Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-pure-black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 3px; }
+
+        h1, h2, h3, h4, .brand-logo, .nav-links a, .dock-item {
+            font-family: var(--font-display);
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
-            color: var(--text-white);
-            font-weight: 600;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition-smooth);
-        }
-
-        ul {
-            list-style: none;
+        /* Architectural Blueprint Grid Pattern Overlay */
+        .blueprint-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none; z-index: 1;
         }
 
         /* ==========================================================================
-           3. PRELOADER (CINEMATIC LOADER)
+           3. ULTRA-LUXURY PRELOADER WITH PERCENTAGE CALCULATOR
            ========================================================================== */
         #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: var(--bg-primary);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
+            background: var(--bg-pure-black); z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1s linear;
         }
 
-        .loader-logo-container {
-            position: relative;
-            margin-bottom: 40px;
+        .loader-container {
+            position: relative; display: flex; justify-content: center; align-items: center;
+            width: 220px; height: 220px;
+        }
+
+        .loader-ring {
+            position: absolute; width: 100%; height: 100%;
+            border: 2px solid transparent; border-top-color: var(--gold-primary);
+            border-radius: 50%; animation: spin 3s linear infinite;
+        }
+
+        .loader-ring-reverse {
+            position: absolute; width: 85%; height: 85%;
+            border: 1px dashed transparent; border-bottom-color: var(--gold-glow);
+            border-radius: 50%; animation: spin-reverse 2s linear infinite;
+        }
+
+        .loader-center {
+            position: absolute; width: 65%; height: 65%;
+            background: var(--bg-glass-card); border: 1px solid var(--gold-alpha);
+            border-radius: 50%; backdrop-filter: var(--glass-blur);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            box-shadow: var(--shadow-gold-glow);
+        }
+
+        .loader-center img {
+            width: 45px; height: auto; object-fit: contain;
             animation: pulseGlow 2s infinite alternate;
         }
 
-        /* Placeholder for User's Logo Image */
-        .loader-logo-img {
-            width: 150px;
-            height: auto;
-            /* If no image is provided yet, this creates a gold box placeholder */
-            min-height: 50px; 
-            border: var(--premium-border);
-            box-shadow: var(--glow-gold);
-            border-radius: 4px;
+        .counter-number {
+            font-size: 1.2rem; font-weight: 700; color: var(--gold-primary);
+            margin-top: 5px; letter-spacing: 1px;
         }
 
-        .loader-text {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--gold-primary);
-            letter-spacing: 5px;
-            margin-top: 15px;
-            text-transform: uppercase;
-            text-shadow: var(--glow-gold);
+        .loader-branding {
+            margin-top: 40px; text-transform: uppercase; letter-spacing: 6px;
+            font-size: 0.85rem; color: var(--text-secondary); text-align: center;
         }
-
-        .loader-bar-container {
-            width: 300px;
-            height: 2px;
-            background: rgba(255,255,255,0.1);
-            position: relative;
-            overflow: hidden;
-            border-radius: 2px;
-        }
-
-        .loader-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0%;
-            background: var(--grad-main-gold);
-            animation: loadingBar 2.5s ease-in-out forwards;
-        }
-
-        @keyframes pulseGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(212,175,55,0.2)); transform: scale(1); }
-            100% { filter: drop-shadow(0 0 25px rgba(212,175,55,0.6)); transform: scale(1.02); }
-        }
-
-        @keyframes loadingBar {
-            0% { width: 0%; }
-            50% { width: 70%; }
-            100% { width: 100%; }
-        }
-
-        .hide-loader {
-            opacity: 0;
-            visibility: hidden;
-        }
+        .loader-branding span { color: var(--gold-primary); display: block; margin-top: 5px; font-size: 0.65rem; color: var(--text-muted); }
 
         /* ==========================================================================
-           4. HEADER & NAVIGATION (GLASSMORPHISM)
+           4. DESKTOP NAVIGATION HIERARCHY
            ========================================================================== */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 25px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            transition: var(--transition-smooth);
-            border-bottom: 1px solid transparent;
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 30px 60px; display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: var(--transition-main);
         }
 
-        header.scrolled {
-            background: var(--bg-glass);
-            backdrop-filter: var(--glass-blur);
-            padding: 15px 5%;
-            border-bottom: var(--glass-border);
+        .header.scrolled {
+            padding: 15px 60px; background: var(--bg-glass);
+            backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--gold-alpha);
         }
 
-        .logo a {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            color: var(--text-white);
-            letter-spacing: 2px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .brand-logo {
+            font-size: 1.6rem; font-weight: 900; letter-spacing: 3px; color: var(--text-white);
+        }
+        .brand-logo span {
+            background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .logo span {
-            color: var(--gold-primary);
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links li { position: relative; }
+        .nav-links a {
+            font-size: 0.8rem; font-weight: 500; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--text-secondary); padding: 10px 0;
         }
-
-        .desktop-nav {
-            display: flex;
-            gap: 30px;
+        .nav-links a::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: var(--grad-gold); transition: var(--transition-main);
         }
-
-        .desktop-nav li a {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            position: relative;
-            padding-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .desktop-nav li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 1px;
-            background: var(--gold-primary);
-            transition: var(--transition-smooth);
-            box-shadow: var(--glow-gold);
-        }
-
-        .desktop-nav li a:hover {
-            color: var(--text-white);
-        }
-
-        .desktop-nav li a:hover::after,
-        .desktop-nav li a.active::after {
-            width: 100%;
-        }
-
-        .desktop-nav li a.active {
-            color: var(--gold-primary);
-        }
+        .nav-links a:hover { color: var(--gold-hover); text-shadow: 0 0 8px rgba(255,213,74,0.3); }
+        .nav-links a:hover::before { width: 100%; }
 
         /* ==========================================================================
-           5. CUSTOM MOBILE TOGGLE (Alternative to Hamburger)
+           5. ULTRA-LUXURY MOBILE CONTROL DOCK & OVERLAY MENU (NO HAMBURGER)
            ========================================================================== */
-        .mobile-toggle {
-            display: none;
-            width: 40px;
-            height: 40px;
-            position: relative;
-            cursor: pointer;
-            z-index: 1002;
+        .mobile-control-dock {
+            display: none; position: fixed; bottom: 25px; left: 50%;
+            transform: translateX(-50%) translateY(100px); width: 90%; max-width: 400px;
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 40px;
+            padding: 10px 25px; justify-content: space-between; align-items: center;
+            z-index: 10000; box-shadow: var(--shadow-gold-glow), 0 10px 30px rgba(0,0,0,0.8);
+            opacity: 0; transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
         }
 
-        /* Geometric Engineering Style Toggle: 4 dots forming a square */
-        .toggle-dot {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--gold-primary);
-            transition: var(--transition-smooth);
-            box-shadow: 0 0 5px rgba(212,175,55,0.5);
+        .mobile-control-dock.visible {
+            transform: translateX(-50%) translateY(0); opacity: 1;
         }
 
-        .toggle-dot:nth-child(1) { top: 10px; left: 10px; }
-        .toggle-dot:nth-child(2) { top: 10px; right: 10px; }
-        .toggle-dot:nth-child(3) { bottom: 10px; left: 10px; }
-        .toggle-dot:nth-child(4) { bottom: 10px; right: 10px; }
+        .dock-brand {
+            font-size: 0.9rem; font-weight: 700; color: var(--text-white); letter-spacing: 1px;
+        }
+        .dock-brand span { color: var(--gold-primary); }
 
-        /* Animation to 'X' on click */
-        .mobile-toggle.active .toggle-dot:nth-child(1) { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); width: 25px; height: 2px; }
-        .mobile-toggle.active .toggle-dot:nth-child(2) { opacity: 0; }
-        .mobile-toggle.active .toggle-dot:nth-child(3) { opacity: 0; }
-        .mobile-toggle.active .toggle-dot:nth-child(4) { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); width: 25px; height: 2px; }
+        .dock-trigger-btn {
+            background: var(--grad-gold); color: var(--bg-pure-black);
+            border: none; padding: 10px 22px; border-radius: 30px;
+            font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 1.5px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4); transition: var(--transition-main);
+        }
+
+        .dock-trigger-btn i { font-size: 0.8rem; transition: var(--transition-main); }
+
+        /* Immersive Mobile Control Center Overlay */
+        .immersive-overlay-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
+            background: rgba(0, 0, 0, 0.96); backdrop-filter: blur(30px);
+            z-index: 9999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: var(--transition-main);
+        }
+
+        .immersive-overlay-menu.active {
+            opacity: 1; visibility: visible;
+        }
+
+        .overlay-nav-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+            width: 85%; max-width: 340px; text-align: center;
+        }
+
+        .overlay-nav-item {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15);
+            padding: 22px 15px; border-radius: 16px; display: flex; flex-direction: column;
+            align-items: center; gap: 12px; transition: var(--transition-main);
+            opacity: 0; transform: translateY(30px);
+        }
+
+        .immersive-overlay-menu.active .overlay-nav-item {
+            opacity: 1; transform: translateY(0);
+        }
+
+        /* Staggered entry animation delay for menu elements via JS or CSS loops */
+        .overlay-nav-item i { font-size: 1.3rem; color: var(--gold-primary); }
+        .overlay-nav-item span {
+            font-family: var(--font-display); font-size: 0.85rem;
+            letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary);
+        }
+
+        .overlay-nav-item:hover, .overlay-nav-item:active {
+            background: var(--grad-card-hover); border-color: var(--gold-primary);
+            box-shadow: var(--shadow-gold-glow);
+        }
+        .overlay-nav-item:hover span { color: var(--gold-glow); }
 
         /* ==========================================================================
-           6. MOBILE FULLSCREEN MENU (GLASSMORPHISM)
-           ========================================================================== */
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1001;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition-smooth);
-        }
-
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .mobile-nav {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .mobile-nav li {
-            transform: translateY(30px);
-            opacity: 0;
-            transition: var(--transition-smooth);
-        }
-
-        .mobile-menu-overlay.active .mobile-nav li {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Staggered animation delays for mobile links */
-        .mobile-menu-overlay.active .mobile-nav li:nth-child(1) { transition-delay: 0.1s; }
-        .mobile-menu-overlay.active .mobile-nav li:nth-child(2) { transition-delay: 0.2s; }
-        .mobile-menu-overlay.active .mobile-nav li:nth-child(3) { transition-delay: 0.3s; }
-        .mobile-menu-overlay.active .mobile-nav li:nth-child(4) { transition-delay: 0.4s; }
-        .mobile-menu-overlay.active .mobile-nav li:nth-child(5) { transition-delay: 0.5s; }
-        .mobile-menu-overlay.active .mobile-nav li:nth-child(6) { transition-delay: 0.6s; }
-        .mobile-menu-overlay.active .mobile-nav li:nth-child(7) { transition-delay: 0.7s; }
-        .mobile-menu-overlay.active .mobile-nav li:nth-child(8) { transition-delay: 0.8s; }
-        .mobile-menu-overlay.active .mobile-nav li:nth-child(9) { transition-delay: 0.9s; }
-
-        .mobile-nav li a {
-            font-family: var(--font-heading);
-            font-size: 2.2rem;
-            color: var(--text-white);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .mobile-nav li a:hover {
-            color: var(--gold-hover);
-            text-shadow: var(--glow-gold);
-        }
-
-        /* ==========================================================================
-           7. HERO SECTION (CINEMATIC CORPORATE STYLE)
+           6. CINEMATIC HERO EPICENTER
            ========================================================================== */
         .hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            overflow: hidden;
-            background: var(--bg-primary);
+            position: relative; height: 100dvh; width: 100%;
+            display: flex; align-items: center; padding: 0 8%;
+            background: var(--bg-pure-black); overflow: hidden; z-index: 2;
         }
 
-        /* Engineering Background Image Placeholder */
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Using a high-quality architecture image from Unsplash */
-            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-            z-index: 1;
-            transform: scale(1.05);
-            animation: slowZoom 20s infinite alternate;
+        .hero-media-wrapper {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
         }
 
-        @keyframes slowZoom {
-            0% { transform: scale(1.05); }
-            100% { transform: scale(1.15); }
+        .hero-video-fallback {
+            width: 100%; height: 100%; object-fit: cover;
+            transform: scale(1.08); animation: cinematicPan 24s infinite alternate ease-in-out;
+            filter: brightness(0.45) contrast(1.1);
         }
 
         .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--grad-hero);
-            z-index: 2;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--grad-hero-overlay); z-index: 2;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            max-width: 800px;
+        .hero-content-cluster {
+            position: relative; z-index: 3; max-width: 900px;
+            opacity: 0; transform: translateY(40px); animation: fadeInUpHero 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.3s;
         }
 
-        .hero-subtitle {
-            font-size: 1rem;
-            color: var(--gold-primary);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            display: inline-block;
-            border-left: 2px solid var(--gold-primary);
-            padding-left: 15px;
-            box-shadow: -5px 0 15px rgba(212,175,55,0.2);
+        .hero-tagline {
+            display: inline-flex; align-items: center; gap: 10px;
+            color: var(--gold-primary); font-size: 0.85rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 6px; margin-bottom: 25px;
+        }
+        .hero-tagline::before { content: ''; width: 35px; height: 1px; background: var(--gold-primary); }
+
+        .hero-main-title {
+            font-size: clamp(2.2rem, 5vw, 5rem); font-weight: 900; line-height: 1.1;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px;
+        }
+        .hero-main-title span {
+            background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .hero-title {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        .hero-paragraph {
+            font-size: clamp(0.95rem, 1.5vw, 1.15rem); color: var(--text-secondary);
+            line-height: 1.8; font-weight: 300; max-width: 650px; margin-bottom: 45px;
         }
 
-        .hero-title span {
-            color: transparent;
-            -webkit-text-stroke: 1px var(--gold-primary);
-            background: var(--grad-main-gold);
-            -webkit-background-clip: text;
-            /* Subtle text glow */
-            filter: drop-shadow(0 0 15px rgba(212,175,55,0.3));
+        .btn-luxury-group { display: flex; gap: 20px; flex-wrap: wrap; }
+
+        .btn-luxury {
+            position: relative; padding: 18px 45px; background: transparent;
+            color: var(--gold-primary); border: 1px solid var(--gold-border);
+            text-transform: uppercase; font-family: var(--font-display);
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 2px;
+            cursor: pointer; overflow: hidden; z-index: 1; transition: var(--transition-main);
         }
 
-        .hero-desc {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            max-width: 600px;
+        .btn-luxury::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--grad-gold); z-index: -1; transition: var(--transition-main);
         }
 
-        .btn-group {
-            display: flex;
-            gap: 20px;
+        .btn-luxury:hover {
+            color: var(--bg-pure-black); box-shadow: var(--shadow-btn-hover); border-color: transparent;
+        }
+        .btn-luxury:hover::before { left: 0; }
+
+        /* ==========================================================================
+           7. REAL-TIME COUNTER / STATS SECTION
+           ========================================================================== */
+        .stats-matrix {
+            position: relative; padding: 80px 8%; background: var(--bg-pure-black);
+            border-top: 1px solid rgba(212,175,55,0.15); border-bottom: 1px solid rgba(212,175,55,0.15);
+            z-index: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;
         }
 
-        .btn {
-            padding: 15px 35px;
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 2px;
-            transition: var(--transition-smooth);
-            display: inline-block;
-            text-align: center;
+        .stat-cube { text-align: center; }
+        .stat-number {
+            font-family: var(--font-display); font-size: 3.5rem; font-weight: 700;
+            background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px; display: inline-block;
         }
-
-        .btn-primary {
-            background: var(--gold-primary);
-            color: var(--bg-primary);
-            border: 1px solid var(--gold-primary);
-            box-shadow: var(--glow-gold);
-        }
-
-        .btn-primary:hover {
-            background: var(--gold-hover);
-            box-shadow: var(--glow-btn);
-            transform: translateY(-3px);
-        }
-
-        .btn-outline {
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            color: var(--text-white);
-            border: var(--premium-border);
-        }
-
-        .btn-outline:hover {
-            background: var(--gold-primary);
-            color: var(--bg-primary);
-            box-shadow: var(--glow-btn);
-            transform: translateY(-3px);
+        .stat-label {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--text-muted);
         }
 
         /* ==========================================================================
-           8. INTRODUCTION SECTION (LUXURY DARK GRADIENT)
+           8. MASTERPIECE EXPERTISE GRID (HIGH RESPONSE)
            ========================================================================== */
-        .section-intro {
-            padding: 100px 5%;
-            background: var(--grad-dark);
-            position: relative;
+        .expertise-showroom {
+            position: relative; padding: 120px 8%; background: var(--bg-rich-dark); z-index: 2;
         }
 
-        .section-header {
-            text-align: center;
+        .section-intel { text-align: center; margin-bottom: 80px; }
+        .section-intel h2 {
+            font-size: clamp(1.8rem, 3vw, 3rem); text-transform: uppercase;
+            letter-spacing: 4px; margin-bottom: 20px;
+        }
+        .section-intel h2 span {
+            background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .section-intel p { color: var(--text-muted); font-size: 0.95rem; letter-spacing: 1px; }
+
+        .showroom-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;
+        }
+
+        .architecture-card {
+            background: var(--bg-glass-card); border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 4px; overflow: hidden; position: relative; height: 500px;
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 40px;
+            transition: var(--transition-main); cursor: pointer;
+        }
+
+        .card-visual-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; transition: var(--transition-main); filter: grayscale(40%) brightness(0.5);
+        }
+        .architecture-card:hover .card-visual-bg { transform: scale(1.06); filter: grayscale(0%) brightness(0.35); }
+
+        .card-gradient-shield {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 30%, transparent 80%); z-index: 2;
+        }
+
+        .card-content-pack { position: relative; z-index: 3; transition: var(--transition-main); }
+        .card-index-num {
+            font-family: var(--font-display); font-size: 1.2rem; color: var(--gold-primary);
+            margin-bottom: 15px; display: block;
+        }
+        .card-title { font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; color: var(--text-white); }
+        .card-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; opacity: 0.8; }
+
+        .architecture-card:hover {
+            border-color: var(--gold-primary); box-shadow: var(--shadow-gold-glow);
+        }
+
+        /* ==========================================================================
+           9. INFINITE SEAMLESS PARTNERSHIP TICKER
+           ========================================================================== */
+        .ticker-universe {
+            background: var(--bg-pure-black); padding: 60px 0; overflow: hidden;
+            border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1);
+            position: relative; z-index: 2;
+        }
+
+        .ticker-wrapper { display: flex; width: max-content; animation: infiniteScroll 25s linear infinite; }
+        .ticker-wrapper:hover { animation-play-state: paused; }
+        
+        .partner-logo-unit {
+            padding: 0 50px; font-family: var(--font-display); font-size: 1.3rem;
+            font-weight: 700; color: var(--text-muted); letter-spacing: 4px;
+            text-transform: uppercase; display: flex; align-items: center; gap: 10px;
+            transition: var(--transition-main); cursor: default;
+        }
+        .partner-logo-unit i { color: var(--gold-alpha); font-size: 1.5rem; }
+        .partner-logo-unit:hover { color: var(--gold-primary); text-shadow: var(--shadow-gold-glow); }
+
+        /* ==========================================================================
+           10. ULTIMATE EXECUTIVE FOOTER
+           ========================================================================== */
+        .executive-footer {
+            background: #030303; border-top: 1px solid rgba(212,175,55,0.2);
+            padding: 80px 8% 40px 8%; position: relative; z-index: 2;
+        }
+
+        .footer-matrix {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px;
             margin-bottom: 60px;
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        .footer-brand-column h3 { font-size: 1.5rem; color: var(--text-white); margin-bottom: 20px; letter-spacing: 2px; }
+        .footer-brand-column h3 span { color: var(--gold-primary); }
+        .footer-brand-column p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; }
 
-        .section-header .gold-line {
-            width: 80px;
-            height: 2px;
-            background: var(--grad-main-gold);
-            margin: 0 auto;
-            box-shadow: var(--glow-gold);
+        .footer-links-column h4 {
+            color: var(--gold-primary); font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 25px;
         }
+        .footer-links-column ul { display: flex; flex-direction: column; gap: 15px; list-style: none; }
+        .footer-links-column a { color: var(--text-secondary); font-size: 0.85rem; letter-spacing: 1px; }
+        .footer-links-column a:hover { color: var(--gold-glow); padding-left: 5px; }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
         }
-
-        .feature-card {
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            border: var(--glass-border);
-            padding: 40px 30px;
-            text-align: center;
-            transition: var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
+        .footer-bottom p { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1px; }
+        .footer-socials { display: flex; gap: 20px; }
+        .footer-socials a {
+            width: 40px; height: 40px; border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            color: var(--text-secondary); transition: var(--transition-main);
         }
-
-        /* Hover Line Effect on Cards */
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: var(--grad-main-gold);
-            transition: var(--transition-smooth);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--gold-border);
-            background: var(--bg-section);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
-
-        .feature-card:hover::before {
-            width: 100%;
-            box-shadow: var(--glow-gold);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--gold-primary);
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(212,175,55,0.4));
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--text-white);
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        .footer-socials a:hover {
+            border-color: var(--gold-primary); color: var(--bg-pure-black); background: var(--grad-gold);
+            box-shadow: var(--shadow-gold-glow);
         }
 
         /* ==========================================================================
-           9. FOOTER (BASIC STRUCTURE FOR INDEX)
+           11. SCREEN ENGINES & ANIMATION KEYFRAMES
            ========================================================================== */
-        footer {
-            background: var(--bg-primary);
-            border-top: var(--premium-border);
-            padding: 40px 5%;
-            text-align: center;
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
+        @keyframes pulseGlow { 0% { opacity: 0.5; filter: drop-shadow(0 0 2px #D4AF37); } 100% { opacity: 1; filter: drop-shadow(0 0 15px #FFD54A); } }
+        @keyframes cinematicPan { 0% { transform: scale(1.08) translate(0, 0); } 100% { transform: scale(1.15) translate(-2%, -1%); } }
+        @keyframes fadeInUpHero { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes infiniteScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Responsive Optimization Quirks */
+        @media (max-width: 1024px) {
+            .header { padding: 25px 40px; }
+            .header.scrolled { padding: 15px 40px; }
         }
 
-        .footer-logo {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            color: var(--text-white);
-            margin-bottom: 15px;
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .mobile-control-dock { display: flex; }
+            .hero { padding: 0 5%; }
         }
 
-        .footer-logo span {
-            color: var(--gold-primary);
-        }
-
-        .footer-copy {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-        }
-
-        /* ==========================================================================
-           10. MEDIA QUERIES (RESPONSIVE DESIGN)
-           ========================================================================== */
-        @media screen and (max-width: 1024px) {
-            .hero-title { font-size: 3.5rem; }
-            .desktop-nav { gap: 20px; }
-        }
-
-        @media screen and (max-width: 850px) {
-            .desktop-nav { display: none; }
-            .mobile-toggle { display: block; }
-            .hero-title { font-size: 2.8rem; }
-            .hero-desc { font-size: 1rem; }
-            .btn-group { flex-direction: column; gap: 15px; }
-            .btn { width: 100%; }
-        }
-
-        @media screen and (max-width: 480px) {
-            .hero-title { font-size: 2.2rem; }
-            .hero-subtitle { font-size: 0.85rem; }
-            .section-intro { padding: 60px 5%; }
-            .mobile-nav li a { font-size: 1.8rem; }
+        @media (max-width: 480px) {
+            .btn-luxury-group { width: 100%; }
+            .btn-luxury { width: 100%; text-align: center; padding: 16px 20px; }
+            .stats-matrix { grid-template-columns: 1fr; gap: 30px; }
+            .showroom-grid { grid-template-columns: 1fr; }
+            .architecture-card { height: 420px; padding: 25px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. PRELOADER -->
+    <!-- Architectural Pattern Backdrop -->
+    <div class="blueprint-grid"></div>
+
+    <!-- 1. ADVANCED PRECISION PRELOADER -->
     <div id="preloader">
-        <div class="loader-logo-container">
-            <!-- مسار صورة اللوجو يوضع هنا، استخدمت عنصر وهمي ليحاكي الشكل المطلوب -->
-            <div class="loader-logo-img" style="background: url('https://via.placeholder.com/150x50/000000/D4AF37?text=LOGO') no-repeat center center/cover;"></div>
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring-reverse"></div>
+            <div class="loader-center">
+                <!-- Vector Drafting Compass acting as architectural logo placeholder -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Drafting_compass_icon.svg/1024px-Drafting_compass_icon.svg.png" alt="Engineering Center Core">
+                <div class="counter-number" id="percentage-counter">0%</div>
+            </div>
         </div>
-        <div class="loader-text">SMART VISION</div>
-        <div class="loader-bar-container">
-            <div class="loader-bar"></div>
+        <div class="loader-branding">
+            SMART <span>VISION</span>
+            <span>ENGINEERING & ARCHITECTURE</span>
         </div>
     </div>
 
-    <!-- 2. HEADER -->
-    <header id="header">
-        <div class="logo">
-            <a href="index.html">SMART<span>VISION</span></a>
+    <!-- 2. DESKTOP HEADER EXECUTION -->
+    <header class="header" id="main-header">
+        <div class="brand-logo">
+            SMART <span>VISION</span>
         </div>
-
-        <!-- Desktop Navigation -->
-        <ul class="desktop-nav">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="#">Partnerships</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Team</a></li>
-            <li><a href="#">Career</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contact</a></li>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="partnerships.html">Partnerships</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="career.html">Career</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
-
-        <!-- Mobile Custom Toggle (Alternative to Hamburger) -->
-        <div class="mobile-toggle" id="mobileToggle">
-            <div class="toggle-dot"></div>
-            <div class="toggle-dot"></div>
-            <div class="toggle-dot"></div>
-            <div class="toggle-dot"></div>
-        </div>
     </header>
 
-    <!-- 3. MOBILE OVERLAY MENU -->
-    <div class="mobile-menu-overlay" id="mobileMenu">
-        <ul class="mobile-nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Partnerships</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Team</a></li>
-            <li><a href="#">Career</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+    <!-- 3. MOBILE SMART INTERFACE CONTROL DOCK (Anti-Hamburger Architecture) -->
+    <nav class="mobile-control-dock" id="mobile-dock">
+        <div class="dock-brand">SMART <span>VISION</span></div>
+        <button class="dock-trigger-btn" id="dock-trigger">
+            <i class="fa-solid fa-compass-drafting"></i> NAVIGATE
+        </button>
+    </nav>
+
+    <!-- IMMERSIVE DOCK CONTROL CENTER OVERLAY -->
+    <div class="immersive-overlay-menu" id="control-center-overlay">
+        <div class="overlay-nav-grid">
+            <a href="index.html" class="overlay-nav-item">
+                <i class="fa-solid fa-house-chimney-crack"></i><span>Home</span>
+            </a>
+            <a href="about.html" class="overlay-nav-item">
+                <i class="fa-solid fa-building-user"></i><span>About</span>
+            </a>
+            <a href="services.html" class="overlay-nav-item">
+                <i class="fa-solid fa-trowel-bricks"></i><span>Services</span>
+            </a>
+            <a href="projects.html" class="overlay-nav-item">
+                <i class="fa-solid fa-city"></i><span>Projects</span>
+            </a>
+            <a href="partnerships.html" class="overlay-nav-item">
+                <i class="fa-solid fa-handshake-angle"></i><span>Partnerships</span>
+            </a>
+            <a href="team.html" class="overlay-nav-item">
+                <i class="fa-solid fa-users-gear"></i><span>Team</span>
+            </a>
+            <a href="career.html" class="overlay-nav-item">
+                <i class="fa-solid fa-briefcase"></i><span>Career</span>
+            </a>
+            <a href="news.html" class="overlay-nav-item">
+                <i class="fa-solid fa-newspaper"></i><span>News</span>
+            </a>
+            <a href="contact.html" class="overlay-nav-item" style="grid-column: span 2;">
+                <i class="fa-solid fa-file-signature" style="color: var(--gold-glow);"></i><span style="color: var(--gold-glow);">Contact Hub</span>
+            </a>
+        </div>
     </div>
 
-    <!-- 4. HERO SECTION -->
-    <section class="hero" id="home">
-        <!-- Background Image (Architecture/Engineering) -->
-        <div class="hero-bg"></div>
-        
-        <!-- Hero Overlay Gradient (from User Palette) -->
+    <!-- 4. CINEMATIC HERO EPICENTER -->
+    <section class="hero">
+        <div class="hero-media-wrapper">
+            <!-- Premium High-contrast Engineering/Architecture asset -->
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" class="hero-video-fallback" alt="Luxury Masterpiece Architecture">
+        </div>
         <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-            <span class="hero-subtitle">Engineering Excellence</span>
-            <h1 class="hero-title">Shaping The <span>Future</span> of Architecture</h1>
-            <p class="hero-desc">We deliver premium engineering and architectural solutions. Combining innovative design with structural integrity to create landmarks of tomorrow.</p>
-            
-            <div class="btn-group">
-                <a href="#" class="btn btn-primary">Discover Projects</a>
-                <a href="#" class="btn btn-outline">Our Services</a>
+        
+        <div class="hero-content-cluster">
+            <div class="hero-tagline">Architectural Elite Office</div>
+            <h1 class="hero-main-title">Crafting Structural <span>Elegance</span> Beyond Time</h1>
+            <p class="hero-paragraph">
+                We engineer structural landmarks combining stark black luxury configurations with master-level gold spatial design workflows.
+            </p>
+            <div class="btn-luxury-group">
+                <button class="btn-luxury" onclick="window.location.href='projects.html'">Initiate Deep Exploration</button>
             </div>
         </div>
     </section>
 
-    <!-- 5. INTRODUCTION / QUICK SERVICES SECTION -->
-    <section class="section-intro" id="about">
-        <div class="section-header">
-            <h2>Elite Engineering</h2>
-            <div class="gold-line"></div>
+    <!-- 5. REAL-TIME ENGINE SCROLL INTERACTION STATS -->
+    <section class="stats-matrix">
+        <div class="stat-cube">
+            <div class="stat-number" data-target="140">0</div>
+            <div class="stat-label">Masterpieces Executed</div>
+        </div>
+        <div class="stat-cube">
+            <div class="stat-number" data-target="28">0</div>
+            <div class="stat-label">Global Design Awards</div>
+        </div>
+        <div class="stat-cube">
+            <div class="stat-number" data-target="65">0</div>
+            <div class="stat-label">Architectural Engineers</div>
+        </div>
+    </section>
+
+    <!-- 6. MASTERPIECE EXPERTISE GRID SECTION -->
+    <section class="expertise-showroom">
+        <div class="section-intel">
+            <h2>Core <span>Expertise</span></h2>
+            <p>Monolithic structural operations handled with extreme luxury parameters.</p>
         </div>
 
-        <div class="features-grid">
+        <div class="showroom-grid">
             <!-- Card 1 -->
-            <div class="feature-card">
-                <!-- SVG Icon representing Architecture -->
-                <div class="feature-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 21h18"></path>
-                        <path d="M9 8h1"></path>
-                        <path d="M9 12h1"></path>
-                        <path d="M9 16h1"></path>
-                        <path d="M14 8h1"></path>
-                        <path d="M14 12h1"></path>
-                        <path d="M14 16h1"></path>
-                        <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path>
-                    </svg>
+            <div class="architecture-card" onclick="window.location.href='services.html'">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop" class="card-visual-bg" alt="Parametric Luxury Residential">
+                <div class="card-gradient-shield"></div>
+                <div class="card-content-pack">
+                    <span class="card-index-num">01 / CONCEPT</span>
+                    <h3 class="card-title">Parametric Architecture</h3>
+                    <p class="card-desc">Advanced algorithmic building generation techniques emphasizing structural complexity and flawless execution aesthetics.</p>
                 </div>
-                <h3>Architectural Design</h3>
-                <p>Crafting visionary architectural blueprints that merge aesthetic luxury with functional brilliance.</p>
             </div>
-
             <!-- Card 2 -->
-            <div class="feature-card">
-                <!-- SVG Icon representing Construction/Engineering -->
-                <div class="feature-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                        <path d="M2 17l10 5 10-5"></path>
-                        <path d="M2 12l10 5 10-5"></path>
-                    </svg>
+            <div class="architecture-card" onclick="window.location.href='services.html'">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" class="card-visual-bg" alt="Engineering Procurement">
+                <div class="card-gradient-shield"></div>
+                <div class="card-content-pack">
+                    <span class="card-index-num">02 / STRUCTURAL</span>
+                    <h3 class="card-title">Heavy Engineering</h3>
+                    <p class="card-desc">Bespoke heavy infrastructure calculations and procurement logistics utilizing glassmorphic corporate frameworks.</p>
                 </div>
-                <h3>Structural Engineering</h3>
-                <p>Applying rigorous engineering principles to ensure maximum safety, durability, and resilience.</p>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="feature-card">
-                <!-- SVG Icon representing Project Management -->
-                <div class="feature-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                    </svg>
-                </div>
-                <h3>Project Management</h3>
-                <p>Executing massive corporate projects with unmatched executive precision and timely delivery.</p>
             </div>
         </div>
     </section>
 
-    <!-- 6. FOOTER PREVIEW -->
-    <footer>
-        <div class="footer-logo">SMART<span>VISION</span></div>
-        <p class="footer-copy">&copy; 2026 Smart Vision Engineering. All Rights Reserved. Designed with Executive Excellence.</p>
+    <!-- 7. SEAMLESS INFINITE PARTNERSHIP TICKER -->
+    <section class="ticker-universe">
+        <div class="ticker-wrapper">
+            <!-- Set 1 -->
+            <div class="partner-logo-unit"><i class="fa-solid fa-vector-square"></i> Aethelgard & Co</div>
+            <div class="partner-logo-unit"><i class="fa-solid fa-cube"></i> Vertex Matrix</div>
+            <div class="partner-logo-unit"><i class="fa-solid fa-layer-group"></i> Obsidian Core Labs</div>
+            <div class="partner-logo-unit"><i class="fa-solid fa-bezier-curve"></i> Stratum Structural</div>
+            <!-- Set 2 (Duplicate for seamless wrapping animation) -->
+            <div class="partner-logo-unit"><i class="fa-solid fa-vector-square"></i> Aethelgard & Co</div>
+            <div class="partner-logo-unit"><i class="fa-solid fa-cube"></i> Vertex Matrix</div>
+            <div class="partner-logo-unit"><i class="fa-solid fa-layer-group"></i> Obsidian Core Labs</div>
+            <div class="partner-logo-unit"><i class="fa-solid fa-bezier-curve"></i> Stratum Structural</div>
+        </div>
+    </section>
+
+    <!-- 8. EXECUTIVE FOOTER -->
+    <footer class="executive-footer">
+        <div class="footer-matrix">
+            <div class="footer-brand-column">
+                <h3>SMART <span>VISION</span></h3>
+                <p>Global Engineering and Luxury Architectural operations hub. Executing cinematic building mechanics since inception.</p>
+            </div>
+            <div class="footer-links-column">
+                <h4>Navigation Hub</h4>
+                <ul>
+                    <li><a href="index.html">Home System</a></li>
+                    <li><a href="projects.html">Corporate Projects</a></li>
+                    <li><a href="services.html">Operations & Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-column">
+                <h4>Inquiries</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Headquarters</a></li>
+                    <li><a href="career.html">Career Pipeline</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SMART VISION Corporation. All Engineering Systems Certified.</p>
+            <div class="footer-socials">
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+        </div>
     </footer>
 
     <!-- ==========================================================================
-         JAVASCRIPT
-         ========================================================================== -->
+       12. ULTRA-SMOOTH LOGIC ENGINE (JAVASCRIPT)
+       ========================================================================== */ -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        // 1. REAL-TIME LOADING PERCENTAGE ENGINE
+        document.addEventListener("DOMContentLoaded", () => {
+            const counterElement = document.getElementById("percentage-counter");
+            const preloader = document.getElementById("preloader");
+            const mobileDock = document.getElementById("mobile-dock");
+            let currentCount = 0;
 
-            /* 1. Preloader Logic */
-            const preloader = document.getElementById('preloader');
-            // We simulate a loading time of 2.5 seconds to let the gold bar animation finish
-            setTimeout(() => {
-                preloader.classList.add('hide-loader');
-                // Remove from DOM after transition
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 800);
-            }, 2500);
-
-            /* 2. Header Scroll Effect (Glassmorphism Activation) */
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
+            const updateCounter = () => {
+                currentCount += Math.floor(Math.random() * 4) + 1; // Real random progression feel
+                if (currentCount >= 100) {
+                    currentCount = 100;
+                    counterElement.innerText = "100%";
+                    clearInterval(loaderInterval);
+                    
+                    // Cinematic exit sequence
+                    setTimeout(() => {
+                        preloader.style.opacity = "0";
+                        preloader.style.transform = "translateY(-100dvh)";
+                        setTimeout(() => {
+                            preloader.style.display = "none";
+                            // Gracefully reveal mobile control dock after load
+                            mobileDock.classList.add("visible");
+                        }, 1200);
+                    }, 400);
                 } else {
-                    header.classList.remove('scrolled');
+                    counterElement.innerText = `${currentCount}%`;
                 }
-            });
-
-            /* 3. Custom Mobile Toggle Logic */
-            const mobileToggle = document.getElementById('mobileToggle');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileLinks = document.querySelectorAll('.mobile-nav li a');
-
-            mobileToggle.addEventListener('click', () => {
-                mobileToggle.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-                
-                // Prevent scrolling on body when menu is open
-                if (mobileMenu.classList.contains('active')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = 'auto';
-                }
-            });
-
-            // Close mobile menu when a link is clicked
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileToggle.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                });
-            });
-
+            };
+            const loaderInterval = setInterval(updateCounter, 40);
         });
+
+        // 2. STICKY HEADER MOTION CONTROLLER
+        const mainHeader = document.getElementById("main-header");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 60) {
+                mainHeader.classList.add("scrolled");
+            } else {
+                mainHeader.classList.remove("scrolled");
+            }
+        });
+
+        // 3. ADVANCED CONTROL CENTER MOBILE OVERLAY DYNAMICS
+        const dockTrigger = document.getElementById("dock-trigger");
+        const controlCenter = document.getElementById("control-center-overlay");
+        const overlayItems = document.querySelectorAll(".overlay-nav-item");
+        let isOverlayOpen = false;
+
+        dockTrigger.addEventListener("click", () => {
+            isOverlayOpen = !isOverlayOpen;
+            if (isOverlayOpen) {
+                controlCenter.classList.add("active");
+                dockTrigger.innerHTML = `<i class="fa-solid fa-xmark"></i> SECURE`;
+                dockTrigger.style.boxShadow = "0 0 25px #FFD54A";
+                
+                // Staggered Item Animation
+                overlayItems.forEach((item, index) => {
+                    item.style.transitionDelay = `${index * 0.05}s`;
+                });
+            } else {
+                controlCenter.classList.remove("active");
+                dockTrigger.innerHTML = `<i class="fa-solid fa-compass-drafting"></i> NAVIGATE`;
+                dockTrigger.style.boxShadow = "0 4px 15px rgba(212,175,55,0.4)";
+                
+                overlayItems.forEach((item) => {
+                    item.style.transitionDelay = `0s`;
+                });
+            }
+        });
+
+        // Close mobile overlay on deep link interaction
+        overlayItems.forEach(item => {
+            item.addEventListener("click", () => {
+                controlCenter.classList.remove("active");
+                isOverlayOpen = false;
+                dockTrigger.innerHTML = `<i class="fa-solid fa-compass-drafting"></i> NAVIGATE`;
+            });
+        });
+
+        // 4. INTELLIGENT SCROLL-TRIGGERED NUMBER RUNNERS (SCROLL MATRIX)
+        const statsSection = document.querySelector(".stats-matrix");
+        const statNumbers = document.querySelectorAll(".stat-number");
+        let statsAnimated = false;
+
+        const startCounting = () => {
+            statNumbers.forEach(num => {
+                const target = parseInt(num.getAttribute("data-target"));
+                let current = 0;
+                const increment = target / 50; // Controls fluidity speed
+                
+                const countTicker = () => {
+                    current += increment;
+                    if (current >= target) {
+                        num.innerText = target + "+";
+                    } else {
+                        num.innerText = Math.floor(current) + "+";
+                        requestAnimationFrame(countTicker);
+                    }
+                };
+                countTicker();
+            });
+        };
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    startCounting();
+                    statsAnimated = true;
+                }
+            });
+        }, { threshold: 0.3 });
+
+        scrollObserver.observe(statsSection);
     </script>
 </body>
 </html>

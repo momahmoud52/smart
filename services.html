@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SMART VISION | Engineering Operations & Services</title>
+    
+    <!-- Premium Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Montserrat:wght@200;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE (MATCHING INDEX & ABOUT)
+           ========================================================================== */
+        :root {
+            --bg-pure-black: #000000;
+            --bg-rich-dark: #0A0A0A;
+            --bg-glass: rgba(0, 0, 0, 0.75);
+            --bg-glass-card: rgba(255, 255, 255, 0.03);
+            
+            --gold-primary: #D4AF37;
+            --gold-glow: #FFD54A;
+            --gold-hover: #E6C75A;
+            --gold-border: #C9A227;
+            --gold-alpha: rgba(212, 175, 55, 0.25);
+            
+            --text-white: #FFFFFF;
+            --text-secondary: #CFCFCF;
+            --text-muted: #8F8F8F;
+            
+            --grad-gold: linear-gradient(90deg, #8B6B15, #D4AF37, #FFD54A, #D4AF37, #8B6B15);
+            
+            --shadow-gold-glow: 0 0 15px rgba(212,175,55,0.35), 0 0 30px rgba(212,175,55,0.15);
+            --shadow-btn-hover: 0 0 20px #D4AF37, 0 0 40px rgba(212,175,55,0.5);
+            --glass-blur: blur(16px);
+            
+            --font-display: 'Cinzel', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            
+            --transition-main: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ==========================================================================
+           2. GLOBAL RESET & BASE STYLES
+           ========================================================================== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%; background-color: var(--bg-pure-black); color: var(--text-white);
+            font-family: var(--font-sans); overflow-x: hidden; scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-pure-black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 3px; }
+
+        h1, h2, h3, h4, .brand-logo, .nav-links a { font-family: var(--font-display); }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .blueprint-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px; pointer-events: none; z-index: 1;
+        }
+
+        /* ==========================================================================
+           3. PRELOADER & NAVIGATION
+           ========================================================================== */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
+            background: var(--bg-pure-black); z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1s linear;
+        }
+        .loader-container { position: relative; display: flex; justify-content: center; align-items: center; width: 220px; height: 220px; }
+        .loader-ring { position: absolute; width: 100%; height: 100%; border: 2px solid transparent; border-top-color: var(--gold-primary); border-radius: 50%; animation: spin 3s linear infinite; }
+        .loader-ring-reverse { position: absolute; width: 85%; height: 85%; border: 1px dashed transparent; border-bottom-color: var(--gold-glow); border-radius: 50%; animation: spin-reverse 2s linear infinite; }
+        .loader-center { position: absolute; width: 65%; height: 65%; background: var(--bg-glass-card); border: 1px solid var(--gold-alpha); border-radius: 50%; backdrop-filter: var(--glass-blur); display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: var(--shadow-gold-glow); }
+        .loader-center img { width: 45px; height: auto; animation: pulseGlow 2s infinite alternate; }
+        .counter-number { font-size: 1.2rem; font-weight: 700; color: var(--gold-primary); margin-top: 5px; }
+
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 30px 60px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-main);
+        }
+        .header.scrolled { padding: 15px 60px; background: var(--bg-glass); backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--gold-alpha); }
+        .brand-logo { font-size: 1.6rem; font-weight: 900; letter-spacing: 3px; }
+        .brand-logo span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links a { font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); position: relative; padding: 10px 0; }
+        .nav-links a::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--grad-gold); transition: var(--transition-main); }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold-hover); text-shadow: 0 0 8px rgba(255,213,74,0.3); }
+        .nav-links a:hover::before, .nav-links a.active::before { width: 100%; }
+
+        /* Mobile Nav */
+        .mobile-control-dock {
+            display: none; position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
+            width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 40px; padding: 10px 25px;
+            justify-content: space-between; align-items: center; z-index: 10000; box-shadow: var(--shadow-gold-glow); opacity: 0; transition: transform 1s, opacity 1s;
+        }
+        .mobile-control-dock.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .dock-brand span { color: var(--gold-primary); font-family: var(--font-display); font-weight: 700;}
+        .dock-trigger-btn {
+            background: var(--grad-gold); border: none; padding: 10px 22px; border-radius: 30px;
+            font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px;
+        }
+        .immersive-overlay-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; background: rgba(0, 0, 0, 0.96);
+            backdrop-filter: blur(30px); z-index: 9999; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: var(--transition-main);
+        }
+        .immersive-overlay-menu.active { opacity: 1; visibility: visible; }
+        .overlay-nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 85%; max-width: 340px; text-align: center; }
+        .overlay-nav-item {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15); padding: 22px 15px;
+            border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px;
+            opacity: 0; transform: translateY(30px); transition: var(--transition-main);
+        }
+        .immersive-overlay-menu.active .overlay-nav-item { opacity: 1; transform: translateY(0); }
+        .overlay-nav-item i { font-size: 1.3rem; color: var(--gold-primary); }
+        .overlay-nav-item span { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); }
+
+        /* ==========================================================================
+           4. SERVICES HERO SECTION
+           ========================================================================== */
+        .page-hero {
+            position: relative; height: 60vh; width: 100%; display: flex; align-items: flex-end;
+            padding: 80px 8%; background: var(--bg-pure-black); overflow: hidden; z-index: 2;
+            border-bottom: 1px solid var(--gold-alpha);
+        }
+        .page-hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            background-attachment: fixed; filter: brightness(0.2) contrast(1.2); z-index: 1;
+        }
+        .page-hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, #0A0A0A 5%, transparent 100%); z-index: 2;
+        }
+        .page-hero-content { position: relative; z-index: 3; max-width: 900px; transform: translateY(30px); opacity: 0; animation: fadeInUp 1s forwards 1.2s; }
+        .subtitle { color: var(--gold-primary); font-size: 0.85rem; letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 10px; }
+        .page-title { font-size: clamp(2.5rem, 4vw, 4rem); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; line-height: 1.2; }
+        .page-title span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* ==========================================================================
+           5. 3D INTERACTIVE SERVICES GRID (THE CORE)
+           ========================================================================== */
+        .services-matrix-section {
+            padding: 120px 8%; background: var(--bg-rich-dark); position: relative; z-index: 2;
+        }
+        
+        .section-intel { text-align: center; margin-bottom: 80px; }
+        .section-intel h2 { font-size: clamp(1.8rem, 3vw, 3rem); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; }
+        .section-intel p { color: var(--text-muted); font-size: 0.95rem; letter-spacing: 1px; max-width: 600px; margin: 0 auto; }
+
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 50px;
+        }
+
+        /* 3D Tilt CSS Architecture */
+        .card-3d-wrapper {
+            perspective: 1500px; /* العمق الثلاثي الأبعاد */
+            width: 100%; height: 450px; cursor: pointer;
+        }
+
+        .card-3d-inner {
+            width: 100%; height: 100%; position: relative;
+            transform-style: preserve-3d; transition: transform 0.2s ease-out; /* حركة ناعمة جداً */
+            background: var(--bg-pure-black); border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 4px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .card-3d-wrapper:hover .card-3d-inner {
+            border-color: var(--gold-primary); box-shadow: var(--shadow-gold-glow);
+        }
+
+        /* Image Layer inside 3D Card */
+        .card-bg-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            filter: grayscale(80%) brightness(0.3); transition: var(--transition-main);
+            transform: translateZ(-50px) scale(1.1); /* دفع الصورة للخلف وإبعادها لتأثير الـ 3D */
+        }
+        .card-3d-wrapper:hover .card-bg-layer { filter: grayscale(0%) brightness(0.5); }
+
+        /* Content Layer inside 3D Card */
+        .card-content-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            padding: 50px 40px; display: flex; flex-direction: column; justify-content: flex-end;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 20%, transparent 100%);
+            transform: translateZ(60px); /* دفع النص للأمام ليطفو فوق الصورة */
+            pointer-events: none;
+        }
+
+        .serv-icon {
+            font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 25px;
+            transform: translateZ(40px); /* أيقونة تطفو أكثر */
+            text-shadow: 0 0 15px rgba(212,175,55,0.4);
+        }
+
+        .serv-title {
+            font-family: var(--font-display); font-size: 1.5rem; color: var(--text-white);
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px;
+            transform: translateZ(30px);
+        }
+
+        .serv-desc {
+            color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;
+            opacity: 0.8; transform: translateZ(20px);
+        }
+
+        .serv-number {
+            position: absolute; top: 30px; right: 30px; font-family: var(--font-display);
+            font-size: 3rem; color: var(--gold-primary); opacity: 0.1; font-weight: 900;
+            transform: translateZ(10px);
+        }
+
+        /* ==========================================================================
+           6. ENGINEERING WORKFLOW (TIMELINE SYSTEM)
+           ========================================================================== */
+        .workflow-section {
+            padding: 120px 8%; background: var(--bg-pure-black); position: relative; z-index: 2;
+            border-top: 1px solid var(--gold-alpha);
+        }
+
+        .timeline-container {
+            position: relative; max-width: 1000px; margin: 0 auto; padding: 40px 0;
+        }
+
+        /* The central Gold Line */
+        .timeline-container::after {
+            content: ''; position: absolute; width: 2px; background: var(--gold-alpha);
+            top: 0; bottom: 0; left: 50%; margin-left: -1px;
+        }
+
+        .timeline-node {
+            padding: 10px 40px; position: relative; background: inherit; width: 50%; margin-bottom: 60px;
+        }
+
+        .timeline-node:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-node:nth-child(even) { left: 50%; text-align: left; }
+
+        /* The Gold Circles */
+        .timeline-node::after {
+            content: ''; position: absolute; width: 20px; height: 20px; right: -10px;
+            background: var(--bg-pure-black); border: 4px solid var(--gold-primary);
+            top: 15px; border-radius: 50%; z-index: 1; box-shadow: var(--shadow-gold-glow);
+        }
+        .timeline-node:nth-child(even)::after { left: -10px; }
+
+        .timeline-content {
+            padding: 30px; background: var(--bg-glass-card); border: 1px solid rgba(212,175,55,0.1);
+            border-radius: 4px; position: relative; transition: var(--transition-main);
+        }
+        .timeline-content:hover {
+            border-color: var(--gold-primary); box-shadow: var(--shadow-gold-glow);
+            transform: translateY(-5px);
+        }
+
+        .timeline-step { font-family: var(--font-display); font-size: 0.9rem; color: var(--gold-primary); letter-spacing: 3px; margin-bottom: 10px; display: block; }
+        .timeline-title { font-size: 1.4rem; text-transform: uppercase; margin-bottom: 15px; color: var(--text-white); }
+        .timeline-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+
+        /* ==========================================================================
+           7. CALL TO ACTION (CTA)
+           ========================================================================== */
+        .cta-section {
+            padding: 100px 8%; text-align: center; background: var(--grad-luxury-dark);
+            border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1); position: relative; z-index: 2;
+        }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .cta-section p { color: var(--text-secondary); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .btn-luxury {
+            display: inline-block; position: relative; padding: 18px 45px; background: transparent;
+            color: var(--gold-primary); border: 1px solid var(--gold-border); text-transform: uppercase;
+            font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; letter-spacing: 2px;
+            cursor: pointer; overflow: hidden; z-index: 1; transition: var(--transition-main);
+        }
+        .btn-luxury::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--grad-gold); z-index: -1; transition: var(--transition-main); }
+        .btn-luxury:hover { color: var(--bg-pure-black); box-shadow: var(--shadow-btn-hover); border-color: transparent; }
+        .btn-luxury:hover::before { left: 0; }
+
+        /* ==========================================================================
+           8. FOOTER
+           ========================================================================== */
+        .executive-footer { background: #030303; padding: 80px 8% 40px 8%; position: relative; z-index: 2; }
+        .footer-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; margin-bottom: 60px; }
+        .footer-brand-column h3 { font-size: 1.5rem; margin-bottom: 20px; letter-spacing: 2px; }
+        .footer-brand-column h3 span { color: var(--gold-primary); }
+        .footer-brand-column p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; }
+        .footer-links-column h4 { color: var(--gold-primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+        .footer-links-column ul { display: flex; flex-direction: column; gap: 15px; }
+        .footer-links-column a { color: var(--text-secondary); font-size: 0.85rem; transition: var(--transition-main); }
+        .footer-links-column a:hover { color: var(--gold-glow); padding-left: 5px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-bottom p { color: var(--text-muted); font-size: 0.8rem; }
+        .footer-socials { display: flex; gap: 20px; }
+        .footer-socials a { width: 40px; height: 40px; border: 1px solid rgba(212,175,55,0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--text-secondary); transition: var(--transition-main); }
+        .footer-socials a:hover { border-color: var(--gold-primary); color: var(--bg-pure-black); background: var(--grad-gold); box-shadow: var(--shadow-gold-glow); }
+
+        /* ==========================================================================
+           9. RESPONSIVE OPTIMIZATION
+           ========================================================================== */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+        @keyframes pulseGlow { 100% { opacity: 1; filter: drop-shadow(0 0 15px #FFD54A); } }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .mobile-control-dock { display: flex; }
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-container::after { left: 31px; }
+            .timeline-node { width: 100%; padding-left: 70px; padding-right: 0; text-align: left; }
+            .timeline-node:nth-child(odd), .timeline-node:nth-child(even) { left: 0; text-align: left; }
+            .timeline-node::after { left: 21px !important; }
+            .services-grid { grid-template-columns: 1fr; }
+            .card-3d-wrapper { height: 400px; }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero { padding: 60px 5%; height: 50vh; align-items: center; text-align: center; justify-content: center; }
+            .services-matrix-section, .workflow-section, .cta-section { padding: 80px 5%; }
+            .cta-section h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Architectural Background Pattern -->
+    <div class="blueprint-grid"></div>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring-reverse"></div>
+            <div class="loader-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Drafting_compass_icon.svg/1024px-Drafting_compass_icon.svg.png" alt="Engineering Core">
+                <div class="counter-number" id="percentage-counter">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DESKTOP HEADER -->
+    <header class="header" id="main-header">
+        <div class="brand-logo">SMART <span>VISION</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="partnerships.html">Partnerships</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="career.html">Career</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- MOBILE SMART DOCK -->
+    <nav class="mobile-control-dock" id="mobile-dock">
+        <div class="dock-brand">SMART <span>VISION</span></div>
+        <button class="dock-trigger-btn" id="dock-trigger">
+            <i class="fa-solid fa-compass-drafting"></i> NAVIGATE
+        </button>
+    </nav>
+
+    <!-- IMMERSIVE MOBILE OVERLAY -->
+    <div class="immersive-overlay-menu" id="control-center-overlay">
+        <div class="overlay-nav-grid">
+            <a href="index.html" class="overlay-nav-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="about.html" class="overlay-nav-item"><i class="fa-solid fa-building-user"></i><span>About</span></a>
+            <a href="services.html" class="overlay-nav-item" style="border-color: var(--gold-primary);"><i class="fa-solid fa-trowel-bricks"></i><span style="color: var(--gold-primary);">Services</span></a>
+            <a href="projects.html" class="overlay-nav-item"><i class="fa-solid fa-city"></i><span>Projects</span></a>
+            <a href="partnerships.html" class="overlay-nav-item"><i class="fa-solid fa-handshake-angle"></i><span>Partnerships</span></a>
+            <a href="team.html" class="overlay-nav-item"><i class="fa-solid fa-users-gear"></i><span>Team</span></a>
+            <a href="career.html" class="overlay-nav-item"><i class="fa-solid fa-briefcase"></i><span>Career</span></a>
+            <a href="news.html" class="overlay-nav-item"><i class="fa-solid fa-newspaper"></i><span>News</span></a>
+            <a href="contact.html" class="overlay-nav-item" style="grid-column: span 2;"><i class="fa-solid fa-envelope"></i><span>Contact Hub</span></a>
+        </div>
+    </div>
+
+    <!-- SERVICES HERO SECTION -->
+    <section class="page-hero">
+        <div class="page-hero-bg"></div>
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <span class="subtitle">Mastering Complexity</span>
+            <h1 class="page-title">Engineering <span>Operations</span> <br>& Services</h1>
+        </div>
+    </section>
+
+    <!-- 3D INTERACTIVE SERVICES GRID -->
+    <section class="services-matrix-section">
+        <div class="section-intel">
+            <h2>Core <span>Competencies</span></h2>
+            <p>Explore our suite of high-end structural and architectural services. Hover over each module to analyze its dimensions.</p>
+        </div>
+
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="card-3d-wrapper">
+                <div class="card-3d-inner">
+                    <div class="card-bg-layer" style="background-image: url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2070&auto=format&fit=crop');"></div>
+                    <div class="card-content-layer">
+                        <div class="serv-number">01</div>
+                        <i class="fa-solid fa-pen-ruler serv-icon"></i>
+                        <h3 class="serv-title">Parametric Architecture</h3>
+                        <p class="serv-desc">Advanced algorithmic building design. Merging mathematical precision with fluid, luxurious structural aesthetics.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="card-3d-wrapper">
+                <div class="card-3d-inner">
+                    <div class="card-bg-layer" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop');"></div>
+                    <div class="card-content-layer">
+                        <div class="serv-number">02</div>
+                        <i class="fa-solid fa-layer-group serv-icon"></i>
+                        <h3 class="serv-title">Heavy Structural Engineering</h3>
+                        <p class="serv-desc">Complex load calculations, seismic modeling, and material science for skyscrapers and colossal landmarks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="card-3d-wrapper">
+                <div class="card-3d-inner">
+                    <div class="card-bg-layer" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356f12?q=80&w=1974&auto=format&fit=crop');"></div>
+                    <div class="card-content-layer">
+                        <div class="serv-number">03</div>
+                        <i class="fa-solid fa-chart-gantt serv-icon"></i>
+                        <h3 class="serv-title">Executive Project Management</h3>
+                        <p class="serv-desc">Rigorous oversight of timelines, procurement, and site execution, guaranteeing delivery without compromise.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="card-3d-wrapper">
+                <div class="card-3d-inner">
+                    <div class="card-bg-layer" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop');"></div>
+                    <div class="card-content-layer">
+                        <div class="serv-number">04</div>
+                        <i class="fa-solid fa-couch serv-icon"></i>
+                        <h3 class="serv-title">Luxury Interior Architecture</h3>
+                        <p class="serv-desc">Crafting internal spaces that echo the external grandeur, utilizing premium materials and bespoke lighting.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="card-3d-wrapper">
+                <div class="card-3d-inner">
+                    <div class="card-bg-layer" style="background-image: url('https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=2070&auto=format&fit=crop');"></div>
+                    <div class="card-content-layer">
+                        <div class="serv-number">05</div>
+                        <i class="fa-solid fa-city serv-icon"></i>
+                        <h3 class="serv-title">Urban Masterplanning</h3>
+                        <p class="serv-desc">Designing macro-scale city layouts, integrating infrastructure, public spaces, and traffic dynamics flawlessly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="card-3d-wrapper">
+                <div class="card-3d-inner">
+                    <div class="card-bg-layer" style="background-image: url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop');"></div>
+                    <div class="card-content-layer">
+                        <div class="serv-number">06</div>
+                        <i class="fa-solid fa-leaf serv-icon"></i>
+                        <h3 class="serv-title">Sustainable Green Tech</h3>
+                        <p class="serv-desc">Implementing LEED-certified protocols, energy-efficient facades, and self-sustaining water systems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENGINEERING WORKFLOW (TIMELINE) -->
+    <section class="workflow-section">
+        <div class="section-intel">
+            <h2>The <span>Execution</span> Workflow</h2>
+            <p>Our systematic approach to transforming abstract vision into structural reality.</p>
+        </div>
+        
+        <div class="timeline-container">
+            <!-- Phase 1 -->
+            <div class="timeline-node">
+                <div class="timeline-content">
+                    <span class="timeline-step">PHASE 01</span>
+                    <h3 class="timeline-title">Feasibility & Spatial Analysis</h3>
+                    <p class="timeline-desc">Extensive site surveying, environmental impact studies, and preliminary spatial zoning algorithms.</p>
+                </div>
+            </div>
+            <!-- Phase 2 -->
+            <div class="timeline-node">
+                <div class="timeline-content">
+                    <span class="timeline-step">PHASE 02</span>
+                    <h3 class="timeline-title">Blueprint & 3D Modeling</h3>
+                    <p class="timeline-desc">Generating hyper-realistic renders and exacting structural CAD blueprints detailing every mechanical aspect.</p>
+                </div>
+            </div>
+            <!-- Phase 3 -->
+            <div class="timeline-node">
+                <div class="timeline-content">
+                    <span class="timeline-step">PHASE 03</span>
+                    <h3 class="timeline-title">Procurement & Logistics</h3>
+                    <p class="timeline-desc">Sourcing the highest-grade materials globally, from specialized steel alloys to premium imported marble.</p>
+                </div>
+            </div>
+            <!-- Phase 4 -->
+            <div class="timeline-node">
+                <div class="timeline-content">
+                    <span class="timeline-step">PHASE 04</span>
+                    <h3 class="timeline-title">Construction & Handover</h3>
+                    <p class="timeline-desc">Meticulous on-site execution led by senior engineers, concluding with a rigorous multi-point quality inspection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+        <h2>Initiate A New <span>Legacy</span></h2>
+        <p>Partner with SMART VISION to engineer your next architectural masterpiece. Our executive team is ready to analyze your requirements.</p>
+        <a href="contact.html" class="btn-luxury">Request Engineering Consultation</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="executive-footer">
+        <div class="footer-matrix">
+            <div class="footer-brand-column">
+                <h3>SMART <span>VISION</span></h3>
+                <p>Global Engineering and Luxury Architectural operations hub. Executing cinematic building mechanics since inception.</p>
+            </div>
+            <div class="footer-links-column">
+                <h4>Navigation Hub</h4>
+                <ul>
+                    <li><a href="index.html">Home System</a></li>
+                    <li><a href="projects.html">Corporate Projects</a></li>
+                    <li><a href="services.html">Operations & Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-column">
+                <h4>Inquiries</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Headquarters</a></li>
+                    <li><a href="career.html">Career Pipeline</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SMART VISION Corporation. All Engineering Systems Certified.</p>
+            <div class="footer-socials">
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT ENGINE -->
+    <script>
+        // 1. PRELOADER LOGIC
+        document.addEventListener("DOMContentLoaded", () => {
+            const counterElement = document.getElementById("percentage-counter");
+            const preloader = document.getElementById("preloader");
+            const mobileDock = document.getElementById("mobile-dock");
+            let currentCount = 0;
+            const updateCounter = () => {
+                currentCount += Math.floor(Math.random() * 5) + 2; 
+                if (currentCount >= 100) {
+                    currentCount = 100;
+                    counterElement.innerText = "100%";
+                    clearInterval(loaderInterval);
+                    setTimeout(() => {
+                        preloader.style.opacity = "0";
+                        preloader.style.transform = "translateY(-100dvh)";
+                        setTimeout(() => {
+                            preloader.style.display = "none";
+                            mobileDock.classList.add("visible");
+                        }, 1200);
+                    }, 300);
+                } else { counterElement.innerText = `${currentCount}%`; }
+            };
+            const loaderInterval = setInterval(updateCounter, 25);
+        });
+
+        // 2. STICKY HEADER
+        const mainHeader = document.getElementById("main-header");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 60) { mainHeader.classList.add("scrolled"); } 
+            else { mainHeader.classList.remove("scrolled"); }
+        });
+
+        // 3. MOBILE DOCK SYSTEM
+        const dockTrigger = document.getElementById("dock-trigger");
+        const controlCenter = document.getElementById("control-center-overlay");
+        const overlayItems = document.querySelectorAll(".overlay-nav-item");
+        let isOverlayOpen = false;
+        dockTrigger.addEventListener("click", () => {
+            isOverlayOpen = !isOverlayOpen;
+            if (isOverlayOpen) {
+                controlCenter.classList.add("active");
+                dockTrigger.innerHTML = `<i class="fa-solid fa-xmark"></i> SECURE`;
+                dockTrigger.style.boxShadow = "0 0 25px #FFD54A";
+                overlayItems.forEach((item, index) => { item.style.transitionDelay = `${index * 0.05}s`; });
+            } else {
+                controlCenter.classList.remove("active");
+                dockTrigger.innerHTML = `<i class="fa-solid fa-compass-drafting"></i> NAVIGATE`;
+                dockTrigger.style.boxShadow = "0 4px 15px rgba(212,175,55,0.4)";
+                overlayItems.forEach((item) => { item.style.transitionDelay = `0s`; });
+            }
+        });
+
+        // ==========================================================================
+        // 4. THE 3D TILT ENGINE (JAVASCRIPT CALCULATION LOGIC)
+        // ==========================================================================
+        const cards3D = document.querySelectorAll('.card-3d-wrapper');
+
+        cards3D.forEach(card => {
+            const innerCard = card.querySelector('.card-3d-inner');
+
+            // عند تحريك الماوس فوق الكارت
+            card.addEventListener('mousemove', (e) => {
+                // استخراج إحداثيات الكارت بالنسبة للشاشة
+                const rect = card.getBoundingClientRect();
+                
+                // حساب موقع الماوس داخل الكارت
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // حساب نقطة المركز للكارت
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // معادلة حساب زاوية الدوران (كلما ابتعد الماوس عن المركز زاد الميل)
+                // قسمنا على رقم للتحكم في حدة الميل (Max ~15 degrees)
+                const rotateX = ((y - centerY) / centerY) * -12; 
+                const rotateY = ((x - centerX) / centerX) * 12;
+
+                // تطبيق الحركة على الكارت الداخلي
+                innerCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            // عند خروج الماوس، يعود الكارت لنقطة الصفر بسلاسة
+            card.addEventListener('mouseleave', () => {
+                innerCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                // إضافة انتقال ناعم عند العودة
+                innerCard.style.transition = 'transform 0.5s ease-out';
+            });
+
+            // إزالة الانتقال الناعم أثناء الحركة حتى لا يحدث تأخير (Lag)
+            card.addEventListener('mouseenter', () => {
+                innerCard.style.transition = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
