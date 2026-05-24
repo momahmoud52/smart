@@ -13,7 +13,7 @@
 
     <style>
         /* ==========================================================================
-           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE (MATCHING INDEX)
+           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE
            ========================================================================== */
         :root {
             --bg-pure-black: #000000;
@@ -178,7 +178,7 @@
         .story-img-wrapper:hover::after { bottom: -25px; left: -25px; }
 
         /* ==========================================================================
-           6. THE CEO MESSAGE (EXECUTIVE LUXURY)
+           6. THE CEO MESSAGE
            ========================================================================== */
         .ceo-message-section {
             position: relative; padding: 120px 8%; background: var(--bg-rich-dark);
@@ -207,7 +207,7 @@
         .signature { font-family: var(--font-signature) !important; font-size: 3rem; color: var(--text-white); opacity: 0.8; }
 
         /* ==========================================================================
-           7. CORE PHILOSOPHY & VALUES
+           7. CORE PHILOSOPHY & VALUES (Icons Updated Here)
            ========================================================================== */
         .philosophy-section { padding: 120px 8%; background: var(--bg-pure-black); position: relative; z-index: 2; }
         .section-header { text-align: center; margin-bottom: 80px; }
@@ -251,7 +251,7 @@
         .footer-socials a:hover { border-color: var(--gold-primary); color: var(--bg-pure-black); background: var(--grad-gold); box-shadow: var(--shadow-gold-glow); }
 
         /* ==========================================================================
-           9. RESPONSIVE MEDIA QUERIES (FIXED FOR MOBILE PERFECTION)
+           9. RESPONSIVE MEDIA QUERIES
            ========================================================================== */
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
@@ -400,7 +400,7 @@
                 <h3>Dr.Eng: Mohamed Osama </h3>
                 <h4>Chief Executive Officer & Head Architect</h4>
                 <p>"Smart Vision Engineering Consultants is a consulting company which specializes in geotechnical engineering, civil engineering, Architectural engineering and structural designs of deep and complex foundation systems, retention and shoring systems, and soil stabilizations. The company was Founded in 2004 by Dr.eng. Mohamed Osama and ARCH. Ahmed Amin, the company which is listed on GAFI - General Authority For Investment" was the result of our vision and hard work for 13 year as sub consultant for many Egyptian developers and as consultant for many of local and individual projects to create self-sufficient and well integrated communities. We are committed to engineering excellence and create time and cost-effective solutions for the different challenges our clients face. We achieve this by using innovations and modern technology to get accurate results, data and relevant analysis to provide innovative, and cost effective, designs and solutions. Our plan is to be an effective partner in Egyptian Development market and Construction industry for the medium and large communities"</p>
-                <div class="signature">M.Osama</div>
+                <div class="signature">Mohamed Osama</div>
             </div>
         </div>
     </section>
@@ -409,24 +409,33 @@
     <section class="philosophy-section">
         <div class="section-header">
             <span class="subtitle">The Blueprint</span>
-            <h2>Core <span>Philosophy</span></h2>
+            <h2>Core <span> Principles</span></h2>
             <p>The fundamental pillars that govern our engineering excellence.</p>
         </div>
         <div class="values-grid">
+            <!-- الابتكار: لمبة مضيئة -->
             <div class="value-card">
-                <i class="fa-solid fa-compass-drafting value-icon"></i>
-                <h3 class="value-title">Absolute Precision</h3>
-                <p class="value-desc">Calculated perfection in every millimeter. Our engineering protocols leave zero margin for error.</p>
+                <i class="fa-solid fa-lightbulb value-icon"></i>
+                <h3 class="value-title">Innovation</h3>
+                <p class="value-desc">We strive to positively impress our clients by delivering creative and effective solutions. We believe that everything worth doing — from customer service to strategy and design — should be driven by innovation, creating value and achieving excellence in every project.</p>
             </div>
+            <!-- النزاهة: ميزان العدالة والشفافية -->
             <div class="value-card">
-                <i class="fa-regular fa-gem value-icon"></i>
-                <h3 class="value-title">Uncompromised Luxury</h3>
-                <p class="value-desc">Integrating premium materials and aesthetic brilliance into robust structural frameworks.</p>
+                <i class="fa-solid fa-scale-balanced value-icon"></i>
+                <h3 class="value-title">Integrity</h3>
+                <p class="value-desc">We believe in representing facts and capabilities with honesty and transparency. Integrity means maintaining the highest ethical and professional standards in every action, decision, and relationship.</p>
             </div>
+            <!-- المعرفة المستمرة: كتاب مفتوح -->
             <div class="value-card">
-                <i class="fa-solid fa-microchip value-icon"></i>
-                <h3 class="value-title">Future-Ready Tech</h3>
-                <p class="value-desc">Utilizing advanced parametric design software and cutting-edge construction methodologies.</p>
+                <i class="fa-solid fa-book-open-reader value-icon"></i>
+                <h3 class="value-title">Continuous Knowledge</h3>
+                <p class="value-desc">We pursue continuous growth and learning. At Smart Vision, we never stop developing our knowledge and capabilities, always seeking new challenges and opportunities to improve. We believe in pushing boundaries and expanding what we think is possible to achieve.</p>
+            </div>
+            <!-- الشغف: شعلة النار التي تمثل الدافع والطاقة -->
+            <div class="value-card">
+                <i class="fa-solid fa-fire-flame-curved value-icon"></i>
+                <h3 class="value-title">Passion</h3>
+                <p class="value-desc">We are passionate and determined in everything we do. Our growth is driven by our dedication to the industry, our commitment to our clients, and the strong culture of our company. We believe our actions create meaningful impact and drive lasting success.</p>
             </div>
         </div>
     </section>
@@ -464,10 +473,10 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT ENGINE -->
+    <!-- JAVASCRIPT ENGINE (تم استكمال الكود وإصلاحه) -->
     <script>
-        // 1. PRELOADER LOGIC
         document.addEventListener("DOMContentLoaded", () => {
+            // 1. PRELOADER LOGIC
             const counterElement = document.getElementById("percentage-counter");
             const preloader = document.getElementById("preloader");
             const mobileDock = document.getElementById("mobile-dock");
@@ -479,46 +488,50 @@
                     currentCount = 100;
                     counterElement.innerText = "100%";
                     clearInterval(loaderInterval);
+                    
+                    // إخفاء الـ Preloader بعد اكتمال التحميل
                     setTimeout(() => {
                         preloader.style.opacity = "0";
-                        preloader.style.transform = "translateY(-100dvh)";
                         setTimeout(() => {
                             preloader.style.display = "none";
-                            mobileDock.classList.add("visible");
-                        }, 1200);
-                    }, 300);
+                            // إظهار القائمة السفلية في الموبايل
+                            if(window.innerWidth <= 900) {
+                                mobileDock.classList.add("visible");
+                            }
+                        }, 1000);
+                    }, 500);
                 } else {
-                    counterElement.innerText = `${currentCount}%`;
+                    counterElement.innerText = currentCount + "%";
                 }
             };
-            const loaderInterval = setInterval(updateCounter, 30);
-        });
+            const loaderInterval = setInterval(updateCounter, 40);
 
-        // 2. STICKY HEADER
-        const mainHeader = document.getElementById("main-header");
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 60) { mainHeader.classList.add("scrolled"); } 
-            else { mainHeader.classList.remove("scrolled"); }
-        });
+            // 2. HEADER SCROLL EFFECT
+            const header = document.getElementById("main-header");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) {
+                    header.classList.add("scrolled");
+                } else {
+                    header.classList.remove("scrolled");
+                }
+            });
 
-        // 3. MOBILE DOCK SYSTEM
-        const dockTrigger = document.getElementById("dock-trigger");
-        const controlCenter = document.getElementById("control-center-overlay");
-        const overlayItems = document.querySelectorAll(".overlay-nav-item");
-        let isOverlayOpen = false;
+            // 3. MOBILE OVERLAY MENU TOGGLE
+            const dockTrigger = document.getElementById("dock-trigger");
+            const overlayMenu = document.getElementById("control-center-overlay");
+            let isMenuOpen = false;
 
-        dockTrigger.addEventListener("click", () => {
-            isOverlayOpen = !isOverlayOpen;
-            if (isOverlayOpen) {
-                controlCenter.classList.add("active");
-                dockTrigger.innerHTML = `<i class="fa-solid fa-xmark"></i> SECURE`;
-                dockTrigger.style.boxShadow = "0 0 25px #FFD54A";
-                overlayItems.forEach((item, index) => { item.style.transitionDelay = `${index * 0.05}s`; });
-            } else {
-                controlCenter.classList.remove("active");
-                dockTrigger.innerHTML = `<i class="fa-solid fa-compass-drafting"></i> NAVIGATE`;
-                dockTrigger.style.boxShadow = "0 4px 15px rgba(212,175,55,0.4)";
-                overlayItems.forEach((item) => { item.style.transitionDelay = `0s`; });
+            if (dockTrigger && overlayMenu) {
+                dockTrigger.addEventListener("click", () => {
+                    isMenuOpen = !isMenuOpen;
+                    if(isMenuOpen) {
+                        overlayMenu.classList.add("active");
+                        dockTrigger.innerHTML = '<i class="fa-solid fa-xmark"></i> CLOSE';
+                    } else {
+                        overlayMenu.classList.remove("active");
+                        dockTrigger.innerHTML = '<i class="fa-solid fa-compass-drafting"></i> NAVIGATE';
+                    }
+                });
             }
         });
     </script>
