@@ -13,7 +13,7 @@
 
     <style>
         /* ==========================================================================
-           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE (Exact match with Projects)
+           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE
            ========================================================================== */
         :root {
             --bg-pure-black: #000000;
@@ -97,7 +97,6 @@
         .nav-links a:hover, .nav-links a.active { color: var(--gold-hover); text-shadow: 0 0 8px rgba(255,213,74,0.3); }
         .nav-links a:hover::before, .nav-links a.active::before { width: 100%; }
 
-        /* Mobile Nav */
         .mobile-control-dock {
             display: none; position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
             width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px);
@@ -128,7 +127,6 @@
         }
         .page-hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* Corporate architecture/handshake abstract bg */
             background: url('https://images.unsplash.com/photo-1554469384-e58fac16e23a?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
             background-attachment: fixed; filter: brightness(0.25) grayscale(0.6); z-index: 1;
         }
@@ -142,14 +140,13 @@
         .page-title span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* ==========================================================================
-           5. INFINITE LOGO MARQUEE (The Premium Touch)
+           5. INFINITE LOGO MARQUEE (UPDATED TO CIRCULAR IMAGES)
            ========================================================================== */
         .marquee-section {
             position: relative; z-index: 2; background: var(--bg-rich-dark);
             padding: 60px 0; border-bottom: 1px solid var(--gold-alpha);
             overflow: hidden; display: flex; align-items: center;
         }
-        /* Fade Edges for smooth entry/exit */
         .marquee-section::before, .marquee-section::after {
             content: ''; position: absolute; top: 0; width: 15vw; height: 100%; z-index: 3; pointer-events: none;
         }
@@ -164,10 +161,20 @@
 
         .brand-item {
             display: flex; align-items: center; gap: 15px; padding: 10px 20px;
-            color: var(--text-muted); filter: grayscale(100%) opacity(0.4);
+            color: var(--text-muted); filter: grayscale(100%) opacity(0.5);
             transition: var(--transition-bounce); cursor: pointer;
         }
-        .brand-item i { font-size: 2.5rem; }
+        
+        /* New CSS for Circular Marquee Logos */
+        .brand-logo-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold-alpha);
+            background-color: var(--bg-pure-black);
+        }
+
         .brand-item .logo-text { font-size: 1.5rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
         
         .brand-item:hover {
@@ -176,9 +183,13 @@
             transform: scale(1.1) translateY(-5px);
             text-shadow: 0 0 20px rgba(212,175,55,0.4);
         }
+        .brand-item:hover .brand-logo-img {
+            border-color: var(--gold-glow);
+            box-shadow: 0 0 15px rgba(212,175,55,0.5);
+        }
 
         /* ==========================================================================
-           6. STRATEGIC PILLARS GRID (Similar to Portfolio)
+           6. STRATEGIC PILLARS GRID (UPDATED TO CIRCULAR IMAGES)
            ========================================================================== */
         .partners-section {
             padding: 100px 8%; background: var(--bg-pure-black); position: relative; z-index: 2;
@@ -197,7 +208,6 @@
             padding: 50px 40px; border-radius: 4px; position: relative; overflow: hidden;
             transition: var(--transition-main); cursor: pointer;
         }
-        /* Top Animated Border */
         .partner-card::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 2px;
             background: var(--grad-gold); transition: all 0.7s ease;
@@ -209,15 +219,30 @@
         }
         .partner-card:hover::before { left: 100%; }
 
+        /* New CSS for Circular Partner Card Images */
         .partner-icon {
-            width: 70px; height: 70px; border: 1px solid var(--gold-alpha); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; margin-bottom: 30px;
-            font-size: 1.8rem; color: var(--gold-primary); background: var(--bg-pure-black);
+            width: 80px; height: 80px; 
+            border: 2px solid var(--gold-alpha); 
+            border-radius: 50%;
+            margin-bottom: 30px;
+            background: var(--bg-pure-black);
+            transition: var(--transition-bounce);
+            overflow: hidden; /* Ensures image stays inside the circle */
+            display: flex; justify-content: center; align-items: center;
+        }
+        .partner-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             transition: var(--transition-bounce);
         }
+        
         .partner-card:hover .partner-icon {
-            transform: scale(1.1) rotate(5deg); box-shadow: 0 0 20px rgba(212,175,55,0.3);
-            background: var(--gold-primary); color: var(--bg-pure-black);
+            box-shadow: 0 0 20px rgba(212,175,55,0.3);
+            border-color: var(--gold-primary);
+        }
+        .partner-card:hover .partner-icon img {
+            transform: scale(1.15) rotate(3deg);
         }
 
         .partner-card h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 15px; letter-spacing: 1px; color: var(--text-white); }
@@ -231,7 +256,7 @@
         .partner-card:hover .partner-link { opacity: 1; gap: 15px; }
 
         /* ==========================================================================
-           7. FEATURED ALLIANCE (Matching "Featured Masterpiece")
+           7. FEATURED ALLIANCE
            ========================================================================== */
         .featured-alliance {
             padding: 0; position: relative; z-index: 2; border-top: 1px solid var(--gold-alpha);
@@ -255,7 +280,7 @@
         .metric-box span { font-size: 0.75rem; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 1px; }
 
         /* ==========================================================================
-           8. FOOTER (Exact match)
+           8. FOOTER
            ========================================================================== */
         .executive-footer { background: #030303; border-top: 1px solid rgba(212,175,55,0.2); padding: 80px 8% 40px 8%; position: relative; z-index: 2; }
         .footer-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; margin-bottom: 60px; }
@@ -292,7 +317,6 @@
             .partners-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
             .marquee-track { gap: 40px; }
             .brand-item .logo-text { font-size: 1.2rem; }
-            .brand-item i { font-size: 2rem; }
         }
         @media (max-width: 480px) {
             .page-hero { padding: 60px 5%; height: 50vh; align-items: center; text-align: center; justify-content: center; }
@@ -367,28 +391,66 @@
         </div>
     </section>
 
-    <!-- INFINITE LOGO MARQUEE -->
+    <!-- INFINITE LOGO MARQUEE (Now with Circular Images) -->
+    <!-- يمكنك استبدال الروابط الخاصة بالصور "src" بشعارات شركائك الفعلية -->
     <section class="marquee-section">
         <div class="marquee-track">
             <!-- Group 1 -->
-            <div class="brand-item"><i class="fa-brands fa-aws"></i><span class="logo-text">AWS Infra</span></div>
-            <div class="brand-item"><i class="fa-solid fa-microchip"></i><span class="logo-text">NovaTech</span></div>
-            <div class="brand-item"><i class="fa-solid fa-shield-halved"></i><span class="logo-text">Vanguard</span></div>
-            <div class="brand-item"><i class="fa-solid fa-bolt"></i><span class="logo-text">Volt Energy</span></div>
-            <div class="brand-item"><i class="fa-solid fa-cube"></i><span class="logo-text">Nexus Build</span></div>
-            <div class="brand-item"><i class="fa-solid fa-leaf"></i><span class="logo-text">EcoMatrix</span></div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="AWS Infra" class="brand-logo-img">
+                <span class="logo-text">AWS Infra</span>
+            </div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="NovaTech" class="brand-logo-img">
+                <span class="logo-text">NovaTech</span>
+            </div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="Vanguard" class="brand-logo-img">
+                <span class="logo-text">Vanguard</span>
+            </div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="Volt Energy" class="brand-logo-img">
+                <span class="logo-text">Volt Energy</span>
+            </div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="Nexus Build" class="brand-logo-img">
+                <span class="logo-text">Nexus Build</span>
+            </div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="EcoMatrix" class="brand-logo-img">
+                <span class="logo-text">EcoMatrix</span>
+            </div>
             
             <!-- Group 2 (Duplicate for seamless loop) -->
-            <div class="brand-item"><i class="fa-brands fa-aws"></i><span class="logo-text">AWS Infra</span></div>
-            <div class="brand-item"><i class="fa-solid fa-microchip"></i><span class="logo-text">NovaTech</span></div>
-            <div class="brand-item"><i class="fa-solid fa-shield-halved"></i><span class="logo-text">Vanguard</span></div>
-            <div class="brand-item"><i class="fa-solid fa-bolt"></i><span class="logo-text">Volt Energy</span></div>
-            <div class="brand-item"><i class="fa-solid fa-cube"></i><span class="logo-text">Nexus Build</span></div>
-            <div class="brand-item"><i class="fa-solid fa-leaf"></i><span class="logo-text">EcoMatrix</span></div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="AWS Infra" class="brand-logo-img">
+                <span class="logo-text">AWS Infra</span>
+            </div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="NovaTech" class="brand-logo-img">
+                <span class="logo-text">NovaTech</span>
+            </div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="Vanguard" class="brand-logo-img">
+                <span class="logo-text">Vanguard</span>
+            </div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="Volt Energy" class="brand-logo-img">
+                <span class="logo-text">Volt Energy</span>
+            </div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="Nexus Build" class="brand-logo-img">
+                <span class="logo-text">Nexus Build</span>
+            </div>
+            <div class="brand-item">
+                <img src="https://dummyimage.com/150x150/111/d4af37&text=LOGO" alt="EcoMatrix" class="brand-logo-img">
+                <span class="logo-text">EcoMatrix</span>
+            </div>
         </div>
     </section>
 
-    <!-- STRATEGIC PILLARS GRID -->
+    <!-- STRATEGIC PILLARS GRID (Now with Circular Images) -->
+    <!-- استبدل وسوم src هنا أيضا بصور شركائك -->
     <section class="partners-section">
         <div class="section-header">
             <h2>Our Core <span>Partners</span></h2>
@@ -397,7 +459,9 @@
             
             <!-- Partner 1 -->
             <div class="partner-card">
-                <div class="partner-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="partner-icon">
+                    <img src="https://dummyimage.com/200x200/111/d4af37&text=Apex" alt="Apex Financial Group">
+                </div>
                 <h3>Apex Financial Group</h3>
                 <p>Providing the robust financial infrastructure necessary to fund and sustain our mega-scale architectural endeavors worldwide.</p>
                 <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
@@ -405,7 +469,9 @@
 
             <!-- Partner 2 -->
             <div class="partner-card">
-                <div class="partner-icon"><i class="fa-solid fa-microchip"></i></div>
+                <div class="partner-icon">
+                    <img src="https://dummyimage.com/200x200/111/d4af37&text=Syntax" alt="Syntax AI Systems">
+                </div>
                 <h3>Syntax AI Systems</h3>
                 <p>Integrating next-generation artificial intelligence to transform traditional structures into sentient, self-regulating smart buildings.</p>
                 <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
@@ -413,7 +479,9 @@
 
             <!-- Partner 3 -->
             <div class="partner-card">
-                <div class="partner-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="partner-icon">
+                    <img src="https://dummyimage.com/200x200/111/d4af37&text=Aero" alt="Aero Eco-Materials">
+                </div>
                 <h3>Aero Eco-Materials</h3>
                 <p>Supplying cutting-edge, carbon-negative materials to ensure our designs protect and harmonize with the natural environment.</p>
                 <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
@@ -421,7 +489,9 @@
 
             <!-- Partner 4 -->
             <div class="partner-card">
-                <div class="partner-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                <div class="partner-icon">
+                    <img src="https://dummyimage.com/200x200/111/d4af37&text=GLH" alt="Global Logistics Hub">
+                </div>
                 <h3>Global Logistics Hub</h3>
                 <p>Ensuring streamlined supply chain management for rapid deployment of construction resources across continents.</p>
                 <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
@@ -429,7 +499,9 @@
 
             <!-- Partner 5 -->
             <div class="partner-card">
-                <div class="partner-icon"><i class="fa-solid fa-drafting-compass"></i></div>
+                <div class="partner-icon">
+                    <img src="https://dummyimage.com/200x200/111/d4af37&text=Zenith" alt="Zenith Architecture">
+                </div>
                 <h3>Zenith Architecture</h3>
                 <p>Collaborating on conceptual parametric designs to push the boundaries of modern skyline aesthetics.</p>
                 <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
@@ -437,7 +509,9 @@
 
             <!-- Partner 6 -->
             <div class="partner-card">
-                <div class="partner-icon"><i class="fa-solid fa-shield-virus"></i></div>
+                <div class="partner-icon">
+                    <img src="https://dummyimage.com/200x200/111/d4af37&text=Titan" alt="Titan Security">
+                </div>
                 <h3>Titan Security</h3>
                 <p>Implementing military-grade cybersecurity and physical protection protocols for our high-profile corporate clients.</p>
                 <div class="partner-link">Explore Synergy <i class="fa-solid fa-arrow-right-long"></i></div>
@@ -521,7 +595,7 @@
 
     <!-- INTERACTIVE SCRIPTS (Preloader & Navigation) -->
     <script>
-        // 1. Preloader Logic
+        // 1. Preloader Logic (تم إكمال الكود هنا)
         document.addEventListener("DOMContentLoaded", () => {
             let count = 0;
             const counterElement = document.getElementById("percentage-counter");
@@ -535,15 +609,11 @@
                 if (count === 100) {
                     clearInterval(interval);
                     setTimeout(() => {
-                        preloader.style.opacity = "0";
                         preloader.style.transform = "translateY(-100%)";
-                        setTimeout(() => preloader.remove(), 1000);
-                        
-                        // Show mobile dock after load
                         setTimeout(() => {
-                            document.getElementById('mobile-dock').classList.add('visible');
-                        }, 500);
-                    }, 400);
+                            preloader.style.display = "none";
+                        }, 1200);
+                    }, 500);
                 }
             }, 30);
         });
@@ -558,23 +628,21 @@
             }
         });
 
-        // 3. Mobile Immersive NAVIGATE Toggles
+        // 3. Mobile Dock / Navigate Overlay Logic
         const dockTrigger = document.getElementById('dock-trigger');
-        const overlayNAVIGATE = document.getElementById('control-center-overlay');
-        
+        const overlay = document.getElementById('control-center-overlay');
+        const mobileDock = document.getElementById('mobile-dock');
+
+        // اظهار القائمة السفلية مع نزول الصفحة وتأخير بسيط لتأثير اجمل
+        setTimeout(() => {
+            mobileDock.classList.add('visible');
+        }, 1500);
+
         dockTrigger.addEventListener('click', () => {
-            overlayNAVIGATE.classList.toggle('active');
-            if(overlayNAVIGATE.classList.contains('active')) {
+            overlay.classList.toggle('active');
+            if(overlay.classList.contains('active')) {
                 dockTrigger.innerHTML = '<i class="fa-solid fa-xmark"></i> CLOSE';
             } else {
-                dockTrigger.innerHTML = '<i class="fa-solid fa-compass-drafting"></i> NAVIGATE';
-            }
-        });
-
-        // Close NAVIGATE when clicking outside items
-        overlayNAVIGATE.addEventListener('click', (e) => {
-            if(e.target === overlayNAVIGATE) {
-                overlayNAVIGATE.classList.remove('active');
                 dockTrigger.innerHTML = '<i class="fa-solid fa-compass-drafting"></i> NAVIGATE';
             }
         });
