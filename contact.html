@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SMART VISION | Contact Hub</title>
+    
+    <!-- Premium Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE
+           ========================================================================== */
+        :root {
+            --bg-pure-black: #000000;
+            --bg-rich-dark: #0A0A0A;
+            --bg-glass: rgba(0, 0, 0, 0.75);
+            --bg-glass-card: rgba(255, 255, 255, 0.03);
+            
+            --gold-primary: #D4AF37;
+            --gold-glow: #FFD54A;
+            --gold-hover: #E6C75A;
+            --gold-border: #C9A227;
+            --gold-alpha: rgba(212, 175, 55, 0.25);
+            
+            --text-white: #FFFFFF;
+            --text-secondary: #CFCFCF;
+            --text-muted: #8F8F8F;
+            
+            --grad-gold: linear-gradient(90deg, #8B6B15, #D4AF37, #FFD54A, #D4AF37, #8B6B15);
+            
+            --shadow-gold-glow: 0 0 15px rgba(212,175,55,0.35), 0 0 30px rgba(212,175,55,0.15);
+            --glass-blur: blur(16px);
+            
+            --font-main: 'Inter', sans-serif;
+            --font-sans: 'Montserrat', sans-serif;
+            
+            --transition-main: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ==========================================================================
+           2. GLOBAL RESET & BASE STYLES
+           ========================================================================== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%; background-color: var(--bg-pure-black); color: var(--text-white);
+            font-family: var(--font-sans); overflow-x: hidden; scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-pure-black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 3px; }
+
+        html, body, h1, h2, h3, h4, .brand-logo, .nav-links a, .dock-item {
+            font-family: var(--font-main) !important;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .blueprint-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px; pointer-events: none; z-index: 1;
+        }
+
+        /* ==========================================================================
+           3. PRELOADER & NAVIGATION
+           ========================================================================== */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
+            background: var(--bg-pure-black); z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1s linear;
+        }
+        #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-container { position: relative; display: flex; justify-content: center; align-items: center; width: 220px; height: 220px; }
+        .loader-ring { position: absolute; width: 100%; height: 100%; border: 2px solid transparent; border-top-color: var(--gold-primary); border-radius: 50%; animation: spin 3s linear infinite; }
+        .loader-ring-reverse { position: absolute; width: 85%; height: 85%; border: 1px dashed transparent; border-bottom-color: var(--gold-glow); border-radius: 50%; animation: spin-reverse 2s linear infinite; }
+        .loader-center { position: absolute; width: 65%; height: 65%; background: var(--bg-glass-card); border: 1px solid var(--gold-alpha); border-radius: 50%; backdrop-filter: var(--glass-blur); display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: var(--shadow-gold-glow); }
+        .loader-center i { font-size: 24px; color: var(--gold-primary); animation: pulseGlow 2s infinite alternate; }
+
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 30px 60px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-main);
+        }
+        .header.scrolled { padding: 15px 60px; background: var(--bg-glass); backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--gold-alpha); }
+        .brand-logo { font-size: 1.6rem; font-weight: 900; letter-spacing: 3px; }
+        .brand-logo span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links a { font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); position: relative; padding: 10px 0; }
+        .nav-links a::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--grad-gold); transition: var(--transition-main); }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold-hover); text-shadow: 0 0 8px rgba(255,213,74,0.3); }
+        .nav-links a:hover::before, .nav-links a.active::before { width: 100%; }
+
+        /* Mobile Nav */
+        .mobile-control-dock {
+            display: none; position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
+            width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 40px; padding: 10px 25px;
+            justify-content: space-between; align-items: center; z-index: 10000; box-shadow: var(--shadow-gold-glow); opacity: 0; transition: transform 1s, opacity 1s;
+        }
+        .mobile-control-dock.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .dock-brand span { color: var(--gold-primary); font-family: var(--font-main); font-weight: 700;}
+        .dock-trigger-btn {
+            background: var(--grad-gold); border: none; padding: 10px 22px; border-radius: 30px;
+            font-family: var(--font-main); font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px;
+        }
+        .immersive-overlay-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; background: rgba(0, 0, 0, 0.96);
+            backdrop-filter: blur(30px); z-index: 9999; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: var(--transition-main);
+        }
+        .immersive-overlay-menu.active { opacity: 1; visibility: visible; }
+        .overlay-nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 85%; max-width: 340px; text-align: center; }
+        .overlay-nav-item {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15); padding: 22px 15px;
+            border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px;
+            opacity: 0; transform: translateY(30px); transition: var(--transition-main);
+        }
+        .immersive-overlay-menu.active .overlay-nav-item { opacity: 1; transform: translateY(0); }
+        .overlay-nav-item i { font-size: 1.3rem; color: var(--gold-primary); }
+        .overlay-nav-item span { font-family: var(--font-main); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); }
+
+        /* ==========================================================================
+           4. CONTACT HERO SECTION
+           ========================================================================== */
+        .page-hero {
+            position: relative; height: 50vh; width: 100%; display: flex; align-items: flex-end;
+            padding: 80px 8%; background: var(--bg-pure-black); overflow: hidden; z-index: 2;
+            border-bottom: 1px solid var(--gold-alpha);
+        }
+        .page-hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop') center/cover no-repeat;
+            background-attachment: fixed; filter: brightness(0.15) contrast(1.2); z-index: 1;
+        }
+        .page-hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, #0A0A0A 5%, transparent 100%); z-index: 2;
+        }
+        .page-hero-content { position: relative; z-index: 3; max-width: 900px; transform: translateY(30px); opacity: 0; animation: fadeInUp 1s forwards 0.5s; }
+        .subtitle { color: var(--gold-primary); font-size: 0.85rem; letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 10px; }
+        .page-title { font-size: clamp(2.5rem, 4vw, 4rem); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; line-height: 1.2; }
+        .page-title span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* ==========================================================================
+           5. CONTACT HUB SYSTEM
+           ========================================================================== */
+        .contact-matrix-section {
+            padding: 100px 8%; background: var(--bg-rich-dark); position: relative; z-index: 2;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: stretch;
+        }
+
+        /* Left Side: Intel Cards (Locations & Direct Lines) */
+        .contact-intel-wrapper {
+            display: flex; flex-direction: column; gap: 30px;
+        }
+
+        .section-header h2 { font-size: clamp(1.8rem, 2.5vw, 2.5rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; }
+        .section-header h2 span { color: var(--gold-primary); }
+        .section-header p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 40px; }
+
+        .info-card {
+            display: flex; gap: 25px; padding: 35px 30px; background: var(--bg-pure-black);
+            border: 1px solid rgba(212,175,55,0.15); border-radius: 6px;
+            transition: var(--transition-main); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative; overflow: hidden;
+        }
+        
+        .info-card::before {
+            content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%;
+            background: var(--grad-gold); transform: scaleY(0); transform-origin: bottom;
+            transition: transform 0.5s ease;
+        }
+
+        .info-card:hover { border-color: var(--gold-primary); transform: translateX(10px); box-shadow: var(--shadow-gold-glow); }
+        .info-card:hover::before { transform: scaleY(1); }
+
+        .info-icon {
+            width: 65px; height: 65px; background: var(--bg-glass-card);
+            border: 1px solid var(--gold-alpha); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.5rem; color: var(--gold-primary); flex-shrink: 0;
+            box-shadow: inset 0 0 15px rgba(212,175,55,0.1);
+        }
+
+        .info-content h3 { color: var(--text-white); font-size: 1.1rem; margin-bottom: 8px; font-family: var(--font-main); text-transform: uppercase; letter-spacing: 1px; }
+        .info-content p, .info-content a { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; font-family: var(--font-sans); }
+        .info-content a { transition: 0.3s; display: block; margin-top: 5px; }
+        .info-content a:hover { color: var(--gold-hover); text-shadow: 0 0 8px rgba(255,213,74,0.4); }
+
+        /* Right Side: Interactive Map Wrapper */
+        .location-map-wrapper {
+            position: relative;
+            display: block;
+            background: var(--bg-glass-card);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            overflow: hidden;
+            min-height: 500px;
+            height: 100%;
+            transition: var(--transition-main);
+            cursor: pointer;
+        }
+
+        .location-map-wrapper:hover {
+            border-color: var(--gold-primary);
+            box-shadow: var(--shadow-gold-glow);
+            transform: translateY(-5px);
+        }
+
+        .map-iframe-container {
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allows the parent <a> link to handle the click */
+            filter: grayscale(80%) contrast(1.1) brightness(0.7) sepia(20%) hue-rotate(5deg);
+            transition: var(--transition-main);
+        }
+
+        .location-map-wrapper:hover .map-iframe-container {
+            filter: grayscale(0%) contrast(1) brightness(1) sepia(0%);
+        }
+
+        .map-overlay-btn {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-pure-black);
+            color: var(--gold-primary);
+            border: 1px solid var(--gold-border);
+            padding: 15px 35px;
+            font-family: var(--font-main);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            transition: var(--transition-main);
+            z-index: 2;
+            white-space: nowrap;
+        }
+
+        .map-overlay-btn i {
+            font-size: 1.1rem;
+        }
+
+        .location-map-wrapper:hover .map-overlay-btn {
+            background: var(--grad-gold);
+            color: var(--bg-pure-black);
+            box-shadow: 0 0 20px rgba(212,175,55,0.6);
+            border-color: transparent;
+        }
+
+        /* ==========================================================================
+           6. FOOTER
+           ========================================================================== */
+        .executive-footer { background: #030303; padding: 80px 8% 40px 8%; position: relative; z-index: 2; border-top: 1px solid rgba(212,175,55,0.1); }
+        .footer-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; margin-bottom: 60px; }
+        .footer-brand-column h3 { font-size: 1.5rem; margin-bottom: 20px; letter-spacing: 2px; }
+        .footer-brand-column h3 span { color: var(--gold-primary); }
+        .footer-brand-column p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; }
+        .footer-links-column h4 { color: var(--gold-primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+        .footer-links-column ul { display: flex; flex-direction: column; gap: 15px; }
+        .footer-links-column a { color: var(--text-secondary); font-size: 0.85rem; transition: var(--transition-main); }
+        .footer-links-column a:hover { color: var(--gold-glow); padding-left: 5px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-bottom p { color: var(--text-muted); font-size: 0.8rem; }
+        .footer-socials { display: flex; gap: 20px; }
+        .footer-socials a { width: 40px; height: 40px; border: 1px solid rgba(212,175,55,0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--text-secondary); transition: var(--transition-main); }
+        .footer-socials a:hover { border-color: var(--gold-primary); color: var(--bg-pure-black); background: var(--grad-gold); box-shadow: var(--shadow-gold-glow); }
+
+        /* ==========================================================================
+           7. RESPONSIVE OPTIMIZATION
+           ========================================================================== */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+        @keyframes pulseGlow { 100% { opacity: 1; filter: drop-shadow(0 0 15px #FFD54A); } }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 1024px) {
+            .contact-matrix-section { grid-template-columns: 1fr; gap: 50px; }
+            .location-map-wrapper { min-height: 400px; }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .mobile-control-dock { display: flex; }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero { padding: 60px 5%; height: 40vh; align-items: center; text-align: center; justify-content: center; }
+            .contact-matrix-section { padding: 80px 5%; }
+            .info-card { flex-direction: column; text-align: center; align-items: center; padding: 30px 20px; }
+            .location-map-wrapper { min-height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Architectural Background Pattern -->
+    <div class="blueprint-grid"></div>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring-reverse"></div>
+            <div class="loader-center">
+                <i class="fa-solid fa-map-location-dot" style="font-size: 24px; color: var(--gold-primary); animation: pulseGlow 2s infinite alternate;"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- DESKTOP HEADER -->
+    <header class="header" id="main-header">
+        <div class="brand-logo">SMART <span>VISION</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="partnerships.html">Partnerships</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="career.html">Career</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- MOBILE SMART DOCK -->
+    <nav class="mobile-control-dock" id="mobile-dock">
+        <div class="dock-brand">SMART <span>VISION</span></div>
+        <button class="dock-trigger-btn" id="dock-trigger">
+            <i class="fa-solid fa-compass-drafting"></i> NAVIGATE
+        </button>
+    </nav>
+
+    <!-- IMMERSIVE MOBILE OVERLAY -->
+    <div class="immersive-overlay-menu" id="control-center-overlay">
+        <div class="overlay-nav-grid">
+            <a href="index.html" class="overlay-nav-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="about.html" class="overlay-nav-item"><i class="fa-solid fa-building-user"></i><span>About</span></a>
+            <a href="services.html" class="overlay-nav-item"><i class="fa-solid fa-trowel-bricks"></i><span>Services</span></a>
+            <a href="projects.html" class="overlay-nav-item"><i class="fa-solid fa-city"></i><span>Projects</span></a>
+            <a href="partnerships.html" class="overlay-nav-item"><i class="fa-solid fa-handshake-angle"></i><span>Partnerships</span></a>
+            <a href="team.html" class="overlay-nav-item"><i class="fa-solid fa-users-gear"></i><span>Team</span></a>
+            <a href="career.html" class="overlay-nav-item"><i class="fa-solid fa-briefcase"></i><span>Career</span></a>
+            <a href="news.html" class="overlay-nav-item"><i class="fa-solid fa-newspaper"></i><span>News</span></a>
+            <a href="contact.html" class="overlay-nav-item" style="border-color: var(--gold-primary); grid-column: span 2;"><i class="fa-solid fa-map-location-dot"></i><span style="color: var(--gold-primary);">Contact Hub</span></a>
+        </div>
+    </div>
+
+    <!-- CONTACT HERO SECTION -->
+    <section class="page-hero">
+        <div class="page-hero-bg"></div>
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <span class="subtitle">Global Connectivity</span>
+            <h1 class="page-title">Direct <span>Contact</span> <br>& Locations</h1>
+        </div>
+    </section>
+
+    <!-- CONTACT HUB SYSTEM -->
+    <section class="contact-matrix-section">
+        
+        <!-- Left Column: Information Cards -->
+        <div class="contact-intel-wrapper">
+            <div class="section-header">
+                <h2>Our <span>Offices</span></h2>
+                <p>Connect with our executive team. We are strategically located to oversee global engineering operations.</p>
+            </div>
+
+            <!-- Head Office -->
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-content">
+                    <h3>Head Office</h3>
+                    <p>IZAR Mall, Palm Hills Square,<br>Zayed, Giza, Egypt.</p>
+                </div>
+            </div>
+
+            <!-- Branch Office -->
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-content">
+                    <h3>Branch Office</h3>
+                    <p>Villa 7m, Pyramids Gardens,<br>Giza, Egypt.</p>
+                </div>
+            </div>
+
+            <!-- Direct Lines -->
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-headset"></i></div>
+                <div class="info-content">
+                    <h3>Direct Communications</h3>
+                    <a href="tel:01000076056"><i class="fa-solid fa-phone-flip" style="margin-right: 5px;"></i> (+20) 01000076056</a>
+                    <a href="tel:01021501250"><i class="fa-solid fa-phone-flip" style="margin-right: 5px;"></i> (+20) 01021501250</a>
+                    <a href="mailto:smartgcs_es@yahoo.com" style="margin-top: 15px;"><i class="fa-solid fa-envelope" style="margin-right: 5px;"></i> smartgcs_es@yahoo.com</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Interactive Google Map -->
+        <!-- Clicking anywhere on this map card will open Google Maps directly to the Head Office location -->
+        <a href="https://www.google.com/maps/search/IZAR+Mall,+Palm+Hills+Square,+Zayed,+Giza" target="_blank" class="location-map-wrapper">
+            <!-- Iframe is visually embedded but click events are passed to the wrapper link -->
+            <iframe class="map-iframe-container" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55251.33663488775!2d31.130836526131463!3d29.9880757970473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145845ef59a72df5%3A0x6e87f75f9d77fcd1!2sGiza%20Governorate%2C%20Egypt!5e0!3m2!1sen!2sae!4v1684948030000!5m2!1sen!2sae" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            
+            <div class="map-overlay-btn">
+                <i class="fa-solid fa-location-arrow"></i> Open in Google Maps
+            </div>
+        </a>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="executive-footer">
+        <div class="footer-matrix">
+            <div class="footer-brand-column">
+                <h3>SMART <span>VISION</span></h3>
+                <p>Engineering complexity into luxurious structural reality. We are the architects of the future.</p>
+            </div>
+            <div class="footer-links-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Our Services</a></li>
+                    <li><a href="projects.html">Portfolio</a></li>
+                    <li><a href="news.html">News & Updates</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-column">
+                <h4>Connect</h4>
+                <div class="footer-socials">
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SMART VISION Engineering Operations. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTION SCRIPTS -->
+    <script>
+        // Preloader Logic
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('preloader').classList.add('hidden');
+                if(window.innerWidth <= 992) {
+                    setTimeout(() => {
+                        document.getElementById('mobile-dock').classList.add('visible');
+                    }, 500);
+                }
+            }, 800);
+        });
+
+        // Sticky Header Logic
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Overlay Toggle
+        const dockTrigger = document.getElementById('dock-trigger');
+        const overlayMenu = document.getElementById('control-center-overlay');
+        
+        if(dockTrigger && overlayMenu) {
+            dockTrigger.addEventListener('click', function() {
+                overlayMenu.classList.toggle('active');
+                if(overlayMenu.classList.contains('active')) {
+                    dockTrigger.innerHTML = '<i class="fa-solid fa-xmark"></i> CLOSE';
+                } else {
+                    dockTrigger.innerHTML = '<i class="fa-solid fa-compass-drafting"></i> NAVIGATE';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
