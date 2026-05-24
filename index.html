@@ -6,8 +6,9 @@
     <title>SMART VISION | Premium Engineering & Architecture</title>
     
     <!-- Premium Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Montserrat:wght@200;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* ==========================================================================
@@ -44,8 +45,7 @@
             --glass-blur: blur(16px);
             
             /* Fonts */
-            --font-display: 'Cinzel', serif;
-            --font-sans: 'Montserrat', sans-serif;
+            --font-main: 'Inter', sans-serif;
             
             /* Engine Settings */
             --transition-main: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -73,9 +73,9 @@
         ::-webkit-scrollbar-track { background: var(--bg-pure-black); }
         ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 3px; }
 
-        h1, h2, h3, h4, .brand-logo, .nav-links a, .dock-item {
-            font-family: var(--font-display);
-        }
+ html, body, h1, h2, h3, h4, .brand-logo, .nav-links a, .dock-item {
+    font-family: var(--font-main) !important;
+}
 
         /* Architectural Blueprint Grid Pattern Overlay */
         .blueprint-grid {
