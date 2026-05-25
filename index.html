@@ -5,55 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SMART VISION | Premium Engineering & Architecture</title>
     
-    <!-- Premium Fonts & Icons -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==========================================================================
-           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE
-           ========================================================================== */
         :root {
-            /* Background Colors */
             --bg-pure-black: #000000;
             --bg-rich-dark: #0A0A0A;
             --bg-glass: rgba(0, 0, 0, 0.75);
             --bg-glass-card: rgba(255, 255, 255, 0.02);
-            
-            /* Luxury Gold System */
             --gold-primary: #D4AF37;
             --gold-glow: #FFD54A;
             --gold-hover: #E6C75A;
             --gold-border: #C9A227;
             --gold-alpha: rgba(212, 175, 55, 0.25);
-            
-            /* Typography Colors */
             --text-white: #FFFFFF;
             --text-secondary: #CFCFCF;
             --text-muted: #8F8F8F;
-            
-            /* Cinematic Gradients */
             --grad-gold: linear-gradient(90deg, #8B6B15, #D4AF37, #FFD54A, #D4AF37, #8B6B15);
             --grad-hero-overlay: linear-gradient(to right, rgba(0,0,0,0.95) 20%, rgba(0,0,0,0.75) 50%, rgba(212,175,55,0.15) 100%);
             --grad-luxury-dark: linear-gradient(180deg, #000000, #0A0A0A, #000000);
             --grad-card-hover: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, transparent 100%);
-            
-            /* Premium Shadows & Blurs */
             --shadow-gold-glow: 0 0 15px rgba(212,175,55,0.35), 0 0 30px rgba(212,175,55,0.15);
             --shadow-btn-hover: 0 0 20px #D4AF37, 0 0 40px rgba(212,175,55,0.5);
             --glass-blur: blur(16px);
-            
-            /* Fonts */
             --font-main: 'Inter', sans-serif;
-            
-            /* Engine Settings */
             --transition-main: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* ==========================================================================
-           2. GLOBAL RESET & CINEMATIC BASE STYLES
-           ========================================================================== */
         *, *::before, *::after {
             margin: 0; padding: 0; box-sizing: border-box;
             outline: none; -webkit-tap-highlight-color: transparent;
@@ -63,21 +44,19 @@
             width: 100%; min-height: 100%;
             background-color: var(--bg-pure-black);
             color: var(--text-white);
-            font-family: var(--font-sans);
+            font-family: var(--font-main);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Custom Premium Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-pure-black); }
         ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 3px; }
 
- html, body, h1, h2, h3, h4, .brand-logo, .nav-links a, .dock-item {
-    font-family: var(--font-main) !important;
-}
+        html, body, h1, h2, h3, h4, .brand-logo, .nav-links a, .dock-item {
+            font-family: var(--font-main) !important;
+        }
 
-        /* Architectural Blueprint Grid Pattern Overlay */
         .blueprint-grid {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
@@ -87,83 +66,281 @@
             pointer-events: none; z-index: 1;
         }
 
-        /* ==========================================================================
-           3. ULTRA-LUXURY PRELOADER WITH PERCENTAGE CALCULATOR
-           ========================================================================== */
+        /* =============================================
+           REDESIGNED LUXURY PRELOADER
+           ============================================= */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
             background: var(--bg-pure-black); z-index: 99999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1s linear;
+            overflow: hidden;
         }
 
-        .loader-container {
-            position: relative; display: flex; justify-content: center; align-items: center;
-            width: 220px; height: 220px;
+        /* Animated scan lines behind everything */
+        #preloader::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(212,175,55,0.012) 2px,
+                rgba(212,175,55,0.012) 4px
+            );
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .loader-ring {
-            position: absolute; width: 100%; height: 100%;
-            border: 2px solid transparent; border-top-color: var(--gold-primary);
-            border-radius: 50%; animation: spin 3s linear infinite;
+        /* Gold beam sweep */
+        #preloader::after {
+            content: '';
+            position: absolute; top: -100%; left: 0; width: 100%; height: 40%;
+            background: linear-gradient(to bottom, transparent, rgba(212,175,55,0.04), transparent);
+            animation: scanBeam 3.5s ease-in-out infinite;
+            pointer-events: none; z-index: 0;
         }
 
-        .loader-ring-reverse {
-            position: absolute; width: 85%; height: 85%;
-            border: 1px dashed transparent; border-bottom-color: var(--gold-glow);
-            border-radius: 50%; animation: spin-reverse 2s linear infinite;
+        @keyframes scanBeam {
+            0%   { top: -40%; }
+            100% { top: 140%; }
         }
 
-        .loader-center {
-            position: absolute; width: 65%; height: 65%;
-            background: var(--bg-glass-card); border: 1px solid var(--gold-alpha);
-            border-radius: 50%; backdrop-filter: var(--glass-blur);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            box-shadow: var(--shadow-gold-glow);
+        .loader-stage {
+            position: relative; z-index: 2;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 0;
         }
 
-        .loader-center img {
-            width: 45px; height: auto; object-fit: contain;
-            animation: pulseGlow 2s infinite alternate;
+        /* Hexagon frame */
+        .loader-hex-wrap {
+            position: relative;
+            width: 180px; height: 180px;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .counter-number {
-            font-size: 1.2rem; font-weight: 700; color: var(--gold-primary);
-            margin-top: 5px; letter-spacing: 1px;
+        .hex-svg {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
         }
 
-        .loader-branding {
-            margin-top: 40px; text-transform: uppercase; letter-spacing: 6px;
-            font-size: 0.85rem; color: var(--text-secondary); text-align: center;
+        .hex-outline {
+            fill: none;
+            stroke: url(#hexGrad);
+            stroke-width: 1.5;
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+            animation: hexDraw 1.8s cubic-bezier(0.4,0,0.2,1) forwards 0.3s;
         }
-        .loader-branding span { color: var(--gold-primary); display: block; margin-top: 5px; font-size: 0.65rem; color: var(--text-muted); }
 
-        /* ==========================================================================
-           4. DESKTOP NAVIGATION HIERARCHY
-           ========================================================================== */
+        .hex-inner {
+            fill: none;
+            stroke: rgba(212,175,55,0.12);
+            stroke-width: 0.8;
+            stroke-dasharray: 4 8;
+            animation: rotateSlow 12s linear infinite;
+            transform-origin: 90px 90px;
+        }
+
+        @keyframes hexDraw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes rotateSlow {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Corner tick marks */
+        .hex-tick {
+            fill: none;
+            stroke: var(--gold-glow);
+            stroke-width: 2;
+            opacity: 0;
+            animation: tickAppear 0.4s ease forwards;
+        }
+        .hex-tick:nth-child(1) { animation-delay: 1.8s; }
+        .hex-tick:nth-child(2) { animation-delay: 2.0s; }
+        .hex-tick:nth-child(3) { animation-delay: 2.2s; }
+
+        @keyframes tickAppear {
+            to { opacity: 1; }
+        }
+
+        /* Logo inside hex */
+        .loader-logo-img {
+            width: 68px; height: 68px;
+            object-fit: contain;
+            position: relative; z-index: 3;
+            animation: logoPulse 2.5s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 10px rgba(212,175,55,0.6));
+        }
+
+        @keyframes logoPulse {
+            0%   { filter: drop-shadow(0 0 6px rgba(212,175,55,0.4)); opacity: 0.85; }
+            100% { filter: drop-shadow(0 0 20px rgba(255,213,74,0.9)); opacity: 1; }
+        }
+
+        /* Progress bar track */
+        .loader-progress-track {
+            width: 220px; height: 1px;
+            background: rgba(212,175,55,0.15);
+            margin-top: 32px;
+            position: relative; overflow: hidden; border-radius: 1px;
+        }
+
+        .loader-progress-fill {
+            height: 100%;
+            background: var(--grad-gold);
+            width: 0%;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 8px rgba(255,213,74,0.8);
+        }
+
+        /* Glint on progress bar */
+        .loader-progress-fill::after {
+            content: '';
+            position: absolute; right: -10px; top: -4px;
+            width: 20px; height: 9px;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.8) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        /* Text area */
+        .loader-info {
+            margin-top: 24px;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+        }
+
+        .loader-brand-text {
+            font-size: 1.1rem; font-weight: 700;
+            letter-spacing: 8px; text-transform: uppercase;
+            color: var(--text-white);
+        }
+        .loader-brand-text span {
+            background: var(--grad-gold);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .loader-sub-row {
+            display: flex; align-items: center; gap: 16px;
+        }
+
+        .loader-divider {
+            width: 30px; height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-border));
+        }
+        .loader-divider.right {
+            background: linear-gradient(to left, transparent, var(--gold-border));
+        }
+
+        .loader-tagline {
+            font-size: 0.62rem; letter-spacing: 4px; text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .loader-percentage {
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 2px; color: var(--gold-primary);
+            margin-top: 6px;
+        }
+
+        /* Corner decorations */
+        .loader-corner {
+            position: absolute; width: 50px; height: 50px;
+            opacity: 0.35;
+        }
+        .loader-corner.tl { top: 30px; left: 30px; border-top: 1px solid var(--gold-primary); border-left: 1px solid var(--gold-primary); }
+        .loader-corner.tr { top: 30px; right: 30px; border-top: 1px solid var(--gold-primary); border-right: 1px solid var(--gold-primary); }
+        .loader-corner.bl { bottom: 30px; left: 30px; border-bottom: 1px solid var(--gold-primary); border-left: 1px solid var(--gold-primary); }
+        .loader-corner.br { bottom: 30px; right: 30px; border-bottom: 1px solid var(--gold-primary); border-right: 1px solid var(--gold-primary); }
+
+        /* =============================================
+           HEADER WITH LOGO
+           ============================================= */
         .header {
             position: fixed; top: 0; left: 0; width: 100%;
-            padding: 30px 60px; display: flex; justify-content: space-between; align-items: center;
+            padding: 22px 60px; display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; transition: var(--transition-main);
         }
 
         .header.scrolled {
-            padding: 15px 60px; background: var(--bg-glass);
+            padding: 12px 60px; background: var(--bg-glass);
             backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--gold-alpha);
         }
 
-        .brand-logo {
-            font-size: 1.6rem; font-weight: 900; letter-spacing: 3px; color: var(--text-white);
-        }
-        .brand-logo span {
-            background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        /* Brand identity block */
+        .brand-identity {
+            display: flex; align-items: center; gap: 13px;
+            text-decoration: none;
         }
 
-        .nav-links { display: flex; gap: 35px; }
+        /* Logo wrapper with gold ring */
+        .header-logo-wrap {
+            position: relative;
+            width: 46px; height: 46px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .header-logo-ring {
+            position: absolute; inset: 0;
+            border-radius: 50%;
+            border: 1px solid var(--gold-border);
+            box-shadow: 0 0 10px rgba(212,175,55,0.2), inset 0 0 8px rgba(212,175,55,0.05);
+            transition: var(--transition-main);
+        }
+
+        .header-logo-ring::before {
+            content: '';
+            position: absolute; inset: 3px;
+            border-radius: 50%;
+            border: 1px dashed rgba(212,175,55,0.25);
+            animation: rotateSlow 18s linear infinite;
+        }
+
+        .header-logo-img {
+            width: 30px; height: 30px;
+            object-fit: contain;
+            position: relative; z-index: 2;
+            filter: drop-shadow(0 0 4px rgba(212,175,55,0.4));
+            transition: var(--transition-main);
+        }
+
+        .brand-identity:hover .header-logo-ring {
+            box-shadow: var(--shadow-gold-glow);
+            border-color: var(--gold-glow);
+        }
+        .brand-identity:hover .header-logo-img {
+            filter: drop-shadow(0 0 10px rgba(255,213,74,0.7));
+            transform: scale(1.05);
+        }
+
+        /* Vertical separator */
+        .brand-separator {
+            width: 1px; height: 28px;
+            background: linear-gradient(to bottom, transparent, rgba(212,175,55,0.4), transparent);
+        }
+
+        .brand-logo {
+            font-size: 1.45rem; font-weight: 900; letter-spacing: 3px;
+            color: var(--text-white); line-height: 1;
+        }
+        .brand-logo span {
+            background: var(--grad-gold);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .brand-logo-sub {
+            font-size: 0.52rem; letter-spacing: 4px; text-transform: uppercase;
+            color: var(--text-muted); margin-top: 3px; font-weight: 400;
+        }
+
+        .nav-links { display: flex; gap: 35px; list-style: none; }
         .nav-links li { position: relative; }
         .nav-links a {
-            font-size: 0.8rem; font-weight: 500; text-transform: uppercase;
+            font-size: 0.78rem; font-weight: 500; text-transform: uppercase;
             letter-spacing: 2px; color: var(--text-secondary); padding: 10px 0;
+            text-decoration: none;
         }
         .nav-links a::before {
             content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
@@ -172,15 +349,15 @@
         .nav-links a:hover { color: var(--gold-hover); text-shadow: 0 0 8px rgba(255,213,74,0.3); }
         .nav-links a:hover::before { width: 100%; }
 
-        /* ==========================================================================
-           5. ULTRA-LUXURY MOBILE CONTROL DOCK & OVERLAY MENU (NO HAMBURGER)
-           ========================================================================== */
+        /* =============================================
+           MOBILE DOCK — with logo
+           ============================================= */
         .mobile-control-dock {
             display: none; position: fixed; bottom: 25px; left: 50%;
             transform: translateX(-50%) translateY(100px); width: 90%; max-width: 400px;
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 40px;
-            padding: 10px 25px; justify-content: space-between; align-items: center;
+            padding: 9px 20px; justify-content: space-between; align-items: center;
             z-index: 10000; box-shadow: var(--shadow-gold-glow), 0 10px 30px rgba(0,0,0,0.8);
             opacity: 0; transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
         }
@@ -189,22 +366,41 @@
             transform: translateX(-50%) translateY(0); opacity: 1;
         }
 
+        /* Mobile dock brand with mini logo */
+        .dock-brand-wrap {
+            display: flex; align-items: center; gap: 9px;
+        }
+
+        .dock-logo-mini {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            border: 1px solid rgba(212,175,55,0.5);
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(212,175,55,0.05);
+            flex-shrink: 0;
+        }
+
+        .dock-logo-mini img {
+            width: 18px; height: 18px; object-fit: contain;
+            filter: drop-shadow(0 0 3px rgba(212,175,55,0.5));
+        }
+
         .dock-brand {
-            font-size: 0.9rem; font-weight: 700; color: var(--text-white); letter-spacing: 1px;
+            font-size: 0.85rem; font-weight: 700; color: var(--text-white); letter-spacing: 1px;
         }
         .dock-brand span { color: var(--gold-primary); }
 
         .dock-trigger-btn {
             background: var(--grad-gold); color: var(--bg-pure-black);
-            border: none; padding: 10px 22px; border-radius: 30px;
-            font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
+            border: none; padding: 10px 20px; border-radius: 30px;
+            font-family: var(--font-main); font-size: 0.72rem; font-weight: 700;
             letter-spacing: 1.5px; cursor: pointer; display: flex; align-items: center; gap: 8px;
             box-shadow: 0 4px 15px rgba(212,175,55,0.4); transition: var(--transition-main);
+            white-space: nowrap;
         }
 
         .dock-trigger-btn i { font-size: 0.8rem; transition: var(--transition-main); }
 
-        /* Immersive Mobile Control Center Overlay */
         .immersive-overlay-menu {
             position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
             background: rgba(0, 0, 0, 0.96); backdrop-filter: blur(30px);
@@ -226,18 +422,17 @@
             background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15);
             padding: 22px 15px; border-radius: 16px; display: flex; flex-direction: column;
             align-items: center; gap: 12px; transition: var(--transition-main);
-            opacity: 0; transform: translateY(30px);
+            opacity: 0; transform: translateY(30px); text-decoration: none;
         }
 
         .immersive-overlay-menu.active .overlay-nav-item {
             opacity: 1; transform: translateY(0);
         }
 
-        /* Staggered entry animation delay for menu elements via JS or CSS loops */
         .overlay-nav-item i { font-size: 1.3rem; color: var(--gold-primary); }
         .overlay-nav-item span {
-            font-family: var(--font-display); font-size: 0.85rem;
-            letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary);
+            font-size: 0.85rem; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--text-secondary);
         }
 
         .overlay-nav-item:hover, .overlay-nav-item:active {
@@ -246,9 +441,9 @@
         }
         .overlay-nav-item:hover span { color: var(--gold-glow); }
 
-        /* ==========================================================================
-           6. CINEMATIC HERO EPICENTER
-           ========================================================================== */
+        /* =============================================
+           HERO
+           ============================================= */
         .hero {
             position: relative; height: 100dvh; width: 100%;
             display: flex; align-items: center; padding: 0 8%;
@@ -300,7 +495,7 @@
         .btn-luxury {
             position: relative; padding: 18px 45px; background: transparent;
             color: var(--gold-primary); border: 1px solid var(--gold-border);
-            text-transform: uppercase; font-family: var(--font-display);
+            text-transform: uppercase; font-family: var(--font-main);
             font-size: 0.8rem; font-weight: 700; letter-spacing: 2px;
             cursor: pointer; overflow: hidden; z-index: 1; transition: var(--transition-main);
         }
@@ -315,9 +510,7 @@
         }
         .btn-luxury:hover::before { left: 0; }
 
-        /* ==========================================================================
-           7. REAL-TIME COUNTER / STATS SECTION
-           ========================================================================== */
+        /* STATS */
         .stats-matrix {
             position: relative; padding: 80px 8%; background: var(--bg-pure-black);
             border-top: 1px solid rgba(212,175,55,0.15); border-bottom: 1px solid rgba(212,175,55,0.15);
@@ -326,7 +519,7 @@
 
         .stat-cube { text-align: center; }
         .stat-number {
-            font-family: var(--font-display); font-size: 3.5rem; font-weight: 700;
+            font-size: 3.5rem; font-weight: 700;
             background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 10px; display: inline-block;
         }
@@ -334,9 +527,7 @@
             font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--text-muted);
         }
 
-        /* ==========================================================================
-           8. MASTERPIECE EXPERTISE GRID (HIGH RESPONSE)
-           ========================================================================== */
+        /* EXPERTISE */
         .expertise-showroom {
             position: relative; padding: 120px 8%; background: var(--bg-rich-dark); z-index: 2;
         }
@@ -365,6 +556,7 @@
         .card-visual-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1; transition: var(--transition-main); filter: grayscale(40%) brightness(0.5);
+            object-fit: cover;
         }
         .architecture-card:hover .card-visual-bg { transform: scale(1.06); filter: grayscale(0%) brightness(0.35); }
 
@@ -375,7 +567,7 @@
 
         .card-content-pack { position: relative; z-index: 3; transition: var(--transition-main); }
         .card-index-num {
-            font-family: var(--font-display); font-size: 1.2rem; color: var(--gold-primary);
+            font-size: 1.2rem; color: var(--gold-primary);
             margin-bottom: 15px; display: block;
         }
         .card-title { font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; color: var(--text-white); }
@@ -385,9 +577,7 @@
             border-color: var(--gold-primary); box-shadow: var(--shadow-gold-glow);
         }
 
-        /* ==========================================================================
-           9. INFINITE SEAMLESS PARTNERSHIP TICKER
-           ========================================================================== */
+        /* TICKER */
         .ticker-universe {
             background: var(--bg-pure-black); padding: 60px 0; overflow: hidden;
             border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1);
@@ -396,9 +586,9 @@
 
         .ticker-wrapper { display: flex; width: max-content; animation: infiniteScroll 25s linear infinite; }
         .ticker-wrapper:hover { animation-play-state: paused; }
-        
+
         .partner-logo-unit {
-            padding: 0 50px; font-family: var(--font-display); font-size: 1.3rem;
+            padding: 0 50px; font-size: 1.3rem;
             font-weight: 700; color: var(--text-muted); letter-spacing: 4px;
             text-transform: uppercase; display: flex; align-items: center; gap: 10px;
             transition: var(--transition-main); cursor: default;
@@ -406,9 +596,7 @@
         .partner-logo-unit i { color: var(--gold-alpha); font-size: 1.5rem; }
         .partner-logo-unit:hover { color: var(--gold-primary); text-shadow: var(--shadow-gold-glow); }
 
-        /* ==========================================================================
-           10. ULTIMATE EXECUTIVE FOOTER
-           ========================================================================== */
+        /* FOOTER */
         .executive-footer {
             background: #030303; border-top: 1px solid rgba(212,175,55,0.2);
             padding: 80px 8% 40px 8%; position: relative; z-index: 2;
@@ -428,7 +616,7 @@
             letter-spacing: 2px; margin-bottom: 25px;
         }
         .footer-links-column ul { display: flex; flex-direction: column; gap: 15px; list-style: none; }
-        .footer-links-column a { color: var(--text-secondary); font-size: 0.85rem; letter-spacing: 1px; }
+        .footer-links-column a { color: var(--text-secondary); font-size: 0.85rem; letter-spacing: 1px; text-decoration: none; }
         .footer-links-column a:hover { color: var(--gold-glow); padding-left: 5px; }
 
         .footer-bottom {
@@ -440,33 +628,34 @@
         .footer-socials a {
             width: 40px; height: 40px; border: 1px solid rgba(212,175,55,0.2);
             border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            color: var(--text-secondary); transition: var(--transition-main);
+            color: var(--text-secondary); transition: var(--transition-main); text-decoration: none;
         }
         .footer-socials a:hover {
             border-color: var(--gold-primary); color: var(--bg-pure-black); background: var(--grad-gold);
             box-shadow: var(--shadow-gold-glow);
         }
 
-        /* ==========================================================================
-           11. SCREEN ENGINES & ANIMATION KEYFRAMES
-           ========================================================================== */
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
-        @keyframes pulseGlow { 0% { opacity: 0.5; filter: drop-shadow(0 0 2px #D4AF37); } 100% { opacity: 1; filter: drop-shadow(0 0 15px #FFD54A); } }
+        /* KEYFRAMES */
         @keyframes cinematicPan { 0% { transform: scale(1.08) translate(0, 0); } 100% { transform: scale(1.15) translate(-2%, -1%); } }
         @keyframes fadeInUpHero { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
         @keyframes infiniteScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* Responsive Optimization Quirks */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .header { padding: 25px 40px; }
-            .header.scrolled { padding: 15px 40px; }
+            .header { padding: 20px 40px; }
+            .header.scrolled { padding: 12px 40px; }
         }
 
         @media (max-width: 900px) {
             .nav-links { display: none; }
             .mobile-control-dock { display: flex; }
             .hero { padding: 0 5%; }
+            .header { padding: 18px 24px; }
+            .header.scrolled { padding: 12px 24px; }
+            .header-logo-wrap { width: 40px; height: 40px; }
+            .header-logo-img { width: 26px; height: 26px; }
+            .brand-logo { font-size: 1.2rem; letter-spacing: 2px; }
+            .brand-logo-sub { display: none; }
         }
 
         @media (max-width: 480px) {
@@ -475,36 +664,83 @@
             .stats-matrix { grid-template-columns: 1fr; gap: 30px; }
             .showroom-grid { grid-template-columns: 1fr; }
             .architecture-card { height: 420px; padding: 25px; }
+            .brand-separator { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Architectural Pattern Backdrop -->
     <div class="blueprint-grid"></div>
 
-    <!-- 1. ADVANCED PRECISION PRELOADER -->
+    <!-- ═══════════════════════════════════════
+         REDESIGNED PRELOADER
+         ═══════════════════════════════════════ -->
     <div id="preloader">
-        <div class="loader-container">
-            <div class="loader-ring"></div>
-            <div class="loader-ring-reverse"></div>
-            <div class="loader-center">
-                <!-- Vector Drafting Compass acting as architectural logo placeholder -->
-                <img src="Picture1.png" alt="Engineering Center Core">
-                <div class="counter-number" id="percentage-counter">0%</div>
+        <!-- Corner decorations -->
+        <div class="loader-corner tl"></div>
+        <div class="loader-corner tr"></div>
+        <div class="loader-corner bl"></div>
+        <div class="loader-corner br"></div>
+
+        <div class="loader-stage">
+            <!-- Hex frame with SVG -->
+            <div class="loader-hex-wrap">
+                <svg class="hex-svg" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%"   stop-color="#8B6B15"/>
+                            <stop offset="40%"  stop-color="#D4AF37"/>
+                            <stop offset="60%"  stop-color="#FFD54A"/>
+                            <stop offset="100%" stop-color="#8B6B15"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Outer hex -->
+                    <polygon class="hex-outline"
+                        points="90,10 164,52 164,128 90,170 16,128 16,52"/>
+                    <!-- Inner dashed ring -->
+                    <polygon class="hex-inner"
+                        points="90,28 148,62 148,118 90,152 32,118 32,62"/>
+                    <!-- Corner tick marks -->
+                    <line class="hex-tick" x1="88" y1="10" x2="92" y2="10"/>
+                    <line class="hex-tick" x1="162" y1="126" x2="166" y2="130"/>
+                    <line class="hex-tick" x1="14" y1="50" x2="18" y2="54"/>
+                </svg>
+                <img class="loader-logo-img" src="tled_sign-removebg-preview.png" alt="Smart Vision Logo">
             </div>
-        </div>
-        <div class="loader-branding">
-            SMART Vision
-            <span>Engineering Consultancy</span>
+
+            <!-- Progress bar -->
+            <div class="loader-progress-track">
+                <div class="loader-progress-fill" id="progress-fill"></div>
+            </div>
+
+            <!-- Branding text -->
+            <div class="loader-info">
+                <div class="loader-brand-text">SMART <span>VISION</span></div>
+                <div class="loader-sub-row">
+                    <div class="loader-divider"></div>
+                    <div class="loader-tagline">Engineering Consultancy</div>
+                    <div class="loader-divider right"></div>
+                </div>
+                <div class="loader-percentage" id="percentage-counter">0%</div>
+            </div>
         </div>
     </div>
 
-    <!-- 2. DESKTOP HEADER EXECUTION -->
+    <!-- ═══════════════════════════════════════
+         HEADER WITH LOGO
+         ═══════════════════════════════════════ -->
     <header class="header" id="main-header">
-        <div class="brand-logo">
-            SMART <span>VISION</span>
-        </div>
+        <a class="brand-identity" href="index.html">
+            <div class="header-logo-wrap">
+                <div class="header-logo-ring"></div>
+                <img class="header-logo-img" src="tled_sign-removebg-preview.png" alt="Smart Vision Logo">
+            </div>
+            <div class="brand-separator"></div>
+            <div>
+                <div class="brand-logo">SMART <span>VISION</span></div>
+                <div class="brand-logo-sub">Engineering Consultancy</div>
+            </div>
+        </a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
@@ -518,15 +754,20 @@
         </ul>
     </header>
 
-    <!-- 3. MOBILE SMART INTERFACE CONTROL DOCK (Anti-Hamburger Architecture) -->
+    <!-- MOBILE DOCK -->
     <nav class="mobile-control-dock" id="mobile-dock">
-        <div class="dock-brand">SMART <span>VISION</span></div>
+        <div class="dock-brand-wrap">
+            <div class="dock-logo-mini">
+                <img src="tled_sign-removebg-preview.png" alt="Logo">
+            </div>
+            <div class="dock-brand">SMART <span>VISION</span></div>
+        </div>
         <button class="dock-trigger-btn" id="dock-trigger">
             <i class="fa-solid fa-compass-drafting"></i> NAVIGATE
         </button>
     </nav>
 
-    <!-- IMMERSIVE DOCK CONTROL CENTER OVERLAY -->
+    <!-- OVERLAY MENU -->
     <div class="immersive-overlay-menu" id="control-center-overlay">
         <div class="overlay-nav-grid">
             <a href="index.html" class="overlay-nav-item">
@@ -554,19 +795,18 @@
                 <i class="fa-solid fa-newspaper"></i><span>News</span>
             </a>
             <a href="contact.html" class="overlay-nav-item" style="grid-column: span 2;">
-                <i class="fa-solid fa-file-signature" style="color: var(--gold-glow);"></i><span style="color: var(--gold-glow);">Contact Hub</span>
+                <i class="fa-solid fa-file-signature" style="color: var(--gold-glow);"></i>
+                <span style="color: var(--gold-glow);">Contact Hub</span>
             </a>
         </div>
     </div>
 
-    <!-- 4. CINEMATIC HERO EPICENTER -->
+    <!-- HERO -->
     <section class="hero">
         <div class="hero-media-wrapper">
-            <!-- Premium High-contrast Engineering/Architecture asset -->
             <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" class="hero-video-fallback" alt="Luxury Masterpiece Architecture">
         </div>
         <div class="hero-overlay"></div>
-        
         <div class="hero-content-cluster">
             <div class="hero-tagline">Engineering Elite Company</div>
             <h1 class="hero-main-title">Crafting Structural <span>Elegance</span> Beyond Time</h1>
@@ -579,11 +819,11 @@
         </div>
     </section>
 
-    <!-- 5. REAL-TIME ENGINE SCROLL INTERACTION STATS -->
+    <!-- STATS -->
     <section class="stats-matrix">
         <div class="stat-cube">
             <div class="stat-number" data-target="4">0</div>
-            <div class="stat-label">Core Displines</div>
+            <div class="stat-label">Core Disciplines</div>
         </div>
         <div class="stat-cube">
             <div class="stat-number" data-target="20">0</div>
@@ -595,15 +835,13 @@
         </div>
     </section>
 
-    <!-- 6. MASTERPIECE EXPERTISE GRID SECTION -->
+    <!-- EXPERTISE -->
     <section class="expertise-showroom">
         <div class="section-intel">
             <h2>Core <span>Expertise</span></h2>
             <p>Monolithic structural operations handled with extreme luxury parameters.</p>
         </div>
-
         <div class="showroom-grid">
-            <!-- Card 1 -->
             <div class="architecture-card" onclick="window.location.href='services.html'">
                 <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop" class="card-visual-bg" alt="Parametric Luxury Residential">
                 <div class="card-gradient-shield"></div>
@@ -613,7 +851,6 @@
                     <p class="card-desc">Advanced algorithmic building generation techniques emphasizing structural complexity and flawless execution aesthetics.</p>
                 </div>
             </div>
-            <!-- Card 2 -->
             <div class="architecture-card" onclick="window.location.href='services.html'">
                 <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" class="card-visual-bg" alt="Engineering Procurement">
                 <div class="card-gradient-shield"></div>
@@ -626,17 +863,15 @@
         </div>
     </section>
 
-    <!-- 7. SEAMLESS INFINITE PARTNERSHIP TICKER -->
+    <!-- TICKER -->
     <section class="ticker-universe">
         <div class="ticker-wrapper">
-            <!-- Set 1 -->
-            <div class="partner-logo-unit"><i class="fa-solid fa-vector-square"></i>Integrated Engineering Consultancy </div>
+            <div class="partner-logo-unit"><i class="fa-solid fa-vector-square"></i>Integrated Engineering Consultancy</div>
             <div class="partner-logo-unit"><i class="fa-solid fa-cube"></i>Architecture</div>
-            <div class="partner-logo-unit"><i class="fa-solid fa-layer-group"></i>Structure </div>
+            <div class="partner-logo-unit"><i class="fa-solid fa-layer-group"></i>Structure</div>
             <div class="partner-logo-unit"><i class="fa-solid fa-bezier-curve"></i>MEP</div>
-            <!-- Set 2 (Duplicate for seamless wrapping animation) -->
-            <div class="partner-logo-unit"><i class="fa-solid fa-vector-square"></i>Value Engineering </div>
-            <div class="partner-logo-unit"><i class="fa-solid fa-cube"></i>Efficiency </div>
+            <div class="partner-logo-unit"><i class="fa-solid fa-vector-square"></i>Value Engineering</div>
+            <div class="partner-logo-unit"><i class="fa-solid fa-cube"></i>Efficiency</div>
             <div class="partner-logo-unit"><i class="fa-solid fa-layer-group"></i>Optimum</div>
             <div class="partner-logo-unit"><i class="fa-solid fa-bezier-curve"></i>Accuracy</div>
         </div>
@@ -672,55 +907,49 @@
         </div>
     </footer>
 
-    <!-- ==========================================================================
-       12. ULTRA-SMOOTH LOGIC ENGINE (JAVASCRIPT)
-       ========================================================================== */ -->
     <script>
-        // 1. REAL-TIME LOADING PERCENTAGE ENGINE
+        // 1. PRELOADER ENGINE
         document.addEventListener("DOMContentLoaded", () => {
-            const counterElement = document.getElementById("percentage-counter");
-            const preloader = document.getElementById("preloader");
-            const mobileDock = document.getElementById("mobile-dock");
-            let currentCount = 0;
+            const counterEl   = document.getElementById("percentage-counter");
+            const progressBar = document.getElementById("progress-fill");
+            const preloader   = document.getElementById("preloader");
+            const mobileDock  = document.getElementById("mobile-dock");
+            let current = 0;
 
-            const updateCounter = () => {
-                currentCount += Math.floor(Math.random() * 4) + 1; // Real random progression feel
-                if (currentCount >= 100) {
-                    currentCount = 100;
-                    counterElement.innerText = "100%";
+            const updateLoader = () => {
+                current += Math.floor(Math.random() * 4) + 1;
+                if (current >= 100) {
+                    current = 100;
+                    counterEl.innerText   = "100%";
+                    progressBar.style.width = "100%";
                     clearInterval(loaderInterval);
-                    
-                    // Cinematic exit sequence
+
                     setTimeout(() => {
-                        preloader.style.opacity = "0";
+                        preloader.style.opacity   = "0";
                         preloader.style.transform = "translateY(-100dvh)";
                         setTimeout(() => {
                             preloader.style.display = "none";
-                            // Gracefully reveal mobile control dock after load
                             mobileDock.classList.add("visible");
                         }, 1200);
-                    }, 400);
+                    }, 500);
                 } else {
-                    counterElement.innerText = `${currentCount}%`;
+                    counterEl.innerText     = `${current}%`;
+                    progressBar.style.width = `${current}%`;
                 }
             };
-            const loaderInterval = setInterval(updateCounter, 40);
+            const loaderInterval = setInterval(updateLoader, 40);
         });
 
-        // 2. STICKY HEADER MOTION CONTROLLER
+        // 2. STICKY HEADER
         const mainHeader = document.getElementById("main-header");
         window.addEventListener("scroll", () => {
-            if (window.scrollY > 60) {
-                mainHeader.classList.add("scrolled");
-            } else {
-                mainHeader.classList.remove("scrolled");
-            }
+            mainHeader.classList.toggle("scrolled", window.scrollY > 60);
         });
 
-        // 3. ADVANCED CONTROL CENTER MOBILE OVERLAY DYNAMICS
-        const dockTrigger = document.getElementById("dock-trigger");
-        const controlCenter = document.getElementById("control-center-overlay");
-        const overlayItems = document.querySelectorAll(".overlay-nav-item");
+        // 3. MOBILE OVERLAY
+        const dockTrigger    = document.getElementById("dock-trigger");
+        const controlCenter  = document.getElementById("control-center-overlay");
+        const overlayItems   = document.querySelectorAll(".overlay-nav-item");
         let isOverlayOpen = false;
 
         dockTrigger.addEventListener("click", () => {
@@ -729,23 +958,15 @@
                 controlCenter.classList.add("active");
                 dockTrigger.innerHTML = `<i class="fa-solid fa-xmark"></i> SECURE`;
                 dockTrigger.style.boxShadow = "0 0 25px #FFD54A";
-                
-                // Staggered Item Animation
-                overlayItems.forEach((item, index) => {
-                    item.style.transitionDelay = `${index * 0.05}s`;
-                });
+                overlayItems.forEach((item, i) => { item.style.transitionDelay = `${i * 0.05}s`; });
             } else {
                 controlCenter.classList.remove("active");
                 dockTrigger.innerHTML = `<i class="fa-solid fa-compass-drafting"></i> NAVIGATE`;
                 dockTrigger.style.boxShadow = "0 4px 15px rgba(212,175,55,0.4)";
-                
-                overlayItems.forEach((item) => {
-                    item.style.transitionDelay = `0s`;
-                });
+                overlayItems.forEach(item => { item.style.transitionDelay = "0s"; });
             }
         });
 
-        // Close mobile overlay on deep link interaction
         overlayItems.forEach(item => {
             item.addEventListener("click", () => {
                 controlCenter.classList.remove("active");
@@ -754,40 +975,30 @@
             });
         });
 
-        // 4. INTELLIGENT SCROLL-TRIGGERED NUMBER RUNNERS (SCROLL MATRIX)
+        // 4. COUNTER ANIMATION ON SCROLL
         const statsSection = document.querySelector(".stats-matrix");
-        const statNumbers = document.querySelectorAll(".stat-number");
-        let statsAnimated = false;
+        const statNumbers  = document.querySelectorAll(".stat-number");
+        let statsAnimated  = false;
 
         const startCounting = () => {
             statNumbers.forEach(num => {
-                const target = parseInt(num.getAttribute("data-target"));
-                let current = 0;
-                const increment = target / 50; // Controls fluidity speed
-                
-                const countTicker = () => {
+                const target    = parseInt(num.getAttribute("data-target"));
+                let current     = 0;
+                const increment = target / 50;
+                const tick = () => {
                     current += increment;
-                    if (current >= target) {
-                        num.innerText = target + "+";
-                    } else {
-                        num.innerText = Math.floor(current) + "+";
-                        requestAnimationFrame(countTicker);
-                    }
+                    if (current >= target) { num.innerText = target + "+"; }
+                    else { num.innerText = Math.floor(current) + "+"; requestAnimationFrame(tick); }
                 };
-                countTicker();
+                tick();
             });
         };
 
-        const scrollObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !statsAnimated) {
-                    startCounting();
-                    statsAnimated = true;
-                }
+        new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting && !statsAnimated) { startCounting(); statsAnimated = true; }
             });
-        }, { threshold: 0.3 });
-
-        scrollObserver.observe(statsSection);
+        }, { threshold: 0.3 }).observe(statsSection);
     </script>
 </body>
 </html>
