@@ -4,126 +4,299 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SMART VISION | Executive Team</title>
-    
-    <!-- Premium Fonts & Icons -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* ==========================================================================
-           1. DESIGN SYSTEM & VARIABLE ARCHITECTURE
+           1. DESIGN SYSTEM
            ========================================================================== */
         :root {
             --bg-pure-black: #000000;
             --bg-rich-dark: #0A0A0A;
             --bg-glass: rgba(0, 0, 0, 0.75);
             --bg-glass-card: rgba(255, 255, 255, 0.03);
-            
             --gold-primary: #D4AF37;
             --gold-glow: #FFD54A;
             --gold-hover: #E6C75A;
             --gold-border: #C9A227;
             --gold-alpha: rgba(212, 175, 55, 0.25);
-            
             --text-white: #FFFFFF;
             --text-secondary: #CFCFCF;
             --text-muted: #8F8F8F;
-            
             --grad-gold: linear-gradient(90deg, #8B6B15, #D4AF37, #FFD54A, #D4AF37, #8B6B15);
-            
+            --grad-luxury-dark: linear-gradient(180deg, #000000, #0A0A0A, #000000);
             --shadow-gold-glow: 0 0 15px rgba(212,175,55,0.35), 0 0 30px rgba(212,175,55,0.15);
+            --shadow-btn-hover: 0 0 20px #D4AF37, 0 0 40px rgba(212,175,55,0.5);
             --glass-blur: blur(16px);
-            
             --font-main: 'Inter', sans-serif;
             --font-sans: 'Montserrat', sans-serif;
-            
             --transition-main: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         /* ==========================================================================
-           2. GLOBAL RESET & BASE STYLES
+           2. RESET & BASE
            ========================================================================== */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
             width: 100%; background-color: var(--bg-pure-black); color: var(--text-white);
-            font-family: var(--font-sans); overflow-x: hidden; scroll-behavior: smooth;
+            font-family: var(--font-main) !important; overflow-x: hidden; scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
         }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-pure-black); }
         ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 3px; }
-
-        html, body, h1, h2, h3, h4, .brand-logo, .nav-links a, .dock-item, .logo-text, .member-name {
-            font-family: var(--font-main) !important;
-        }        
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
+        html, body, h1, h2, h3, h4, .brand-logo, .nav-links a, .dock-item, .member-name {
+            font-family: var(--font-main) !important;
+        }
 
         .blueprint-grid {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+            background-image:
+                linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
             background-size: 50px 50px; pointer-events: none; z-index: 1;
         }
 
         /* ==========================================================================
-           3. PRELOADER & NAVIGATION
+           3. PRELOADER — LUXURY HEX (from partnerships page, icon = fa-users-gear for team)
            ========================================================================== */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
             background: var(--bg-pure-black); z-index: 99999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1s linear;
+            overflow: hidden;
         }
-        .loader-container { position: relative; display: flex; justify-content: center; align-items: center; width: 220px; height: 220px; }
-        .loader-ring { position: absolute; width: 100%; height: 100%; border: 2px solid transparent; border-top-color: var(--gold-primary); border-radius: 50%; animation: spin 3s linear infinite; }
-        .loader-ring-reverse { position: absolute; width: 85%; height: 85%; border: 1px dashed transparent; border-bottom-color: var(--gold-glow); border-radius: 50%; animation: spin-reverse 2s linear infinite; }
-        .loader-center { position: absolute; width: 65%; height: 65%; background: var(--bg-glass-card); border: 1px solid var(--gold-alpha); border-radius: 50%; backdrop-filter: var(--glass-blur); display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: var(--shadow-gold-glow); }
-        .loader-center i { font-size: 30px; color: var(--gold-primary); animation: pulseGlow 2s infinite alternate; }
-        .counter-number { font-size: 1.2rem; font-weight: 700; color: var(--gold-primary); margin-top: 5px; }
+        #preloader::before {
+            content: ''; position: absolute; inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(212,175,55,0.012) 2px, rgba(212,175,55,0.012) 4px);
+            pointer-events: none; z-index: 0;
+        }
+        #preloader::after {
+            content: ''; position: absolute; top: -40%; left: 0; width: 100%; height: 40%;
+            background: linear-gradient(to bottom, transparent, rgba(212,175,55,0.04), transparent);
+            animation: scanBeam 3.5s ease-in-out infinite; pointer-events: none; z-index: 0;
+        }
+        @keyframes scanBeam { 0%{top:-40%} 100%{top:140%} }
 
-        .header {
-            position: fixed; top: 0; left: 0; width: 100%; padding: 30px 60px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-main);
+        .loader-stage {
+            position: relative; z-index: 2;
+            display: flex; flex-direction: column; align-items: center;
         }
-        .header.scrolled { padding: 15px 60px; background: var(--bg-glass); backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--gold-alpha); }
-        .brand-logo { font-size: 1.6rem; font-weight: 900; letter-spacing: 3px; }
+        .loader-hex-wrap {
+            position: relative; width: 180px; height: 180px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hex-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .hex-outline {
+            fill: none; stroke: url(#hexGrad); stroke-width: 1.5;
+            stroke-dasharray: 600; stroke-dashoffset: 600;
+            animation: hexDraw 1.8s cubic-bezier(0.4,0,0.2,1) forwards 0.3s;
+        }
+        .hex-inner {
+            fill: none; stroke: rgba(212,175,55,0.12); stroke-width: 0.8;
+            stroke-dasharray: 4 8; animation: rotateSlow 12s linear infinite;
+            transform-origin: 90px 90px;
+        }
+        @keyframes hexDraw { to { stroke-dashoffset: 0; } }
+        @keyframes rotateSlow { to { transform: rotate(360deg); } }
+
+        /* Team page icon: fa-users-gear (unchanged from original) */
+        .loader-icon-wrap {
+            position: relative; z-index: 3;
+            width: 72px; height: 72px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            background: rgba(212,175,55,0.06);
+            border: 1px solid rgba(212,175,55,0.25);
+            animation: iconPulse 2.5s ease-in-out infinite alternate;
+            box-shadow: 0 0 20px rgba(212,175,55,0.15), inset 0 0 16px rgba(212,175,55,0.05);
+        }
+        .loader-icon-wrap i {
+            font-size: 1.9rem;
+            background: var(--grad-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 6px rgba(255,213,74,0.5));
+        }
+        @keyframes iconPulse {
+            0%   { box-shadow: 0 0 10px rgba(212,175,55,0.15), inset 0 0 10px rgba(212,175,55,0.04); border-color: rgba(212,175,55,0.2); }
+            100% { box-shadow: 0 0 30px rgba(212,175,55,0.35), inset 0 0 20px rgba(212,175,55,0.08); border-color: rgba(212,175,55,0.6); }
+        }
+
+        .loader-progress-track {
+            width: 220px; height: 1px; background: rgba(212,175,55,0.15);
+            margin-top: 32px; position: relative; overflow: hidden; border-radius: 1px;
+        }
+        .loader-progress-fill {
+            height: 100%; background: var(--grad-gold); width: 0%;
+            transition: width 0.1s ease; box-shadow: 0 0 8px rgba(255,213,74,0.8);
+        }
+        .loader-progress-fill::after {
+            content: ''; position: absolute; right: -10px; top: -4px;
+            width: 20px; height: 9px;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.8) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .loader-info { margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .loader-brand-text { font-size: 1.1rem; font-weight: 700; letter-spacing: 8px; text-transform: uppercase; color: var(--text-white); }
+        .loader-brand-text span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .loader-sub-row { display: flex; align-items: center; gap: 16px; }
+        .loader-divider { width: 30px; height: 1px; background: linear-gradient(to right, transparent, var(--gold-border)); }
+        .loader-divider.right { background: linear-gradient(to left, transparent, var(--gold-border)); }
+        .loader-tagline { font-size: 0.62rem; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); }
+        .loader-percentage { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; color: var(--gold-primary); margin-top: 6px; }
+
+        .loader-corner { position: absolute; width: 50px; height: 50px; opacity: 0.35; }
+        .loader-corner.tl { top: 30px; left: 30px; border-top: 1px solid var(--gold-primary); border-left: 1px solid var(--gold-primary); }
+        .loader-corner.tr { top: 30px; right: 30px; border-top: 1px solid var(--gold-primary); border-right: 1px solid var(--gold-primary); }
+        .loader-corner.bl { bottom: 30px; left: 30px; border-bottom: 1px solid var(--gold-primary); border-left: 1px solid var(--gold-primary); }
+        .loader-corner.br { bottom: 30px; right: 30px; border-bottom: 1px solid var(--gold-primary); border-right: 1px solid var(--gold-primary); }
+
+        /* ==========================================================================
+           4. HEADER WITH LOGO (from partnerships page)
+           ========================================================================== */
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 22px 60px; display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: var(--transition-main);
+        }
+        .header.scrolled {
+            padding: 12px 60px; background: var(--bg-glass);
+            backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--gold-alpha);
+        }
+
+        .brand-identity { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+
+        .header-logo-wrap {
+            position: relative; width: 46px; height: 46px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .header-logo-ring {
+            position: absolute; inset: 0; border-radius: 50%;
+            border: 1px solid var(--gold-border);
+            box-shadow: 0 0 10px rgba(212,175,55,0.2), inset 0 0 8px rgba(212,175,55,0.05);
+            transition: var(--transition-main);
+        }
+        .header-logo-ring::before {
+            content: ''; position: absolute; inset: 3px; border-radius: 50%;
+            border: 1px dashed rgba(212,175,55,0.25);
+            animation: rotateSlow 18s linear infinite;
+        }
+        .header-logo-img {
+            width: 30px; height: 30px; object-fit: contain; position: relative; z-index: 2;
+            filter: drop-shadow(0 0 4px rgba(212,175,55,0.4)); transition: var(--transition-main);
+        }
+        .brand-identity:hover .header-logo-ring { box-shadow: var(--shadow-gold-glow); border-color: var(--gold-glow); }
+        .brand-identity:hover .header-logo-img { filter: drop-shadow(0 0 10px rgba(255,213,74,0.7)); transform: scale(1.05); }
+
+        .brand-separator { width: 1px; height: 28px; background: linear-gradient(to bottom, transparent, rgba(212,175,55,0.4), transparent); }
+        .brand-logo { font-size: 1.45rem; font-weight: 900; letter-spacing: 3px; color: var(--text-white); line-height: 1; white-space: nowrap; }
         .brand-logo span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
+        .brand-logo-sub { font-size: 0.52rem; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); margin-top: 3px; font-weight: 400; }
+
         .nav-links { display: flex; gap: 35px; }
         .nav-links a { font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); position: relative; padding: 10px 0; }
         .nav-links a::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--grad-gold); transition: var(--transition-main); }
         .nav-links a:hover, .nav-links a.active { color: var(--gold-hover); text-shadow: 0 0 8px rgba(255,213,74,0.3); }
         .nav-links a:hover::before, .nav-links a.active::before { width: 100%; }
 
-        /* Mobile Nav */
+        /* ==========================================================================
+           5. MOBILE DOCK WITH LOGO (from partnerships page)
+           ========================================================================== */
         .mobile-control-dock {
-            display: none; position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
-            width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 40px; padding: 10px 25px;
-            justify-content: space-between; align-items: center; z-index: 10000; box-shadow: var(--shadow-gold-glow); opacity: 0; transition: transform 1s, opacity 1s;
+            display: none; position: fixed; bottom: 25px; left: 50%;
+            transform: translateX(-50%) translateY(100px); width: 90%; max-width: 400px;
+            background: rgba(10,10,10,0.85); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212,175,55,0.4); border-radius: 40px;
+            padding: 9px 20px; justify-content: space-between; align-items: center;
+            z-index: 10000; box-shadow: var(--shadow-gold-glow); opacity: 0;
+            transition: transform 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.9s ease;
         }
         .mobile-control-dock.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
-        .dock-brand span { color: var(--gold-primary); font-weight: 700;}
-        .dock-trigger-btn { background: var(--grad-gold); border: none; padding: 10px 22px; border-radius: 30px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-        
-        .immersive-overlay-NAVIGATE {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; background: rgba(0, 0, 0, 0.96); backdrop-filter: blur(30px); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: var(--transition-main);
+
+        .dock-brand-wrap { display: flex; align-items: center; gap: 9px; }
+        .dock-logo-mini {
+            width: 30px; height: 30px; border-radius: 50%;
+            border: 1px solid rgba(212,175,55,0.5);
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(212,175,55,0.05); flex-shrink: 0;
         }
-        .immersive-overlay-NAVIGATE.active { opacity: 1; visibility: visible; }
-        .overlay-nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 85%; max-width: 340px; text-align: center; }
-        .overlay-nav-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15); padding: 22px 15px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translateY(30px); transition: var(--transition-main); }
-        .immersive-overlay-NAVIGATE.active .overlay-nav-item { opacity: 1; transform: translateY(0); }
+        .dock-logo-mini img { width: 18px; height: 18px; object-fit: contain; filter: drop-shadow(0 0 3px rgba(212,175,55,0.5)); }
+        .dock-brand { font-size: 0.85rem; font-weight: 700; color: var(--text-white); letter-spacing: 1px; }
+        .dock-brand span { color: var(--gold-primary); }
+
+        .dock-trigger-btn {
+            background: var(--grad-gold); border: none; padding: 10px 20px; border-radius: 30px;
+            font-family: var(--font-main); font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+            cursor: pointer; display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4); transition: var(--transition-main); white-space: nowrap;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100dvh;
+            background: rgba(0,0,0,0.97); backdrop-filter: blur(30px);
+            z-index: 9999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; gap: 40px;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .mobile-nav-overlay.active { opacity: 1; visibility: visible; }
+
+        .overlay-close-btn {
+            position: absolute; top: 28px; right: 28px;
+            width: 44px; height: 44px;
+            background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.4);
+            border-radius: 50%; color: var(--gold-primary); font-size: 1.1rem; cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+            transition: background 0.3s ease, transform 0.4s ease;
+        }
+        .overlay-close-btn:hover { background: var(--gold-primary); color: #000; transform: rotate(90deg); }
+
+        .overlay-nav-grid {
+            display: grid; grid-template-columns: repeat(2,1fr);
+            gap: 16px; width: 85%; max-width: 340px; text-align: center;
+        }
+        .overlay-nav-item {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15);
+            padding: 22px 15px; border-radius: 16px;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.3s ease, background 0.3s ease;
+            color: var(--text-secondary);
+        }
+        .mobile-nav-overlay.active .overlay-nav-item { opacity: 1; transform: translateY(0); }
+        .mobile-nav-overlay.active .overlay-nav-item:nth-child(1)  { transition-delay: 0.05s; }
+        .mobile-nav-overlay.active .overlay-nav-item:nth-child(2)  { transition-delay: 0.10s; }
+        .mobile-nav-overlay.active .overlay-nav-item:nth-child(3)  { transition-delay: 0.15s; }
+        .mobile-nav-overlay.active .overlay-nav-item:nth-child(4)  { transition-delay: 0.20s; }
+        .mobile-nav-overlay.active .overlay-nav-item:nth-child(5)  { transition-delay: 0.25s; }
+        .mobile-nav-overlay.active .overlay-nav-item:nth-child(6)  { transition-delay: 0.30s; }
+        .mobile-nav-overlay.active .overlay-nav-item:nth-child(7)  { transition-delay: 0.35s; }
+        .mobile-nav-overlay.active .overlay-nav-item:nth-child(8)  { transition-delay: 0.40s; }
+        .mobile-nav-overlay.active .overlay-nav-item:nth-child(9)  { transition-delay: 0.45s; }
+        .overlay-nav-item:hover { border-color: var(--gold-primary); background: rgba(212,175,55,0.07); }
         .overlay-nav-item i { font-size: 1.3rem; color: var(--gold-primary); }
-        .overlay-nav-item span { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); }
+        .overlay-nav-item span { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
+        .overlay-nav-item.current { border-color: var(--gold-primary); background: rgba(212,175,55,0.06); }
+        .overlay-nav-item.current span { color: var(--gold-primary); }
 
         /* ==========================================================================
-           4. PAGE HERO
+           6. PAGE HERO
            ========================================================================== */
         .page-hero {
-            position: relative; height: 50vh; width: 100%; display: flex; align-items: flex-end;
-            padding: 80px 8%; background: var(--bg-pure-black); overflow: hidden; z-index: 2;
+            position: relative; height: 50vh; width: 100%;
+            display: flex; align-items: flex-end; padding: 80px 8%;
+            background: var(--bg-pure-black); overflow: hidden; z-index: 2;
             border-bottom: 1px solid var(--gold-alpha);
         }
         .page-hero-bg {
@@ -141,14 +314,13 @@
         .page-title span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* ==========================================================================
-           5. ORG CHART (TREE STRUCTURE)
+           7. ORG CHART (TREE STRUCTURE)
            ========================================================================== */
         .team-section {
             padding: 100px 2%; background: var(--bg-pure-black); position: relative; z-index: 2;
             display: flex; justify-content: center; overflow-x: auto;
         }
-        
-        /* CSS Tree Logic */
+
         .org-tree {
             display: flex; justify-content: center; align-items: flex-start;
             padding-top: 20px; margin: 0 auto;
@@ -157,12 +329,10 @@
             padding-top: 40px; position: relative; transition: all 0.5s;
             display: flex; justify-content: center; gap: 20px;
         }
-        /* Top line for child nodes */
         .org-tree li {
             float: left; text-align: center; list-style-type: none;
             position: relative; padding: 40px 10px 0 10px; transition: all 0.5s;
         }
-        /* Drawing the lines */
         .org-tree li::before, .org-tree li::after {
             content: ''; position: absolute; top: 0; right: 50%;
             border-top: 2px solid var(--gold-primary); width: 50%; height: 40px;
@@ -170,22 +340,18 @@
         .org-tree li::after {
             right: auto; left: 50%; border-left: 2px solid var(--gold-primary);
         }
-        /* Remove left/right lines for first and last child */
         .org-tree li:only-child::after, .org-tree li:only-child::before { display: none; }
         .org-tree li:only-child { padding-top: 0; }
         .org-tree li:first-child::before, .org-tree li:last-child::after { border: 0 none; }
-        /* Vertical line from top */
         .org-tree li:first-child::after { border-radius: 5px 0 0 0; }
         .org-tree li:last-child::before {
             border-right: 2px solid var(--gold-primary); border-radius: 0 5px 0 0;
         }
-        /* Connecting parents to children */
         .org-tree ul ul::before {
             content: ''; position: absolute; top: 0; left: 50%;
             border-left: 2px solid var(--gold-primary); width: 0; height: 40px; transform: translateX(-50%);
         }
 
-        /* Top Level Wrapper (CEO & CFO) */
         .executive-tier {
             display: flex; justify-content: center; gap: 40px; position: relative;
             background: rgba(212, 175, 55, 0.02); padding: 20px; border-radius: 20px;
@@ -193,7 +359,7 @@
         }
 
         /* ==========================================================================
-           6. TEAM CARDS
+           8. TEAM CARDS — NO SHADOW ON MEMBER IMAGES
            ========================================================================== */
         .team-card {
             background: var(--bg-glass-card); border: 1px solid var(--gold-alpha);
@@ -210,21 +376,30 @@
             transform: translateY(-10px); border-color: var(--gold-primary); box-shadow: var(--shadow-gold-glow);
         }
         .team-card:hover::before { opacity: 1; }
-        
+
         .member-img {
             width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 15px auto;
             border: 2px solid var(--gold-primary); padding: 3px; background: var(--bg-pure-black);
             overflow: hidden; position: relative;
+            /* NO box-shadow / drop-shadow on the wrapper */
+            box-shadow: none;
         }
         .member-img img {
             width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
             transition: var(--transition-main); filter: grayscale(100%);
+            /* NO filter shadow on the image */
+            box-shadow: none;
         }
-        .team-card:hover .member-img img { filter: grayscale(0%); transform: scale(1.1); }
-        
+        .team-card:hover .member-img img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+            /* Explicitly keep no shadow on hover */
+            box-shadow: none;
+        }
+
         .member-name { font-size: 1.1rem; font-weight: 700; color: var(--text-white); margin-bottom: 5px; }
         .member-role { font-size: 0.75rem; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-        
+
         .card-action {
             margin-top: 15px; font-size: 0.7rem; color: var(--text-muted);
             text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; justify-content: center; gap: 5px;
@@ -233,7 +408,7 @@
         .team-card:hover .card-action { opacity: 1; transform: translateY(0); color: var(--gold-hover); }
 
         /* ==========================================================================
-           7. INTERACTIVE BIO MODAL
+           9. INTERACTIVE BIO MODAL
            ========================================================================== */
         .bio-modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100dvh;
@@ -242,7 +417,7 @@
             opacity: 0; visibility: hidden; transition: var(--transition-main);
         }
         .bio-modal-overlay.active { opacity: 1; visibility: visible; }
-        
+
         .bio-modal-content {
             background: var(--bg-rich-dark); border: 1px solid var(--gold-primary);
             width: 90%; max-width: 800px; border-radius: 12px; position: relative;
@@ -260,16 +435,12 @@
 
         .modal-image { flex: 0 0 40%; position: relative; }
         .modal-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(50%); }
-        .modal-image::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, transparent, var(--bg-rich-dark));
-        }
 
         .modal-info { flex: 1; padding: 50px 40px; }
         .modal-info .role { color: var(--gold-primary); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 10px; font-weight: 600; }
         .modal-info h2 { font-size: 2.2rem; margin-bottom: 25px; font-family: var(--font-main); }
         .modal-info p { color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem; margin-bottom: 30px; }
-        
+
         .modal-socials { display: flex; gap: 15px; }
         .modal-socials a {
             width: 35px; height: 35px; border: 1px solid var(--gold-alpha); border-radius: 50%;
@@ -278,9 +449,9 @@
         .modal-socials a:hover { background: var(--gold-primary); color: var(--bg-pure-black); box-shadow: 0 0 10px rgba(212,175,55,0.5); }
 
         /* ==========================================================================
-           8. FOOTER (Exact match)
+           10. FOOTER
            ========================================================================== */
-        .executive-footer { background: #030303; border-top: 1px solid rgba(212,175,55,0.2); padding: 80px 8% 40px 8%; position: relative; z-index: 2; }
+        .executive-footer { background: #030303; border-top: 1px solid rgba(212,175,55,0.2); padding: 80px 8% 40px; position: relative; z-index: 2; }
         .footer-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; margin-bottom: 60px; }
         .footer-brand-column h3 { font-size: 1.5rem; margin-bottom: 20px; letter-spacing: 2px; }
         .footer-brand-column h3 span { color: var(--gold-primary); }
@@ -296,350 +467,414 @@
         .footer-socials a:hover { border-color: var(--gold-primary); color: var(--bg-pure-black); background: var(--grad-gold); box-shadow: var(--shadow-gold-glow); }
 
         /* ==========================================================================
-           9. ANIMATIONS & RESPONSIVE
+           11. KEYFRAMES & RESPONSIVE
            ========================================================================== */
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
-        @keyframes pulseGlow { 100% { opacity: 1; filter: drop-shadow(0 0 15px #FFD54A); } }
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 1200px) {
             .org-tree ul { gap: 10px; }
             .team-card { width: 180px; padding: 20px 10px; }
         }
-        
         @media (max-width: 992px) {
             .nav-links { display: none; }
             .mobile-control-dock { display: flex; }
-            
-            /* Change Tree to Flex Grid on Tablet/Mobile for readability */
             .org-tree, .org-tree ul, .org-tree li { display: flex; flex-direction: column; align-items: center; width: 100%; padding: 0 !important; }
             .org-tree ul { gap: 30px; margin-top: 30px; flex-wrap: wrap; flex-direction: row; justify-content: center; }
-            .org-tree li::before, .org-tree li::after, .org-tree ul ul::before { display: none; } /* Hide structural lines */
+            .org-tree li::before, .org-tree li::after, .org-tree ul ul::before { display: none; }
             .executive-tier { flex-direction: column; gap: 30px; background: transparent; border: none; }
             .team-card { width: 250px; }
-            
             .bio-modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
             .modal-image { height: 300px; flex: none; }
-            .modal-image::after { 
-             background: linear-gradient(to top, var(--bg-rich-dark) 0%, transparent 40%); }
+            .modal-image::after { display: none; }
             .modal-info { padding: 30px 20px; }
+        }
+        @media (max-width: 900px) {
+            .header { padding: 18px 24px; }
+            .header.scrolled { padding: 12px 24px; }
+            .header-logo-wrap { width: 40px; height: 40px; }
+            .header-logo-img { width: 26px; height: 26px; }
+            .brand-logo { font-size: 1.2rem; letter-spacing: 2px; }
+            .brand-logo-sub { display: none; }
+        }
+        @media (max-width: 480px) {
+            .header { padding: 15px 20px; }
+            .brand-separator { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Architectural Background Pattern -->
-    <div class="blueprint-grid"></div>
+<div class="blueprint-grid"></div>
 
-    <!-- PRELOADER -->
-    <div id="preloader">
-        <div class="loader-container">
-            <div class="loader-ring"></div>
-            <div class="loader-ring-reverse"></div>
-            <div class="loader-center">
+<!-- PRELOADER — LUXURY HEX WITH TEAM ICON -->
+<div id="preloader">
+    <div class="loader-corner tl"></div>
+    <div class="loader-corner tr"></div>
+    <div class="loader-corner bl"></div>
+    <div class="loader-corner br"></div>
+    <div class="loader-stage">
+        <div class="loader-hex-wrap">
+            <svg class="hex-svg" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%"   stop-color="#8B6B15"/>
+                        <stop offset="40%"  stop-color="#D4AF37"/>
+                        <stop offset="60%"  stop-color="#FFD54A"/>
+                        <stop offset="100%" stop-color="#8B6B15"/>
+                    </linearGradient>
+                </defs>
+                <polygon class="hex-outline" points="90,10 164,52 164,128 90,170 16,128 16,52"/>
+                <polygon class="hex-inner"   points="90,28 148,62 148,118 90,152 32,118 32,62"/>
+            </svg>
+            <!-- Team page icon: fa-users-gear (unchanged) -->
+            <div class="loader-icon-wrap">
                 <i class="fa-solid fa-users-gear"></i>
-                <div class="counter-number" id="percentage-counter">0%</div>
             </div>
         </div>
+        <div class="loader-progress-track">
+            <div class="loader-progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="loader-info">
+            <div class="loader-brand-text">SMART <span>VISION</span></div>
+            <div class="loader-sub-row">
+                <div class="loader-divider"></div>
+                <div class="loader-tagline">Executive Leadership</div>
+                <div class="loader-divider right"></div>
+            </div>
+            <div class="loader-percentage" id="percentage-counter">0%</div>
+        </div>
     </div>
+</div>
 
-    <!-- DESKTOP HEADER -->
-    <header class="header" id="main-header">
-        <div class="brand-logo">SMART <span>VISION</span></div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="partnerships.html">Partnerships</a></li>
-            <li><a href="team.html" class="active">Team</a></li>
-            <li><a href="career.html">Career</a></li>
-            <li><a href="news.html">News</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </header>
+<!-- HEADER WITH LOGO -->
+<header class="header" id="main-header">
+    <a class="brand-identity" href="index.html">
+        <div class="header-logo-wrap">
+            <div class="header-logo-ring"></div>
+            <img class="header-logo-img" src="tled_sign-removebg-preview.png" alt="Smart Vision Logo">
+        </div>
+        <div class="brand-separator"></div>
+        <div>
+            <div class="brand-logo">SMART <span>VISION</span></div>
+            <div class="brand-logo-sub">Engineering Consultancy</div>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="partnerships.html">Partnerships</a></li>
+        <li><a href="team.html" class="active">Team</a></li>
+        <li><a href="career.html">Career</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</header>
 
-    <!-- MOBILE SMART DOCK -->
-    <nav class="mobile-control-dock" id="mobile-dock">
+<!-- MOBILE DOCK WITH LOGO -->
+<nav class="mobile-control-dock" id="mobile-dock">
+    <div class="dock-brand-wrap">
+        <div class="dock-logo-mini">
+            <img src="tled_sign-removebg-preview.png" alt="Logo">
+        </div>
         <div class="dock-brand">SMART <span>VISION</span></div>
-        <button class="dock-trigger-btn" id="dock-trigger">
-            <i class="fa-solid fa-compass-drafting"></i> NAVIGATE
-        </button>
-    </nav>
+    </div>
+    <button class="dock-trigger-btn" id="dock-trigger">
+        <i class="fa-solid fa-compass-drafting"></i> NAVIGATE
+    </button>
+</nav>
 
-    <!-- IMMERSIVE MOBILE OVERLAY -->
-    <div class="immersive-overlay-NAVIGATE" id="control-center-overlay">
-        <div class="overlay-nav-grid">
-            <a href="index.html" class="overlay-nav-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
-            <a href="about.html" class="overlay-nav-item"><i class="fa-solid fa-building-user"></i><span>About</span></a>
-            <a href="services.html" class="overlay-nav-item"><i class="fa-solid fa-trowel-bricks"></i><span>Services</span></a>
-            <a href="projects.html" class="overlay-nav-item"><i class="fa-solid fa-city"></i><span>Projects</span></a>
-            <a href="partnerships.html" class="overlay-nav-item" style="border-color: var(--gold-primary);"><i class="fa-solid fa-handshake-angle"></i><span style="color: var(--gold-primary);">Partnerships</span></a>
-            <a href="team.html" class="overlay-nav-item"><i class="fa-solid fa-users-gear"></i><span>Team</span></a>
-            <a href="career.html" class="overlay-nav-item"><i class="fa-solid fa-briefcase"></i><span>Career</span></a>
-            <a href="news.html" class="overlay-nav-item"><i class="fa-solid fa-newspaper"></i><span>News</span></a>
-            <a href="contact.html" class="overlay-nav-item" style="grid-column: span 2;"><i class="fa-solid fa-envelope"></i><span>Contact Hub</span></a>
+<!-- MOBILE OVERLAY -->
+<div class="mobile-nav-overlay" id="mobile-nav-overlay">
+    <button class="overlay-close-btn" id="overlay-close">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="overlay-nav-grid">
+        <a href="index.html" class="overlay-nav-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="about.html" class="overlay-nav-item"><i class="fa-solid fa-building-user"></i><span>About</span></a>
+        <a href="services.html" class="overlay-nav-item"><i class="fa-solid fa-trowel-bricks"></i><span>Services</span></a>
+        <a href="projects.html" class="overlay-nav-item"><i class="fa-solid fa-city"></i><span>Projects</span></a>
+        <a href="partnerships.html" class="overlay-nav-item"><i class="fa-solid fa-handshake-angle"></i><span>Partnerships</span></a>
+        <a href="team.html" class="overlay-nav-item current"><i class="fa-solid fa-users-gear"></i><span>Team</span></a>
+        <a href="career.html" class="overlay-nav-item"><i class="fa-solid fa-briefcase"></i><span>Career</span></a>
+        <a href="news.html" class="overlay-nav-item"><i class="fa-solid fa-newspaper"></i><span>News</span></a>
+        <a href="contact.html" class="overlay-nav-item" style="grid-column: span 2;"><i class="fa-solid fa-envelope"></i><span>Contact Hub</span></a>
+    </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+        <span class="subtitle">The Minds Behind The Vision</span>
+        <h1 class="page-title">Executive <span>Leadership</span></h1>
+    </div>
+</section>
+
+<!-- ORG CHART SECTION -->
+<section class="team-section">
+    <div class="org-tree">
+        <ul>
+            <li>
+                <div class="executive-tier">
+                    <!-- CEO -->
+                    <div class="team-card" onclick="openBioModal('ceo')">
+                        <div class="member-img">
+                            <img src="WhatsApp Image 2026-05-24 at 8.21.51 PM.jpeg" alt="CEO">
+                        </div>
+                        <div class="member-name">Mohamed Osama Hassaan</div>
+                        <div class="member-role">Consultant, MSC , PHD</div>
+                        <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                    </div>
+                    <!-- CFO -->
+                    <div class="team-card" onclick="openBioModal('cfo')">
+                        <div class="member-img">
+                            <img src="WhatsApp Image 2026-05-25 at 12.25.23 AM.jpeg" alt="CFO">
+                        </div>
+                        <div class="member-name">Arch. Ahmed Amin</div>
+                        <div class="member-role">Co-Founder &amp; CFO</div>
+                        <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                    </div>
+                </div>
+
+                <!-- CHILD NODES -->
+                <ul>
+                    <li>
+                        <div class="team-card" onclick="openBioModal('mem1')">
+                            <div class="member-img">
+                                <img src="unknow.jpg" alt="Head of MEP">
+                            </div>
+                            <div class="member-name">Michel Mounir</div>
+                            <div class="member-role">Head of MEP</div>
+                            <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="team-card" onclick="openBioModal('mem2')">
+                            <div class="member-img">
+                                <img src="female-profile.jpg" alt="Head Of Cost Control">
+                            </div>
+                            <div class="member-name">Heba Abd AlHamid</div>
+                            <div class="member-role">Head Of Cost Control</div>
+                            <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="team-card" onclick="openBioModal('mem3')">
+                            <div class="member-img">
+                                <img src="1586.jpg" alt="Structural Team Leader">
+                            </div>
+                            <div class="member-name">Eslam Fares</div>
+                            <div class="member-role">Structural Team Leader</div>
+                            <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="team-card" onclick="openBioModal('mem4')">
+                            <div class="member-img">
+                                <img src="female-profile.jpg" alt="Project Coordinator">
+                            </div>
+                            <div class="member-name">Malak Ibrahim</div>
+                            <div class="member-role">Project Coordinator</div>
+                            <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="team-card" onclick="openBioModal('mem5')">
+                            <div class="member-img">
+                                <img src="unknow.jpg" alt="Site Supervision Engineer">
+                            </div>
+                            <div class="member-name">Mohamed Nabil</div>
+                            <div class="member-role">Site Supervision Engineer</div>
+                            <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- INTERACTIVE BIO MODAL -->
+<div class="bio-modal-overlay" id="bioModal">
+    <div class="bio-modal-content">
+        <button class="modal-close" onclick="closeBioModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-image">
+            <img id="modalImg" src="" alt="Profile Picture">
+        </div>
+        <div class="modal-info">
+            <span class="role" id="modalRole">Role</span>
+            <h2 id="modalName">Name</h2>
+            <p id="modalDesc">Biography goes here.</p>
+            <div class="modal-socials"></div>
         </div>
     </div>
+</div>
 
-    <!-- PAGE HERO -->
-    <section class="page-hero">
-        <div class="page-hero-bg"></div>
-        <div class="page-hero-overlay"></div>
-        <div class="page-hero-content">
-            <span class="subtitle">The Minds Behind The Vision</span>
-            <h1 class="page-title">Executive <span>Leadership</span></h1>
+<!-- FOOTER -->
+<footer class="executive-footer">
+    <div class="footer-matrix">
+        <div class="footer-brand-column">
+            <h3>SMART <span>VISION</span></h3>
+            <p>Luxury Engineering Operations Hub — Engineering Architectural, Structural & MEP Excellence Since Inception.</p>
         </div>
-    </section>
-
-    <!-- ORG CHART SECTION -->
-    <section class="team-section">
-        <div class="org-tree">
+        <div class="footer-links-column">
+            <h4>Quick Links</h4>
             <ul>
-                <!-- ROOT NODE (CEO & CFO) -->
-                <li>
-                    <div class="executive-tier">
-                        <!-- CEO -->
-                        <div class="team-card" onclick="openBioModal('ceo')">
-                            <div class="member-img">
-                                <img src="WhatsApp Image 2026-05-24 at 8.21.51 PM.jpeg" alt="CEO">
-                            </div>
-                            <div class="member-name">Mohamed Osama Hassaan</div>
-                            <div class="member-role">Consultant, MSC , PHD</div>
-                            <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
-                        </div>
-                        
-                        <!-- CFO -->
-                        <div class="team-card" onclick="openBioModal('cfo')">
-                            <div class="member-img">
-                                <img src="WhatsApp Image 2026-05-25 at 12.25.23 AM.jpeg" alt="CFO">
-                            </div>
-                            <div class="member-name">Arch. Ahmed Amin</div>
-                            <div class="member-role">Co-Founder & CFO</div>
-                            <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
-                        </div>
-                    </div>
-                    
-                    <!-- CHILD NODES (The 5 Directors) -->
-                    <ul>
-                        <li>
-                            <div class="team-card" onclick="openBioModal('mem1')">
-                                <div class="member-img">
-                                    <img src="unknow.jpg" alt="VP Engineering">
-                                </div>
-                                <div class="member-name">Michel Mounir</div>
-                                <div class="member-role">Head of MEP</div>
-                                <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="team-card" onclick="openBioModal('mem2')">
-                                <div class="member-img">
-                                    <img src="female-profile.jpg" alt="Lead Architect">
-                                </div>
-                                <div class="member-name">Heba Abd AlHamid</div>
-                                <div class="member-role">Head Of Cost Control</div>
-                                <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="team-card" onclick="openBioModal('mem3')">
-                                <div class="member-img">
-                                    <img src="1586.jpg" alt="Director of Operations">
-                                </div>
-                                <div class="member-name">Eslam Fares</div>
-                                <div class="member-role">Structural Team Leader</div>
-                                <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="team-card" onclick="openBioModal('mem4')">
-                                <div class="member-img">
-                                    <img src="female-profile.jpg" alt="Head of Sustainability">
-                                </div>
-                                <div class="member-name">Malak ibrahim</div>
-                                <div class="member-role">project Coordinator</div>
-                                <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="team-card" onclick="openBioModal('mem5')">
-                                <div class="member-img">
-                                    <img src="unknow.jpg" alt="Chief Technology Officer">
-                                </div>
-                                <div class="member-name">Mohamed Nabil</div>
-                                <div class="member-role">Site Supervision Engineer</div>
-                                <div class="card-action">View Profile <i class="fa-solid fa-expand"></i></div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Our Services</a></li>
+                <li><a href="projects.html">Portfolio</a></li>
+                <li><a href="news.html">News & Updates</a></li>
             </ul>
         </div>
-    </section>
-
-    <!-- INTERACTIVE BIO MODAL -->
-    <div class="bio-modal-overlay" id="bioModal">
-        <div class="bio-modal-content">
-            <button class="modal-close" onclick="closeBioModal()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-image">
-                <img id="modalImg" src="" alt="Profile Picture">
-            </div>
-            <div class="modal-info">
-                <span class="role" id="modalRole">Role</span>
-                <h2 id="modalName">Name</h2>
-                <p id="modalDesc">Biography goes here.</p>
-                <div class="modal-socials">
-                </div>
+        <div class="footer-links-column">
+            <h4>Connect</h4>
+            <div class="footer-socials" style="margin-top:0;">
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
             </div>
         </div>
     </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 SMART VISION Engineering Operations. All Rights Reserved.</p>
+    </div>
+</footer>
 
+<script>
+    // --- Preloader (runs immediately, no DOMContentLoaded needed) ---
+    (function() {
+        var counterEl   = document.getElementById("percentage-counter");
+        var progressBar = document.getElementById("progress-fill");
+        var preloader   = document.getElementById("preloader");
+        var mobileDock  = document.getElementById("mobile-dock");
+        var current = 0;
 
-    <!-- FOOTER -->
-    <footer class="executive-footer">
-        <div class="footer-matrix">
-            <div class="footer-brand-column">
-                <h3>SMART <span>VISION</span></h3>
-                <p>Luxury Engineering Operations Hub — Engineering Architectural, Structural & MEP Excellence Since Inception.</p>
-            </div>
-            <div class="footer-links-column">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Our Services</a></li>
-                    <li><a href="projects.html">Portfolio</a></li>
-                    <li><a href="news.html">News & Updates</a></li>
-                </ul>
-            </div>
-            <div class="footer-links-column">
-                <h4>Connect</h4>
-                <div class="footer-socials">
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 SMART VISION Engineering Operations. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- JAVASCRIPT -->
-    <script>
-        // 1. Team Database (JSON Object containing bios)
-        const teamDatabase = {
-            ceo: {
-                name: "Dr.Eng Mohamed Osama",
-                role: "Consultant, MSC , PHD",
-                img: "WhatsApp Image 2026-05-24 at 8.21.51 PM.jpeg",
-                desc: " has been a driving force behind the growth of SMART VISION. He serves as Chairman & CEO of the Board of Directors and has guided the company from its first projects in 2004 into a leading consultant player in Egypt. Known from an early age amongst his colleagues to possess a strong business sense, also he is the founder and CEO of “O” Consult (General Consultancy Company), Beyond his corporate role, Osama serves as a mentor to many aspiring professionals, actively contributes community initiatives, and is frequently commissioned to author books on self-development and leadership. under his guidance, SMART VISION has achieved remarkable milestones both locally and internationally excellence at the heart of everything they do."
-            },
-            cfo: {
-                name: "Arch. Ahmed Amin",
-                role: "Co-Founder & CFO",
-                img: "WhatsApp Image 2026-05-25 at 12.25.23 AM.jpeg",
-                desc: "as CFO and has guided the company from its first projects in 2004 into a leading consultant player in Egypt. Arch. Amin occupied managerial positions handling a diversity of residential and commercial projects. Amin holds a Bachelor of Architecture from faculty of Fine Arts, and Management Diploma from Ain Shams university."
-            },
-            mem1: {
-                name: "Michel Mounir",
-                role: "Head Of MEP",
-                img: "unknow.jpg",
-                desc: "Leading SMART VISION’s mechanical, electrical and plumbing projects with precision and innovation."
-            },
-            mem2: {
-                name: "Heba Abd AlHamid",
-                role: "Head Of Cost Control",
-                img: "female-profile.jpg",
-                desc: "Driving SMART VISION’s projects profitability through strategic budgeting, cost optimization."
-            },
-            mem3: {
-                name: "Eslam Fares",
-                role: "Structural Team Leader",
-                img: "1586.jpg",
-                desc: "Guiding SMART VISION’s structural team to deliver innovation, code – compliant, and high-impact designs with precision and collaboration."
-            },
-            mem4: {
-                name: "Malak ibrahim",
-                role: "project Coordinator",
-                img: "female-profile.jpg",
-                desc: "Coordinate all projects’ trades between all teams members for SMART VISION’s Projects."
-            },
-            mem5: {
-                name: "Mohamed Nabil",
-                role: "Site Supervision Engineer",
-                img: "unknow.jpg",
-                desc: "Site Supervision Engineer."
+        var loaderInterval = setInterval(function() {
+            current += Math.floor(Math.random() * 5) + 2;
+            if (current >= 100) {
+                current = 100;
+                counterEl.innerText     = "100%";
+                progressBar.style.width = "100%";
+                clearInterval(loaderInterval);
+                setTimeout(function() {
+                    preloader.style.opacity   = "0";
+                    preloader.style.transform = "translateY(-100dvh)";
+                    setTimeout(function() {
+                        preloader.style.display = "none";
+                        mobileDock.classList.add("visible");
+                    }, 1200);
+                }, 500);
+            } else {
+                counterEl.innerText     = current + "%";
+                progressBar.style.width = current + "%";
             }
-        };
+        }, 40);
+    })();
 
-        // 2. Modal Logic
-        const modal = document.getElementById('bioModal');
-        const mImg = document.getElementById('modalImg');
-        const mName = document.getElementById('modalName');
-        const mRole = document.getElementById('modalRole');
-        const mDesc = document.getElementById('modalDesc');
+    // --- Header scroll ---
+    window.addEventListener("scroll", function() {
+        var header = document.getElementById("main-header");
+        if (header) header.classList.toggle("scrolled", window.scrollY > 50);
+    });
 
-        function openBioModal(memberId) {
-            const data = teamDatabase[memberId];
-            mImg.src = data.img;
-            mName.innerText = data.name;
-            mRole.innerText = data.role;
-            mDesc.innerText = data.desc;
-            
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    // --- Mobile overlay toggle ---
+    document.addEventListener("DOMContentLoaded", function() {
+        var dockBtn  = document.getElementById("dock-trigger");
+        var overlay  = document.getElementById("mobile-nav-overlay");
+        var closeBtn = document.getElementById("overlay-close");
+
+        function openOverlay() {
+            overlay.classList.add("active");
+            document.body.style.overflow = "hidden";
+            dockBtn.innerHTML = '<i class="fa-solid fa-xmark"></i> CLOSE';
+            dockBtn.style.boxShadow = "0 0 25px #FFD54A";
+        }
+        function closeOverlay() {
+            overlay.classList.remove("active");
+            document.body.style.overflow = "";
+            dockBtn.innerHTML = '<i class="fa-solid fa-compass-drafting"></i> NAVIGATE';
+            dockBtn.style.boxShadow = "0 4px 15px rgba(212,175,55,0.4)";
         }
 
-        function closeBioModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal on clicking outside content
-        modal.addEventListener('click', (e) => {
-            if(e.target === modal) closeBioModal();
+        dockBtn.addEventListener("click", function() {
+            overlay.classList.contains("active") ? closeOverlay() : openOverlay();
         });
-
-        // 3. Preloader Logic
-        document.addEventListener("DOMContentLoaded", () => {
-            let count = 0;
-            const counterElement = document.getElementById("percentage-counter");
-            const preloader = document.getElementById("preloader");
-            
-            const interval = setInterval(() => {
-                count += Math.floor(Math.random() * 5) + 1; 
-                if (count > 100) count = 100;
-                counterElement.innerText = count + "%";
-                
-                if (count === 100) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        preloader.style.opacity = "0";
-                        preloader.style.transform = "translateY(-100%)";
-                        setTimeout(() => preloader.remove(), 1000);
-                        setTimeout(() => document.getElementById('mobile-dock').classList.add('visible'), 500);
-                    }, 400);
-                }
-            }, 30);
+        closeBtn.addEventListener("click", closeOverlay);
+        overlay.querySelectorAll(".overlay-nav-item").forEach(function(item) {
+            item.addEventListener("click", closeOverlay);
         });
+    });
 
-        // 4. Header Scroll Effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('main-header');
-            if (window.scrollY > 50) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
-        });
+// --- Team Database ---
+const teamDatabase = {
+    ceo: {
+        name: "Dr.Eng Mohamed Osama",
+        role: "Consultant, MSC, PHD",
+        img: "WhatsApp Image 2026-05-24 at 8.21.51 PM.jpeg",
+        desc: "Has been a driving force behind the growth of SMART VISION. He serves as Chairman & CEO of the Board of Directors and has guided the company from its first projects in 2004 into a leading consultant player in Egypt. Known from an early age amongst his colleagues to possess a strong business sense, also he is the founder and CEO of O Consult (General Consultancy Company). Beyond his corporate role, Osama serves as a mentor to many aspiring professionals, actively contributes community initiatives, and is frequently commissioned to author books on self-development and leadership."
+    },
+    cfo: {
+        name: "Arch. Ahmed Amin",
+        role: "Co-Founder & CFO",
+        img: "WhatsApp Image 2026-05-25 at 12.25.23 AM.jpeg",
+        desc: "As CFO, he has guided the company from its first projects in 2004 into a leading consultant player in Egypt. Arch. Amin occupied managerial positions handling a diversity of residential and commercial projects. Amin holds a Bachelor of Architecture from faculty of Fine Arts, and Management Diploma from Ain Shams University."
+    },
+    mem1: {
+        name: "Michel Mounir",
+        role: "Head Of MEP",
+        img: "unknow.jpg",
+        desc: "Leading SMART VISION's mechanical, electrical and plumbing projects with precision and innovation."
+    },
+    mem2: {
+        name: "Heba Abd AlHamid",
+        role: "Head Of Cost Control",
+        img: "female-profile.jpg",
+        desc: "Driving SMART VISION's projects profitability through strategic budgeting and cost optimization."
+    },
+    mem3: {
+        name: "Eslam Fares",
+        role: "Structural Team Leader",
+        img: "1586.jpg",
+        desc: "Guiding SMART VISION's structural team to deliver innovative, code-compliant, and high-impact designs with precision and collaboration."
+    },
+    mem4: {
+        name: "Malak Ibrahim",
+        role: "Project Coordinator",
+        img: "female-profile.jpg",
+        desc: "Coordinate all projects' trades between all team members for SMART VISION's Projects."
+    },
+    mem5: {
+        name: "Mohamed Nabil",
+        role: "Site Supervision Engineer",
+        img: "unknow.jpg",
+        desc: "Site Supervision Engineer responsible for on-site quality and execution oversight."
+    }
+};
 
-        // 5. Mobile NAVIGATE Logic
-        const dockTrigger = document.getElementById('dock-trigger');
-        const overlayNAVIGATE = document.getElementById('control-center-overlay');
-        dockTrigger.addEventListener('click', () => {
-            overlayNAVIGATE.classList.toggle('active');
-            dockTrigger.innerHTML = overlayNAVIGATE.classList.contains('active') ? '<i class="fa-solid fa-xmark"></i> CLOSE' : '<i class="fa-solid fa-compass-drafting"></i> NAVIGATE';
-        });
-    </script>
+// --- Modal Logic ---
+const modal = document.getElementById('bioModal');
+const mImg  = document.getElementById('modalImg');
+const mName = document.getElementById('modalName');
+const mRole = document.getElementById('modalRole');
+const mDesc = document.getElementById('modalDesc');
+
+function openBioModal(memberId) {
+    const data = teamDatabase[memberId];
+    mImg.src          = data.img;
+    mName.innerText   = data.name;
+    mRole.innerText   = data.role;
+    mDesc.innerText   = data.desc;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeBioModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+modal.addEventListener('click', (e) => { if (e.target === modal) closeBioModal(); });
+</script>
 </body>
 </html>
